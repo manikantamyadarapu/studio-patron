@@ -4,6 +4,34 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Estimator — Studio Patron</title>
+    <!-- ✅ Preconnect to key origins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preconnect" href="https://maps.googleapis.com">
+  <link rel="preconnect" href="https://maps.gstatic.com">
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+  <link rel="dns-prefetch" href="https://maps.googleapis.com">
+
+  <!-- ✅ Preload critical fonts -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700&display=swap">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- ✅ Preload top visible images -->
+  <link rel="preload" as="image" href="./assets/images/Essentials.jpeg">
+  <link rel="preload" as="image" href="./assets/images/premimum.jpeg">
+  <link rel="preload" as="image" href="./assets/images/luxury.jpeg">
+  <link rel="preload" as="image" href="./assets/images/living room banner.jpg">
+
+  <!-- ✅ Preload external scripts that block rendering -->
+  <link rel="preload" as="script" href="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js">
+  <link rel="preload" as="script" href="https://maps.googleapis.com/maps/api/js?key=AIzaSyDibnkPbrHVBpxn0i9FXf0jSHsgPfkhhLQ&libraries=places">
+
+  
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDibnkPbrHVBpxn0i9FXf0jSHsgPfkhhLQ&libraries=places"></script>
   <style>
      @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700&display=swap');
@@ -1107,7 +1135,7 @@
   
 <div class="packages">
   <div class="pkg">
-    <img src="./assets/images/Essentials.jpeg" alt="Essentials package" class="pkg-img">
+    <img src="./assets/images/Essentials.jpeg" alt="Essentials package" class="pkg-img" loading="lazy">
     <label><input type="radio" name="package" value="Essentials"> Essentials (₹₹)</label>
     <p class="pkg-desc">Perfect for simple and functional interiors.</p>
     <p class="pkg-desc">- Affordable pricing.</p>
@@ -1115,7 +1143,7 @@
     <p class="pkg-desc">- Basic accessories.</p>
   </div>
      <div class="pkg">
-    <img src="./assets/images/premimum.jpeg" alt="Premium package" class="pkg-img">
+    <img src="./assets/images/premimum.jpeg" alt="Premium package" class="pkg-img" loading="lazy">
     <label><input type="radio" name="package" value="Premium"> Premium (₹₹₹)</label>
     <p class="pkg-desc">Top-tier finishes with high-end craftsmanship.</p>
     <p class="pkg-desc">- Mid-range pricing</p>
@@ -1123,7 +1151,7 @@
     <p class="pkg-desc">- Wide range of accessories</p>
   </div>
   <div class="pkg">
-    <img src="./assets/images/luxury.jpeg" alt="Luxury package" class="pkg-img">
+    <img src="./assets/images/luxury.jpeg" alt="Luxury package" class="pkg-img" loading="lazy">
     <label><input type="radio" name="package" value="Luxury"> Luxury (₹₹₹₹)</label>
     <p class="pkg-desc">A fine balance of comfort and modern elegance.</p>
     <p class="pkg-desc">- Elite pricing</p>
