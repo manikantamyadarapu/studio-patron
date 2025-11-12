@@ -2,14 +2,9 @@
   "name": "studio-patron",
   "version": "1.0.0",
   "type": "module",
-  "main": "index.js",
   "scripts": {
     "start": "node server.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "Studio Patron website with serverless email API on Vercel",
   "dependencies": {
     "nodemailer": "^7.0.10"
   }
