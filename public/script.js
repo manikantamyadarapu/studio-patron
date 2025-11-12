@@ -335,40 +335,42 @@ const horizontalScroll = document.querySelector('.horizontal-scroll');
   counters.forEach(animateCounter);
 
   // Handle Contact and Quote Forms
-  ["contactForm", "quoteForm"].forEach(formId => {
-    const form = document.getElementById(formId);
-    if (!form) return;
+["contactForm", "quoteForm"].forEach(formId => {
+  const form = document.getElementById(formId);
+  if (!form) return;
 
-    form.addEventListener("submit", async function (e) {
-      e.preventDefault();
-      const formData = {
-        fullName: this.fullName.value,
-        email: this.email.value,
-        phone: this.phone.value,
-        message: this.message.value,
-      };
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
 
-      try {
-        const res = await fetch("http://localhost:5000/send-email", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
-        });
-        const data = await res.json();
-        alert(data.message);
+    const formData = {
+      fullName: this.fullName.value.trim(),
+      email: this.email.value.trim(),
+      phone: this.phone.value.trim(),
+      message: this.message.value.trim(),
+    };
 
-        if (formId === "quoteForm") {
-          modal.classList.remove("flex");
-          modal.classList.add("hidden");
-        }
+    try {
+      const res = await fetch("/api/sendMail", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
 
-        this.reset();
-      } catch (err) {
-        console.error("Error submitting form:", err);
-        alert("❌ Something went wrong, please try again.");
+      const data = await res.json();
+      alert(data.message || "✅ Message sent successfully!");
+
+      if (formId === "quoteForm") {
+        modal.classList.remove("flex");
+        modal.classList.add("hidden");
       }
-    });
+
+      this.reset();
+    } catch (err) {
+      console.error("Error submitting form:", err);
+      alert("❌ Something went wrong, please try again.");
+    }
   });
+});
 
   // ==========================
   // FAQ TOGGLE FUNCTIONALITY
