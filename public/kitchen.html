@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Know Your Kitchen – Studio Patron</title>
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+   /* -------------------------------------------------
+           GLOBAL RESET & TYPOGRAPHY
+        ------------------------------------------------- */
+   *,
+   *::before,
+   *::after {
+    box-sizing: border-box;
+   }
+
+   body,
+   html {
+    margin: 0;
+    padding: 0;
+   }
+
+   body {
+    font-family: 'Montserrat', sans-serif;
+    background: #fff;
+    color: #2b2b2b;
+    line-height: 1.5;
+    margin: 0 80px;
+   }
+
+   h1,
+   h2,
+   h3,
+   h4,
+   p {
+    margin: 0 0 0.75rem;
+   }
+
+   a {
+    text-decoration: none;
+   }
+
+   /* -------------------------------------------------
+           TOPBAR
+        ------------------------------------------------- */
+   .topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    background: #111;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 60px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .4);
+    z-index: 1000;
+   }
+
+   .brand {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #fffff4;
+   }
+
+   .studio {
+    font-weight: 200;
+    letter-spacing: 1.5px;
+    opacity: .7;
+    text-transform: uppercase;
+    color: #ffffff !important;
+   }
+
+   .patron {
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    opacity: .9;
+   }
+ /* === Tablet View (Below 1024px) === */
+@media (max-width: 1024px) {
+  .brand {
+    margin-left: -20px !important; /* move slightly left */
+  }
+}
+
+/* === Mobile View (Below 768px) === */
+@media (max-width: 768px) {
+  .brand {
+    margin-left: -30px !important; /* move further left for smaller screens */
+  }
+}
+
+/* === Very Small Phones (Below 480px) === */
+@media (max-width: 480px) {
+  .brand {
+    margin-left: -40px !important; /* slight extra adjustment for ultra small devices */
+  }
+}
+
+   /* -------------------------------------------------
+           HERO
+        ------------------------------------------------- */
+   .hero {
+    position: relative;
+    height: 600px;
+    background: url('./assets/images/kitchen\ know.png') center 70% / cover no-repeat;
+    margin-top: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   }
+
+   .hero-overlay {
+    text-align: center;
+    color: #fff;
+    position: relative;
+    /* no absolute positioning */
+   }
+
+.hero-overlay h1 {
+  font-size: 42px !important;
+  font-weight: 400 !important;
+  font-family: 'Montserrat', sans-serif !important;
+  line-height: 1.2;
+  color: #000000;
+  text-align: center;
+  margin-top: 360px !important;
+  text-transform: uppercase;
+  background-color: white !important;
+  display: inline-block;          /* allows background to wrap nicely */
+  padding: 20px 60px !important;  /* ✅ controls background size */
+  border-radius: 6px;             /* optional: soften corners */
+}
+.hero-overlay span{
+  color: #ffcc33;
+}
+
+
+/* -------------------------------------------------
+   💻 Tablet (Below 1024px)
+------------------------------------------------- */
+@media (max-width: 1024px) {
+  .hero {
+    height: 500px;
+    background: url('./assets/images/kitchen\ vertical.jpg') center center / cover no-repeat;
+  }
+
+  .hero-overlay h1 {
+    font-size: 38px;
+    margin-top: 240px;
+    color: rgb(0, 0, 0) !important;
+  }
+}
+
+/* -------------------------------------------------
+   📱 Mobile (Below 768px)
+------------------------------------------------- */
+@media (max-width: 768px) {
+  .hero {
+    height: 420px;
+    background: url('./assets/images/kitchen\ vertical.jpg') center top / cover no-repeat;
+    color: rgb(0, 0, 0) !important;
+  }
+
+  .hero-overlay h1 {
+    font-size: 28px;
+    margin-top: 200px;
+    padding: 0 15px;
+    line-height: 1.3;
+  }
+}
+
+/* -------------------------------------------------
+   📱 Very Small Phones (Below 480px)
+------------------------------------------------- */
+@media (max-width: 480px) {
+  .hero {
+    height: 380px;
+    background: url('./assets/images/kitchen\ vertical.jpg') center top / cover no-repeat;
+  }
+
+  .hero-overlay h1 {
+    font-size: 24px;
+    margin-top: 180px;
+    padding: 0 20px;
+  }
+}
+
+   .kitchen-range {
+    padding: 80px 0;
+    background: #fff;
+   }
+
+   .container {
+    width: min(1200px, 90%);
+    margin: 0 auto;
+   }
+
+   .section-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 34px;
+    font-weight: 400;
+    color: #2b2b2b;
+    margin-bottom: 12px;
+   }
+
+   .section-subtitle {
+    font-size: 16px;
+    color: #5f5f5f;
+    margin-bottom: 50px;
+    max-width: 700px;
+    line-height: 1.6;
+    margin-top: -30px !important;
+   }
+
+   .range-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+   }
+
+   .range-card {
+    background: #fff;
+    border: 1px solid #e3e3e3;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    transition: all 0.25s ease;
+   }
+
+   .range-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+   }
+
+   .range-img img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-bottom: 1px solid #eee;
+   }
+
+   .range-content {
+    padding: 20px;
+    text-align: left;
+   }
+
+   .range-content h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #2b2b2b;
+    margin-bottom: 6px;
+   }
+
+   .range-content p {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.6;
+   }
+
+   /* Responsive adjustments */
+   @media (max-width: 992px) {
+    .range-grid {
+     grid-template-columns: repeat(2, 1fr);
+    }
+   }
+
+   @media (max-width: 768px) {
+    .range-grid {
+     grid-template-columns: 1fr;
+    }
+
+    .section-title {
+     font-size: 26px;
+     text-align: center;
+    }
+
+    .section-subtitle {
+     text-align: center;
+     margin: 0 auto 40px;
+    }
+
+    .range-content {
+     text-align: center;
+    }
+   }
+
+   .why-choose {
+    background: #f8f6f7;
+    /* very light gray like Livspace */
+    padding: 80px 0;
+    text-align: center;
+   }
+
+   .container {
+    width: min(1200px, 90%);
+    margin: 0 auto;
+   }
+
+   .why-choose h2 {
+    margin-left: -390px !important;
+   }
+
+   .section-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 34px;
+    font-weight: 400;
+    color: #2b2b2b;
+    margin-bottom: 50px;
+   }
+
+   .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+   }
+
+   .feature-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 40px 30px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    transition: all 0.25s ease;
+   }
+
+   .feature-card img {
+    width: 72px;
+    height: 72px;
+    object-fit: contain;
+    margin-bottom: 18px;
+   }
+
+   .feature-card h3 {
+    font-size: 17px;
+    font-weight: 600;
+    color: #2b2b2b;
+    margin-bottom: 8px;
+   }
+
+   .feature-card p {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.5;
+   }
+
+   .footnote {
+    font-size: 12px;
+    color: #888;
+    margin-top: 40px;
+    line-height: 1.5;
+   }
+
+   /* Responsive */
+   @media (max-width: 992px) {
+    .feature-grid {
+     grid-template-columns: repeat(2, 1fr);
+    }
+   }
+
+   @media (max-width: 768px) {
+    .feature-grid {
+     grid-template-columns: 1fr;
+    }
+
+    .section-title {
+     font-size: 26px;
+    }
+
+    .feature-card {
+     padding: 30px 20px;
+    }
+   }
+
+   .container .core {
+    margin-top: -80px !important;
+   }
+
+   .aes .para {
+    margin-top: -18px !important;
+   }
+
+   .aes h2 {
+    font-size: 34px !important;
+    font-weight: 400 !important;
+   }
+
+   .gray-bg .sink {
+    margin-top: -100px !important;
+   }
+
+   .container .deco {
+    margin-top: 80px !important;
+    font-size: 24px !important;
+    font-weight: 400 !important;
+   }
+
+   .gray-bg .compo {
+    font-size: 34px !important;
+    font-weight: 400 !important;
+   }
+   .sink{
+        margin-bottom: 100px !important;
+   }
+
+   /* -------------------------------------------------
+           SECTION COMMON
+        ------------------------------------------------- */
+   .section {
+    padding: 60px 0;
+   }
+
+   .container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 20px;
+   }
+
+   .gray-bg {
+    background: #ffffff;
+   }
+
+   .gray-bg {
+    margin-top: 80px !important;
+   }
+
+   .gray-bg .para {
+    margin-top: -18px !important;
+   }
+
+   /* -------------------------------------------------
+           TYPOGRAPHY – RESPONSIVE (same as reference)
+        ------------------------------------------------- */
+   /* Desktop (default) */
+   h2 {
+    font-size: 28px;
+    font-weight: 400;
+    /* text-transform: uppercase; */
+    margin-bottom: 40px;
+   }
+
+   .section p {
+    font-size: 16px;
+    font-weight: 400;
+    color: #6b6b6b;
+   }
+
+   .card h3,
+   .feature-card h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 12px 0 6px;
+   }
+
+   .card p,
+   .feature-card p {
+    font-size: 14px;
+    font-weight: 400;
+    color: #6b6b6b;
+   }
+
+   /* Tablet */
+   @media (max-width:1024px) {
+    h2 {
+     font-size: 24px;
+    }
+
+    .section p {
+     font-size: 15px;
+    }
+
+    .card h3,
+    .feature-card h3 {
+     font-size: 17px;
+    }
+
+    .card p,
+    .feature-card p {
+     font-size: 13.5px;
+    }
+   }
+
+   /* Mobile */
+   @media (max-width:768px) {
+    body {
+     margin: 0 20px;
+    }
+
+    h2 {
+     font-size: 22px;
+    }
+
+    .section p {
+     font-size: 14px;
+    }
+
+    .card h3,
+    .feature-card h3 {
+     font-size: 16px;
+    }
+
+    .card p,
+    .feature-card p {
+     font-size: 13px;
+     line-height: 1.45;
+    }
+   }
+
+   @media (max-width:480px) {
+    h2 {
+     font-size: 20px;
+    }
+
+    .section p {
+     font-size: 13px;
+    }
+
+    .card h3,
+    .feature-card h3 {
+     font-size: 15px;
+    }
+
+    .card p,
+    .feature-card p {
+     font-size: 12.8px;
+    }
+   }
+   .why-choose h2{
+        margin-left: -520px !important;
+   }
+   /* -------------------------------------------------
+           GRID & CARDS
+        ------------------------------------------------- */
+   .grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+   }
+
+   @media (max-width:768px) {
+    .grid-3 {
+     grid-template-columns: 1fr;
+    }
+   }
+
+   .card,
+   .feature-card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, .08);
+    text-align: center;
+   }
+
+   .card img,
+   .feature-card img {
+    width: 100%;
+    height: 220px;
+    /* uniform height */
+    object-fit: cover;
+    object-position: center;
+   }
+
+   .feature-card img {
+    height: 90px;
+    object-fit: contain;
+   }
+
+   .explore {
+    color: #ff4d6f;
+    font-weight: 500;
+   }
+
+   /* -------------------------------------------------
+           DECONSTRUCTED IMAGE
+        ------------------------------------------------- */
+   .deconstructed {
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+    flex-wrap: wrap;
+   }
+
+   .deconstructed img {
+    flex: 1 1 60%;
+    max-width: 800px;
+    height: auto;
+    border-radius: 12px;
+    object-fit: cover;
+   }
+
+ .deconstructed {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: nowrap; /* prevents stacking on large screens */
+}
+
+.deconstructed img {
+  flex: 1 1 60%;
+  max-width: 750px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.labels {
+  flex: 1 1 35%;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.8;
+  counter-reset: item;
+}
+
+.labels li {
+  position: relative;
+  padding-left: 28px;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #2b2b2b;
+}
+
+.labels li::before {
+  counter-increment: item;
+  content: counter(item);
+  position: absolute;
+  left: 0;
+  top: 2px;
+  width: 20px;
+  height: 20px;
+  color: #000000;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* Responsive stacking for mobile */
+@media (max-width: 768px) {
+  .deconstructed {
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+  }
+
+  .deconstructed img {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .labels {
+    width: 100%;
+  }
+}
+
+
+   /* -------------------------------------------------
+           FOOTNOTE
+        ------------------------------------------------- */
+   .footnote {
+    font-size: 12px;
+    color: #888;
+    margin-top: 20px;
+   }
+   /* ==================================================
+   📱 Responsive Font Sizes (Kitchen Page)
+   ================================================== */
+
+/* 💻 Tablet (Below 1024px) */
+@media (max-width: 1024px) {
+  /* Hero heading */
+  h1, .hero-overlay h1 {
+    font-size: 38px !important;
+    margin-top: 240px !important;
+  }
+
+  /* All section titles */
+  h2, 
+  .section-title, 
+  .deco, 
+  .core, 
+  .aes h2, 
+  .compo, 
+  .why-choose .section-title {
+    font-size: 28px !important;
+    line-height: 1.3 !important;
+    text-align: center !important;
+    margin-left: 0px !important; 
+  }
+
+  h3 {
+    font-size: 17px !important;
+    line-height: 1.4 !important;
+  }
+
+  /* Paragraphs and content */
+  p,
+  .section p,
+  .para,
+  .section-subtitle,
+  .range-content p,
+  .feature-card p,
+  .card p,
+  .labels li,
+  .footnote {
+    font-size: 14px !important;
+    line-height: 1.45 !important;
+    color: #555 !important;
+  }
+
+  .footnote {
+    font-size: 12px !important;
+    text-align: center !important;
+  }
+}
+
+/* 📱 Mobile (Below 768px) */
+@media (max-width: 768px) {
+  /* Hero heading */
+  h1, .hero-overlay h1 {
+    font-size: 28px !important;
+    line-height: 1.3 !important;
+    margin-top: 200px !important;
+    padding: 0 15px !important;
+  }
+
+  /* Headings */
+  h2, 
+  .section-title, 
+  .deco, 
+  .core, 
+  .aes h2, 
+  .compo, 
+  .why-choose .section-title {
+    font-size: 24px !important;
+    line-height: 1.3 !important;
+    text-align: center !important;
+    margin-left: 0px !important;
+  }
+
+  h3 {
+    font-size: 16px !important;
+  }
+
+  /* Paragraphs and text */
+  p,
+  .section p,
+  .para,
+  .section-subtitle,
+  .range-content p,
+  .feature-card p,
+  .card p,
+  .labels li,
+  .footnote {
+    font-size: 13px !important;
+    line-height: 1.35 !important;
+    color: #555 !important;
+    text-align: center !important;
+  }
+
+  .labels li {
+    text-align: left !important;
+  }
+
+  .footnote {
+    font-size: 11px !important;
+    text-align: center !important;
+  }
+}
+
+/* 📱 Very Small Phones (Below 480px) */
+@media (max-width: 480px) {
+  /* Hero heading */
+  h1, .hero-overlay h1 {
+    font-size: 24px !important;
+    line-height: 1.25 !important;
+    margin-top: 180px !important;
+    padding: 0 20px !important;
+  }
+
+  /* Section titles */
+  h2, 
+  .section-title, 
+  .deco, 
+  .core, 
+  .aes h2, 
+  .compo, 
+  .why-choose .section-title {
+    font-size: 20px !important;
+    line-height: 1.25 !important;
+    text-align: center !important;
+    margin-left: 0px !important;
+  }
+
+  h3 {
+    font-size: 15px !important;
+  }
+
+  /* Text & content */
+  p,
+  .section p,
+  .para,
+  .section-subtitle,
+  .range-content p,
+  .feature-card p,
+  .card p,
+  .labels li,
+  .footnote {
+    font-size: 12.5px !important;
+    line-height: 1.25 !important;
+  }
+
+  .footnote {
+    font-size: 10.5px !important;
+    text-align: center !important;
+  }
+}
+.section {
+  margin-bottom: 50px !important;  /* ✅ base gap between sections */
+}
+/* ================================
+   HERO SECTION (Updated & Unified)
+================================ */
+.hero-banner {
+  background-color: #ffffff !important;
+  color: #fff;
+  text-align: center;
+  padding: 120px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-banner::before,
+.hero-banner::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.1;
+}
+
+.hero-banner::before {
+  width: 300px;
+  height: 300px;
+  background: #000000;
+  top: -100px;
+  left: -100px;
+}
+
+.hero-banner::after {
+  width: 400px;
+  height: 400px;
+  background: #ffcc33;
+  bottom: -150px;
+  right: -150px;
+}
+
+/* === HERO TEXT === */
+.hero-content h1 {
+  font-size: 42px;
+  font-weight: 400;
+  margin-bottom: 15px;
+  line-height: 1.2;
+  font-family: "Montserrat", sans-serif !important;
+  color: #000000 !important;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.hero-content h1 span {
+  color: #ffcc33; /* Golden highlight */
+}
+
+.hero-content p {
+  font-size: 16px;
+  margin-bottom: 40px;
+  font-family: "Montserrat", sans-serif !important;
+  font-weight: 500;
+  color: #242424;
+  line-height: 1.6;
+  letter-spacing: 0.3px;
+  max-width: 650px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ================================
+   📱 RESPONSIVE DESIGN
+================================ */
+
+/* === Tablet === */
+@media (max-width: 1024px) {
+  .hero-banner {
+    padding: 100px 15px;
+  }
+
+  .hero-content h1 {
+    font-size: 36px;
+  }
+
+  .hero-content p {
+    font-size: 15px;
+    max-width: 580px;
+  }
+
+  .hero-content .btn {
+    padding: 0.75rem 1.8rem;
+    font-size: 14.5px;
+  }
+}
+
+/* === Mobile === */
+@media (max-width: 768px) {
+  .hero-banner {
+    padding: 90px 15px;
+  }
+
+  .hero-content h1 {
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+
+  .hero-content p {
+    font-size: 14px;
+    margin-bottom: 30px;
+  }
+
+  .hero-content .btn {
+    padding: 12px 28px;
+    font-size: 14px;
+  }
+}
+
+/* === Very Small Phones === */
+@media (max-width: 480px) {
+  .hero-banner {
+    padding: 80px 12px;
+  }
+
+  .hero-content h1 {
+    font-size: 24px;
+  }
+
+  .hero-content p {
+    font-size: 13.5px;
+  }
+
+  .hero-content .btn {
+    padding: 10px 24px;
+    font-size: 13.5px;
+  }
+}
+
+  </style>
+ </head>
+ <body>
+  <!-- TOPBAR -->
+  <div class="topbar">
+   <a href="./index.html" class="brand">
+    <span class="studio">STUDIO</span>
+    <span class="patron">PATRON</span>
+   </a>
+  </div>
+  <!-- HERO -->
+  <section class="hero">
+   <div class="hero-overlay">
+    <h1>Experience your Studio Patron <span>kitchen</span> </h1>
+   </div>
+  </section>
+    <!-- DECONSTRUCTED -->
+  <section class="section container">
+   <h2 class="deco">Your kitchen deconstructed</h2>
+   <div class="deconstructed">
+    <img src="./assets/images/kitchenoverall.jpg (1).avif" alt="Deconstructed Kitchen">
+    <ol class="labels" start="1">
+     <li>Base Units</li>
+     <li>Wall Units</li>
+     <li>Tall Units</li>
+     <li>Microwave Oven</li>
+     <li>Chimney</li>
+     <li>Hob</li>
+     <li>Sink</li>
+     <li>Faucet</li>
+     <li>Drawer</li>
+     <li>Wicker Basket</li>
+     <li>Loft</li>
+    </ol>
+   </div>
+  </section>
+  <section class="kitchen-range">
+   <div class="container">
+    <h2 class="section-title">The Studio Patron kitchen collection</h2>
+    <p class="section-subtitle"> Start off your journey, selecting from our amazing range of kitchens with varying styles, offerings and budgets. </p>
+    <div class="range-grid">
+     <div class="range-card">
+      <div class="range-img">
+       <img src="./assets/images/Modular-kitchen.jpg" alt="modular Kitchen">
+      </div>
+      <div class="range-content">
+  <h3>Modular</h3>
+  <p>Fully customisable units engineered for seamless installation and enduring strength.</p>
+</div>
+
+     </div>
+     <div class="range-card">
+      <div class="range-img">
+       <img src="./assets/images/semi-modular-kitchen.jpg" alt="Semi-modular Kitchen">
+      </div>
+      <div class="range-content">
+       <h3>Semi-modular</h3>
+       <p>A semi-modular kitchen is a blend of traditional construction and modern modular design — ideal when the countertop or base is already made on-site.</p>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section>
+  <section class="why-choose">
+   <div class="container">
+    <h2 class="section-title">We promise at studio Patron kitchen!</h2>
+    <div class="feature-grid">
+     <div class="feature-card">
+      <img src="./assets/images/" alt="DuraBuild Cabinets">
+      <h3>DuraBuild Cabinets</h3>
+      <p>with soft-closing hinges and sturdy build.</p>
+     </div>
+          <div class="feature-card">
+            <img src="./assets/images/antibubble-icon.png" alt="AntiBubble Technology">
+            <h3>Air-Free Technology</h3>
+            <p>for bubble-free panel bonding.</p>
+          </div>
+     <div class="feature-card">
+      <img src="./assets/images/precision-icon.png" alt="Precision Engineered Manufacturing">
+      <h3>Precision Engineered Manufacturing</h3>
+      <p>with an automated process for error-free cabinets.</p>
+     </div>
+     <div class="feature-card">
+      <img src="./assets/images/warranty-icon.png" alt="Flat 10 year warranty">
+      <h3>Flat 12 year warranty*</h3>
+      <p>on all kitchens.</p>
+     </div>
+     <div class="feature-card">
+      <img src="./assets/images/delivery-icon.png" alt="45-day Delivery">
+      <h3>45-day Delivery**</h3>
+      <p>with Studio Patron Move-in Guarantee.</p>
+     </div>
+    </div>
+    <p class="footnote"> T&amp;Cs apply: *Flat 10-years for modular and semi-modular products. For full scope on warranty, please visit <strong>studiopatron.com</strong> | **For select finishes on modular products. </p>
+   </div>
+  </section>
+  <section class="kitchen-range">
+   <div class="container">
+    <h2 class="section-title">Know your kitchen layout</h2>
+    <p class="section-subtitle"> Understanding a kitchen layout is the first step to planning a perfect kitchen. Your kitchen would have one of the following layouts. </p>
+    <div class="range-grid">
+    <div class="range-card">
+      <div class="range-img">
+       <img src="./assets/images/parallel-kitchen.jpeg" alt="Straight Kitchen">
+      </div>
+      <div class="range-content">
+       <h3>Parallel</h3>
+       <p>Cabinets placed on two opposite walls for a balanced and efficient layout.</p>
+      </div>
+     </div>
+     <div class="range-card">
+      <div class="range-img">
+       <img src="./assets/images/l-shaped-kitchen.jpg" alt="L-shaped Kitchen">
+      </div>
+      <div class="range-content">
+       <h3>L-shaped Kitchen</h3>
+       <p>2 adjoining countertops with corner spaces.</p>
+      </div>
+     </div>
+     <div class="range-card">
+      <div class="range-img">
+       <img src="./assets/images/u-shaped-kitechen.jpg" alt="U-shaped Kitchen">
+      </div>
+      <div class="range-content">
+       <h3>U-shaped Kitchen</h3>
+       <p>3 connected walls of cabinets with an open entrance.</p>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section>
+  <section class="kitchen-range">
+   <div class="container">
+    <h2 class="section-title core">Core materials we use</h2>
+    <p class="section-subtitle"> Your kitchen goes through a lot. Superior quality materials at the core ensure it lasts a lifetime. </p>
+    <div class="range-grid two-cards">
+     <div class="range-card">
+      <div class="range-img">
+       <img src="./assets/images/HDF-HMR.jpg" alt="Engineered Wood">
+      </div>
+      <div class="range-content">
+       <h3>HDF-HMR</h3>
+       <p>Lightweight, budget-friendly with a varying range of load and screw-holding capacities.</p>
+      </div>
+     </div>
+     <div class="range-card">
+      <div class="range-img">
+       <img src="./assets/images/Plywood.jpeg" alt="Plywood">
+      </div>
+      <div class="range-content">
+       <h3>Plywood - BWR, BWP</h3>
+       <p>High strength, termite-resistant and low on emission.</p>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section>
+  <!-- Aesthetics Section -->
+  <section class="section container aes">
+   <h2>Aesthetics that add elegance</h2>
+   <p class="para">Give your kitchen a distinct look as per your wants. Choose from multiple finishes, handles and backsplashes.</p>
+   <h3>Shutter Finishes</h3>
+   <div class="grid-3">
+        <div class="card">
+     <img src="./assets/images/lamiinate.jpeg" alt="Membrane">
+     <h3>Laminates</h3>
+     <p>Durable finish available in multiple textures and colors. Scratch and moisture resistant.</p>
+    </div>
+
+    <div class="card">
+     <img src="./assets/images/acrylic.jpeg" alt="Classic Laminate">
+     <h3>Acrylic</h3>
+     <p>Smooth, mirror-like finish. Acrylic comes with UV stability.</p>
+    </div>
+        <div class="card">
+     <img src="./assets/images/PU image .jpg" alt="Elite Laminate">
+     <h3>PU</h3>
+     <p>Superior paint finish which comes in matte and gloss.</p>
+    </div>
+   </div>
+  </section>
+  <!-- Handles Section -->
+  <section class="section container">
+   <h3>Handles</h3>
+   <div class="grid-3">
+    <div class="card">
+     <img src="./assets/images/regural-handles.jpg" alt="Regular Handles">
+     <h3>Regular Handles</h3>
+     <p>Low-maintenance and easy to use. These come in linear and classic designs.</p>
+    </div>
+    <div class="card">
+     <img src="./assets/images/edge handle.jpg" alt="Edge Profile">
+     <h3>Edge Profile</h3>
+     <p>Placed along the edges, it gives an illusion of being handle-less.</p>
+    </div>
+    <div class="card">
+     <img src="./assets/images/gola.jpeg" alt="Gola">
+     <h3>Gola</h3>
+     <p>Attached to the carcass cabinet, they give a seamless look.</p>
+    </div>
+   </div>
+  </section>
+  <!-- Countertops Section -->
+  <section class="section container">
+   <h3>Countertops and Backsplashes</h3>
+   <div class="grid-3">
+    <div class="card">
+     <img src="./assets/images/granite.jpg" alt="Granite">
+     <h3>Granite</h3>
+     <p>Low maintenance and durable.</p>
+    </div>
+    <div class="card">
+     <img src="./assets/images/quartz.jpg" alt="Quartz">
+     <h3>Quartz</h3>
+     <p>Tough, gives a polished look and comes in different colours.</p>
+    </div>
+    <div class="card">
+     <img src="./assets/images/tiles.jpg" alt="tiles">
+     <h3>Splashback</h3>
+     <p>Heat resistant and easy to maintain</p>
+    </div>
+   </div>
+  </section>
+  <!-- Components Section -->
+  <section class="section gray-bg container">
+   <h2 class="compo">Components that make your kitchen</h2>
+   <p class="para">Get familiar with the components that make your kitchen, and the role they play in making your cooking experience easy and convenient.</p>
+   <h3>Cabinets and Hardware</h3>
+   <div class="grid-3">
+    <div class="card">
+     <img src="./assets/images/base unit.jpg" alt="Base Units">
+     <h3>Base Units</h3>
+     <p>Placed on the floor. Goes up to the countertop.</p>
+    </div>
+    <div class="card">
+     <img src="./assets/images/wall-unit-kitchen.jpeg" alt="Wall Units">
+     <h3>Wall Units</h3>
+     <p>Can be hung on the wall and run over the dado area for up to 7 ft.</p>
+    </div>
+    <div class="card">
+     <img src="./assets/images/semi-tall-unit.jpg" alt="Semi-Tall Units">
+     <h3>Tall Units</h3>
+     <p>Located on the floor. Runs up above the countertop height.</p>
+    </div>
+   </div>
+  </section>
+  <!-- Appliances Section -->
+  <section class="section container">
+   <h3>Appliances</h3>
+   <div class="grid-3">
+    <div class="card">
+     <img src="./assets/images/hob.jpg" alt="Hobs">
+     <h3>Hobs</h3>
+     <p>Come in various options to choose from.</p>
+    </div>
+    <div class="card">
+     <img src="./assets/images/chimney.jpg" alt="Chimney">
+     <h3>Chimney</h3>
+     <p>Removes odour while cooking and keeps the kitchen clean.</p>
+    </div>
+    <div class="card">
+     <img src="./assets/images/other appliances.jpg" alt="Other Appliances">
+     <h3>Other Appliances</h3>
+     <p>Includes microwave ovens, dishwashers and wine chillers.</p>
+    </div>
+   </div>
+  </section>
+  <!-- Sink and Faucets Section -->
+  <section class="section container sink">
+   <h3>Sink and Faucets</h3>
+   <div class="grid-3">
+    <div class="card">
+     <img src="./assets/images/Under-mount-sink.webp" alt="Single Bowl Sink">
+     <h3>Under-mount Sink</h3>
+     <p>Sleek and seamless design that fits below the countertop for easy cleaning.</p>
+    </div>
+  <div class="card">
+     <img src="./assets/images/top-mount-sink.jpg" alt="Single Bowl Sink">
+     <h3>Top-mount Sink</h3>
+     <p>Mounted above the countertop for easy installation.</p>
+    </div>
+      <div class="card">
+     <img src="./assets/images/flush-sink.jpg" alt="Single Bowl Sink">
+     <h3>Flush Sink</h3>
+     <p>Edges sit level with the countertop for a smooth finish.</p>
+    </div>
+      <div class="card">
+     <img src="./assets/images/Deck-mountained.jpg" alt="Single Bowl Sink">
+     <h3>Deck-mounted Faucet</h3>
+     <p>Installed on the countertop for a neat and modern look.</p>
+    </div>
+      <div class="card">
+     <img src="./assets/images/wall-mountained.jpg" alt="Single Bowl Sink">
+     <h3>Wall-mounted Faucet</h3>
+     <p>Fixed to the wall, leaving the countertop clutter-free.</p>
+    </div>
+   </div>
+  </section>
+  <!-- Hero banner -->
+<section class="hero-banner">
+  <div class="hero-content">
+    <h1>
+  <span>Beautiful kitchens</span> built for the heart of your home
+</h1>
+<p>Where every design blends warmth, efficiency, and sophistication.</p>
+  </div>
+</section>
+
+ </body>
+</html>

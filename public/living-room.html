@@ -1,0 +1,1644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Estimator — Studio Patron</title>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDibnkPbrHVBpxn0i9FXf0jSHsgPfkhhLQ&libraries=places"></script>
+  <style>
+     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700&display=swap');
+     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+    :root {
+      --active: #aaa; /* active step text */
+      --inactive: #fff; /* inactive step text */
+      --line: #444; /* line color */
+      --accent: #000; /* deep purple accent */
+      --accent-2:rgb(43, 42, 42); /* CTA accent */
+      --muted: #9aa0a6;
+      --bg: #f4f6f8;
+      --card: #fff;
+      --green: #2a9d49;
+      
+    }
+
+    body {
+      margin: 0;
+      background: rgb(0, 0, 0);
+    }
+    
+    .brand {
+  position: relative;
+  z-index: 11;
+}
+
+    /* ===== TOPBAR ===== */
+    .topbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 70px;
+      background: #000000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 60px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+      z-index: 10;
+    }
+
+    /* ===== BRAND ===== */
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+    }
+/* ===== BRAND ===== */
+.studio {
+   font-family: 'Montserrat', sans-serif;
+  font-weight: 200; 
+  letter-spacing: 1.5px;
+  opacity: 0.7;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+.patron {
+ font-weight: 500; /* bold weight */
+  color: #fffff4; /* optional: golden tone for emphasis */
+  letter-spacing: 1.5px;
+  opacity: 0.9; /* slightly faded look */
+  font-family: 'Montserrat', sans-serif;
+}
+
+    /* ===== PROGRESS BAR ===== */
+.progress {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 90px;
+  height: 30px; /* controls where line aligns */
+  width: 100%;
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+    /* The thin line centered with text */
+    .progress::before {
+      content: "";
+      position: absolute;
+      top: 50%; /* Center vertically */
+      left: 30%;
+      right: 30%;
+      height: 1.3px;
+      background: var(--line);
+      transform: translateY(-50%);
+      z-index: 0;
+    }
+
+    /* Steps */
+    .step {
+      position: relative;
+      z-index: 1;
+      background: #000000; /* same as topbar background to hide line behind text */
+      padding: 0 10px;
+      cursor: pointer;
+    }
+
+    .step .label {
+      font-size: 13px;
+      font-weight: 500;
+      text-transform: uppercase;
+      color: var(--inactive);
+      letter-spacing: 0.6px;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+       .step.active .label {
+      color: #ffcc33;
+      transform: scale(1.05);
+    }
+
+    .step:hover .label {
+      color: #ccc;
+    }
+    /* ===== RESPONSIVE BEHAVIOR ===== */
+@media (max-width: 991px) {
+  .topbar {
+    height: 80px !important;
+    padding: 0 20px;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .brand {
+    position: absolute;
+    left: 20px;
+    top: 15px;
+    transform: none;
+    margin-top: 10px !important;
+  }
+
+  .progress {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    gap: 25px !important;
+    margin-top: 50px;
+    justify-content: center;
+    width: 100%;
+    margin-left: -10px !important;
+  }
+
+  .progress::before {
+    left: 10%;
+    right: 10%;
+  }
+
+  .step .label {
+    font-size: 12px;
+  }
+}
+
+/* ===== SMALLER MOBILE VIEW ===== */
+@media (max-width: 600px) {
+  .topbar {
+    height: 55px;
+    padding: 0 15px;
+  }
+
+  .brand {
+    top: 10px;
+  }
+
+  .progress {
+    gap: 25px;
+  }
+
+  .progress::before {
+    left: 15%;
+    right: 15%;
+  }
+
+  .step .label {
+    font-size: 11px;
+    letter-spacing: 0.5px;
+  }
+}
+
+
+    /* ===== PAGE CONTENT ===== */
+    .page {
+      max-width: 1100px;
+      margin: 100px auto 30px; /* top margin gives space under fixed bar */
+      padding: 0 24px 60px;
+    }
+
+    /* ===== STEP CARD AREA ===== */
+    .card {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 36px;
+      box-shadow: 0 8px 26px rgba(15, 15, 15, 0.06);
+      margin-top: 18px;
+      min-height: 420px;
+    }
+
+    .step-content {
+      display: none;
+      opacity: 0;
+      transform: translateX(20px);
+      transition: all 0.36s ease;
+    }
+    
+
+    .step-content.active {
+      display: block;
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    h1.h-title {
+      margin: 0 0 18px;
+      text-align: center;
+      color: #000;
+      font-size: 22px;
+      font-family: 'Montserrat', sans-serif;
+      text-transform: uppercase;
+      font-weight: 500;
+      letter-spacing: 1px;
+    }
+
+    p.h-sub {
+      text-align: center;
+      color: var(--muted);
+      margin: 6px 0 26px;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    /* ===== BHK LIST ===== */
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+   input[type="radio"] {
+  accent-color: #ffcb05; /* replace with your preferred color */
+}
+
+    .option {
+      background: #fff;
+      border-radius: 8px;
+      padding: 14px 18px;
+      border: 1px solid #f0f0f0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-family: 'Montserrat', sans-serif!important;
+    }
+
+    .option label {
+      font-weight: 700;
+      color: rgb(73, 72, 72);
+      cursor: pointer;
+    }
+
+    /* .option .arrow {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+    } */
+
+    .nextBtn{
+      font-family: 'Montserrat', sans-serif!important;
+      background-color: #111;
+    }
+
+    /* ===== ROOMS (CARDS WITH +/-) ===== */
+    .rooms {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      max-width: 640px;
+      margin: 14px auto 0;
+    }
+
+    .room-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      border-radius: 8px;
+      background: #fff;
+      border: 1px solid #f0f0f0;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .room-card .name {
+      font-weight: 600;
+      color: rgb(73, 72, 72);
+    }
+
+    .room-card .controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .room-card button {
+      background:#c29d0a !important;
+      color: #fff;
+      border: none;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 6px 12px rgba(255, 107, 107, 0.12);
+    }
+
+    .room-card button.inactive {
+      background: #eee;
+      color: #888;
+      box-shadow: none;
+      cursor: not-allowed;
+    }
+
+    .room-card input[type="number"] {
+      width: 48px;
+      text-align: center;
+      border: none;
+      background: transparent;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+/* ===== PACKAGES (MATCH WARDROBE STYLE) ===== */
+.packages {
+  display: flex;
+  gap: 18px;
+  justify-content: center;
+  margin-top: 10px;
+  font-family: 'Montserrat', sans-serif;
+  color: rgb(73, 72, 72);
+  flex-wrap: wrap;
+}
+
+.pkg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 18px 20px;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid #f0f0f0;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  width: 100%;
+  max-width: 320px; /* nice default width for desktop */
+}
+
+.pkg:hover {
+  border-color: #ffe6b3;
+  background: #fff9e6;
+  transform: translateY(-3px);
+}
+
+.pkg img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  display: block;
+  object-position: center;
+}
+
+.pkg input[type="radio"] {
+  margin-bottom: 6px;
+  accent-color: #ffcb05; /* yellow accent */
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.pkg label {
+  font-weight: 700;
+  color: #444;
+  margin-bottom: 4px;
+}
+
+.pkg-desc {
+  font-size: 13px;
+  color: #777;
+  font-weight: 400;
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+/* ===== RESPONSIVE BEHAVIOR ===== */
+
+/* Make package cards appear in a single horizontal row on big screens */
+@media (min-width: 1024px) {
+  .packages {
+    flex-wrap: nowrap; /* Prevent wrapping */
+    justify-content: center; /* Keep centered */
+    gap: 24px; /* Slightly wider spacing */
+  }
+
+  .pkg {
+    flex: 1 1 30%; /* Let cards share equal width */
+    max-width: 350px; /* Control size */
+  }
+}
+
+
+/* ===== RESPONSIVE: STACK VERTICALLY ON MOBILE ===== */
+@media (max-width: 768px) {
+  .packages {
+    gap: 12px;
+  }
+
+  .pkg {
+    min-width: 260px;
+    max-width: 300px;
+  }
+
+  .pkg img {
+    height: 160px;
+  }
+}
+
+    /* ===== QUOTE STEP CARD ===== */
+    .quote-card {
+      max-width: 700px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 14px;
+      padding: 22px;
+      border: 1px solid #f1f1f1;
+    }
+
+    .quote-card .small {
+      color: var(--muted);
+      text-align: center;
+      margin-bottom: 8px;
+     font-family: 'Montserrat', sans-serif;
+    }
+
+    #budget-range {
+      font-size: 34px;
+      color: var(--green);
+      font-weight: 800;
+      text-align: center;
+      margin: 8px 0;
+    }
+
+    .cta-wrap {
+      margin-top: 18px;
+      background: #fff9e6;
+      padding: 18px;
+      border-radius: 10px;
+      text-align: center;
+      font-family: 'Montserrat', sans-serif!important;
+    }
+    #budgetPlaceholder{
+      font-family: 'Montserrat', sans-serif!important;
+    }
+    .cta-wrap .cta-btn {
+      background: var(--accent-2);
+      color: #fff;
+      padding: 12px 22px;
+      border-radius: 24px;
+      border: none;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .summary-list {
+      margin-top: 18px;
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      color: #444;
+    }
+
+    /* ===== FOOTER BUTTONS ===== */
+    .actions {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 24px;
+      max-width: 740px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .btn-ghost {
+      background: #f0f0f0;
+      color: #333;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(107, 59, 91, 0.12);
+    }
+
+    /* ===== MODAL OVERLAY ===== */
+   .modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff; /* solid white background */
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.modal {
+  background: #fffdf6 !important; /* soft creamy white */
+  border: 1px solid #fdfbf4;      /* warm light yellow border */
+}
+
+
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+  /* ===== Base Modal ===== */
+.modal {
+  background: #fff !important;
+  width: 90%;
+  max-width: 550px;
+  border-radius: 12px;
+  padding: 0;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+  animation: slideUp 0.35s ease-in-out;
+  font-family: "Poppins", sans-serif;
+  overflow: hidden;
+  margin: 0 15px; /* adds safe space on tiny screens */
+}
+
+/* ===== Image block — full width header image ===== */
+.modal-image {
+  width: 100%;
+  height: 150px;
+  overflow: hidden;
+}
+
+.modal-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* ===== Inner Content Wrapper ===== */
+.modal-body {
+  padding: 20px 24px; 
+}
+
+/* ===== Responsive Breakpoints ===== */
+
+/* Large Tablets / Small Laptops */
+@media (max-width: 991px) {
+  .modal {
+    max-width: 480px;
+  }
+
+  .modal-body {
+    padding: 24px 28px;
+  }
+
+  .modal-image {
+    height: 160px;
+  }
+}
+
+/* Phones (Portrait) */
+@media (max-width: 768px) {
+  .modal {
+    width: 94%;
+    max-width: 420px;
+  }
+
+  .modal-body {
+    padding: 22px 24px;
+  }
+
+  .modal-image {
+    height: 150px;
+  }
+}
+
+/* Small Phones (≤ 480px) */
+@media (max-width: 480px) {
+  .modal {
+    width: 95%;
+    max-width: 360px;
+    border-radius: 10px;
+  }
+
+  .modal-body {
+    padding: 18px 20px;
+  }
+
+  .modal-image {
+    height: 130px;
+  }
+
+  .modal-body input,
+  .modal-body textarea {
+    font-size: 13px;
+    padding: 10px 12px;
+  }
+
+  .modal-body button {
+    font-size: 13px;
+    padding: 10px 0;
+  }
+}
+
+
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(40px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    /* ===== MODAL HEADER ===== */
+    .modal h3 {
+      margin: 0;
+      color: #222;
+      font-weight: 600;
+      font-size: 1.3rem;
+    }
+
+    /* ===== FIELDS ===== */
+    .field {
+      margin-top: 14px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .field label {
+      font-size: 0.9rem;
+      color: #444;
+      margin-bottom: 6px;
+    }
+
+    .field input {
+      padding: 10px 12px;
+      font-size: 0.95rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    .field input:focus {
+      border-color: #fff9e6;
+      box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+    }
+    .field input:hover {
+      border-color: #fff2cf;
+      background: #fffbea; /* light yellow hover */
+}
+
+
+    /* ===== CHECKBOX ROW ===== */
+    .row {
+      margin-top: 12px;
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    .row input[type="checkbox"] {
+      transform: scale(1.2);
+      accent-color:black; /* golden tick */
+    }
+
+    /* ===== BUTTONS ===== */
+    .modal-cta {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn {
+      background:black;
+      color: #fff;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .btn:hover {
+      background: #f2f2f2 !important;
+    }
+
+    .btn.cancel {
+      background: #f2f2f2 !important;
+      color: #444;
+    }
+
+    .btn.cancel:hover {
+      background: #e0e0e0 !important;
+    }
+
+    /* ===== LOADING SPINNER ===== */
+    .btn.loading::after {
+      content: '';
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid black;
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-left: 8px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* ===== NOTE ===== */
+    .note {
+      margin-top: 10px;
+      font-size: 0.75rem;
+      color: #777;
+      text-align: center;
+    }
+
+    /* ===== CLOSE BUTTON ===== */
+    .close-btn {
+      color: #444;
+      transition: color 0.2s ease;
+      background: none;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .close-btn:hover {
+      color: #ff4b4b;
+    }
+
+    /* ===== SUMMARY MODAL ===== */
+    .summary-modal-content {
+      line-height: 1.5;
+      font-size: 0.9rem;
+      color: #333;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 860px) {
+      .rooms {
+        grid-template-columns: 1fr;
+      }
+      .card {
+        padding: 20px;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .modal {
+        width: 90%;
+        padding: 20px;
+      }
+      .modal-cta {
+        flex-direction: column;
+      }
+      .btn {
+        width: 100%;
+      }
+    }
+#budgetResult {
+  font-family: 'Montserrat', sans-serif;
+}
+
+    /* ===== HELPER CLASSES ===== */
+    .muted {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+    /* =======================================
+   RESPONSIVE TEXT STYLING FOR TOPBAR + STEPPER
+   ======================================= */
+
+/* === Desktop Default (already handled above) === */
+
+/* === Tablet View (max-width: 1024px) === */
+@media (max-width: 1024px) {
+
+  /* Brand text */
+  .studio {
+    font-size: 15px;
+    letter-spacing: 1.2px;
+  }
+
+  .patron {
+    font-size: 15px;
+    letter-spacing: 1.2px;
+  }
+
+  /* Step labels */
+  .step .label {
+    font-size: 12px;
+    letter-spacing: 0.5px;
+  }
+
+  /* Headings inside cards */
+  h1.h-title {
+    font-size: 20px;
+  }
+
+  /* Paragraph subheading */
+  p.h-sub {
+    font-size: 14px;
+  }
+
+  /* Option text */
+  .option label,
+  .pkg label,
+  .room-card .name {
+    font-size: 14px;
+  }
+
+  .pkg-desc {
+    font-size: 12px;
+  }
+
+  /* Buttons */
+  .btn,
+  .btn-primary,
+  .btn-ghost {
+    font-size: 14px;
+  }
+}
+
+/* === Mobile View (max-width: 768px) === */
+@media (max-width: 768px) {
+
+  .topbar {
+    height: 60px;
+    padding: 0 25px;
+  }
+
+  .studio {
+    font-size: 13px;
+    letter-spacing: 1px;
+  }
+
+  .patron {
+    font-size: 13px;
+    letter-spacing: 1px;
+  }
+
+  .progress {
+    gap: 40px;
+  }
+
+  .step .label {
+    font-size: 10.5px;
+    letter-spacing: 0.4px;
+  }
+
+  h1.h-title {
+    font-size: 18px;
+  }
+
+  p.h-sub {
+    font-size: 13px;
+  }
+
+  .option label,
+  .pkg label,
+  .room-card .name {
+    font-size: 13px;
+  }
+
+  .pkg-desc {
+    font-size: 11.5px;
+  }
+
+  .btn,
+  .btn-primary,
+  .btn-ghost {
+    font-size: 13px;
+    padding: 8px 14px;
+  }
+}
+
+/* === Very Small Phones (max-width: 480px) === */
+@media (max-width: 480px) {
+
+  .topbar {
+    height: 54px;
+    padding: 0 16px;
+  }
+
+  .studio,
+  .patron {
+    font-size: 11.5px;
+    letter-spacing: 0.8px;
+  }
+
+  .progress {
+    gap: 25px;
+  }
+
+  .step .label {
+    font-size: 9.5px;
+  }
+
+  h1.h-title {
+    font-size: 16px;
+  }
+
+  p.h-sub {
+    font-size: 12px;
+  }
+
+  .option label,
+  .pkg label,
+  .room-card .name {
+    font-size: 12px;
+  }
+
+  .pkg-desc {
+    font-size: 10.5px;
+  }
+
+  .btn,
+  .btn-primary,
+  .btn-ghost {
+    font-size: 12px;
+    padding: 7px 12px;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- Top bar and stepper -->
+    <div class="topbar">
+      <a href="index.html" class="brand">
+        <span class="studio">STUDIO</span>
+        <span class="patron">PATRON</span>
+      </a>
+      <div class="progress" id="progressBar">
+        <div class="step active" data-step="0">
+          <div class="label">BHK TYPE</div>
+        </div>
+        <div class="step" data-step="1">
+          <div class="label">ROOMS TO DESIGN</div>
+        </div>
+        <div class="step" data-step="2">
+          <div class="label">PACKAGE</div>
+        </div>
+        <div class="step" data-step="3">
+          <div class="label">GET QUOTE</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step card -->
+    <div class="card">
+      <!-- STEP 1: BHK -->
+      <section class="step-content active" data-step="0">
+        <h1 class="h-title">Select your BHK type</h1>
+        <div class="options" id="bhkOptions">
+          <div class="option"><label><input type="radio" name="bhk" value="1BHK" aria-label="1 BHK"> 1 BHK</label><div class="arrow"></div></div>
+          <div class="option"><label><input type="radio" name="bhk" value="2BHK" aria-label="2 BHK"> 2 BHK</label><div class="arrow"></div></div>
+          <div class="option"><label><input type="radio" name="bhk" value="3BHK" aria-label="3 BHK"> 3 BHK</label><div class="arrow"></div></div>
+          <div class="option"><label><input type="radio" name="bhk" value="4BHK" aria-label="4 BHK"> 4 BHK</label><div class="arrow"></div></div>
+        </div>
+        <div class="actions">
+          <div></div>
+          <div><button class="btn-primary nextBtn" aria-label="Next step">Next</button></div>
+        </div>
+      </section>
+
+      <!-- STEP 2: Rooms -->
+      <section class="step-content" data-step="1">
+        <h1 class="h-title">Select the rooms you'd like us to design</h1>
+        <p class="h-sub">To know more about this, <a href="#" id="openRoomModal" style="color:var(--accent);text-decoration: none;" aria-label="View room details">click here</a></p>
+        <!-- Room Details Modal -->
+        <div id="roomDetailsModal" class="modal-overlay" aria-hidden="true">
+          <div class="modal" role="dialog" aria-modal="true" aria-labelledby="roomModalTitle">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <h3 id="roomModalTitle">Room Details</h3>
+              <button class="close-btn" id="closeRoomModal" aria-label="Close room details modal">&times;</button>
+            </div>
+            <ul style="margin-top:16px; line-height:1.5;">
+              <li><strong>Living Room:</strong> TV unit, false ceiling, shoe rack, sofa, coffee table, wallpapers, curtains, pooja unit.</li>
+              <li><strong>Kitchen:</strong> Modular kitchen, loft, countertop, appliances, tiling, utility.</li>
+              <li><strong>Bedroom:</strong> 2-door wardrobe, loft, false ceiling, TV unit, study unit, bed, side table, mattress, wooden flooring.</li>
+              <li><strong>Other Bedroom:</strong> 2-door wardrobe, loft.</li>
+              <li><strong>Bathroom:</strong> Vanity, tiling, shower cubicle.</li>
+              <li><strong>Dining:</strong> Crockery unit, dining table with chairs, false ceiling.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="rooms">
+          <div class="room-card">
+            <div class="name">Living Room</div>
+            <div class="controls">
+              <button class="dec" data-name="living" aria-label="Decrease living room count">−</button>
+              <input type="number" name="living" value="1" min="0" max="5" readonly aria-label="Living room count">
+              <button class="inc" data-name="living" aria-label="Increase living room count">+</button>
+            </div>
+          </div>
+          <div class="room-card">
+            <div class="name">Kitchen</div>
+            <div class="controls">
+              <button class="dec" data-name="kitchen" aria-label="Decrease kitchen count">−</button>
+              <input type="number" name="kitchen" value="1" min="0" max="5" readonly aria-label="Kitchen count">
+              <button class="inc" data-name="kitchen" aria-label="Increase kitchen count">+</button>
+            </div>
+          </div>
+          <div class="room-card">
+            <div class="name">Bedroom</div>
+            <div class="controls">
+              <button class="dec" data-name="bedroom" aria-label="Decrease bedroom count">−</button>
+              <input type="number" name="bedroom" value="2" min="0" max="5" readonly aria-label="Bedroom count">
+              <button class="inc" data-name="bedroom" aria-label="Increase bedroom count">+</button>
+            </div>
+          </div>
+          <div class="room-card">
+            <div class="name">Bathroom</div>
+            <div class="controls">
+              <button class="dec" data-name="bathroom" aria-label="Decrease bathroom count">−</button>
+              <input type="number" name="bathroom" value="2" min="0" max="5" readonly aria-label="Bathroom count">
+              <button class="inc" data-name="bathroom" aria-label="Increase bathroom count">+</button>
+            </div>
+          </div>
+          <div class="room-card" style="grid-column:1 / -1;">
+            <div class="name">Dining</div>
+            <div class="controls">
+              <button class="dec" data-name="dining" aria-label="Decrease dining count">−</button>
+              <input type="number" name="dining" value="1" min="0" max="5" readonly aria-label="Dining count">
+              <button class="inc" data-name="dining" aria-label="Increase dining count">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="actions">
+          <div><button class="btn-ghost prevBtn" aria-label="Previous step">Back</button></div>
+          <div><button class="btn-primary nextBtn" aria-label="Next step">Next</button></div>
+        </div>
+      </section>
+
+      <!-- STEP 3: Package -->
+<!-- STEP 3: Package -->
+<section class="step-content" data-step="2">
+  <h1 class="h-title">Pick your package</h1>
+  <p class="h-sub">Choose one of our curated packages</p>
+  
+<div class="packages">
+  <div class="pkg">
+    <img src="./assets/images/Essentials.jpeg" alt="Essentials package" class="pkg-img">
+    <label><input type="radio" name="package" value="Essentials"> Essentials (₹₹)</label>
+    <p class="pkg-desc">Perfect for simple and functional interiors.</p>
+    <p class="pkg-desc">- Affordable pricing.</p>
+    <p class="pkg-desc">- Convenient designs.</p>
+    <p class="pkg-desc">- Basic accessories.</p>
+  </div>
+     <div class="pkg">
+    <img src="./assets/images/premimum.jpeg" alt="Premium package" class="pkg-img">
+    <label><input type="radio" name="package" value="Premium"> Premium (₹₹₹)</label>
+    <p class="pkg-desc">Top-tier finishes with high-end craftsmanship.</p>
+    <p class="pkg-desc">- Mid-range pricing</p>
+    <p class="pkg-desc">- Premium designs.</p>
+    <p class="pkg-desc">- Wide range of accessories</p>
+  </div>
+  <div class="pkg">
+    <img src="./assets/images/luxury.jpeg" alt="Luxury package" class="pkg-img">
+    <label><input type="radio" name="package" value="Luxury"> Luxury (₹₹₹₹)</label>
+    <p class="pkg-desc">A fine balance of comfort and modern elegance.</p>
+    <p class="pkg-desc">- Elite pricing</p>
+    <p class="pkg-desc">- Lavish designs.</p>
+    <p class="pkg-desc">- Extensive range of accessories</p>
+  </div>
+</div>
+
+
+  <div class="actions">
+    <div><button class="btn-ghost prevBtn" aria-label="Previous step">Back</button></div>
+    <div><button class="btn-primary nextBtn" aria-label="Next step">Next</button></div>
+  </div>
+</section>
+
+
+
+      <!-- STEP 4: GET QUOTE -->
+      <section class="step-content" data-step="3">
+        <h1 class="h-title">Your Estimated Quote</h1>
+        <p class="h-sub">We’ll show the exact estimate after a quick detail form</p>
+        <div class="quote-card" id="quoteCard">
+          <div class="small">Here's your estimated budget range</div>
+          <div id="budgetPlaceholder" style="text-align:center; padding:18px 0; font:'Montserrat', sans-serif;">
+            <div style="font-size:18px;color:var(--muted);">Click <strong>Get Detailed Quote</strong> and fill a short form to see the exact estimate</div>
+          </div>
+          <div id="budgetResult" class="hidden">
+            <div id="budget-range">₹0L - ₹0L*</div>
+            <div style="font-size:13px;color:var(--muted); margin-top:6px;">This isn’t a final quote and can be customized to suit your needs.</div>
+            <div style="margin-top:8px;"><a href="#" id="viewSummary" style="color:var(--accent)" aria-label="View detailed summary">View detailed summary</a></div>
+          </div>
+          <div class="cta-wrap" style="margin-top:16px;">
+            <div style="font-weight:800; margin-bottom:8px;">Want an accurate quote?</div>
+            <div style="margin-bottom:8px;">Book a <span style="background:#2a9d49;color:#fff;padding:4px 6px;border-radius:6px;font-weight:700;font-size:12px">FREE</span> consultation with our designer to get a detailed quote for your interiors.</div>
+            <button class="cta-btn" id="openFormBtn" aria-label="Open form to get detailed quote">GET DETAILED QUOTE</button>
+          </div>
+        </div>
+        <div class="actions" style="margin-top:26px;">
+          <div><button class="btn-ghost prevBtn" aria-label="Previous step">Back</button></div>
+          <div></div>
+        </div>
+      </section>
+    </div> <!-- /card -->
+  </div> <!-- /page -->
+ 
+<!-- Form Modal -->
+<div id="formOverlay" class="modal-overlay" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="formModalTitle">
+    
+    <!-- 🖼️ Full-width header image -->
+    <div class="modal-image">
+      <img src="./assets/images/living room banner.jpg" alt="Studio Patron" />
+    </div>
+
+    <!-- Content section wrapped for inner padding -->
+    <div class="modal-body">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px;">
+        <h3 id="formModalTitle">Enter your details</h3>
+        <button class="close-btn" id="closeFormBtn" aria-label="Close form modal">×</button>
+      </div>
+
+      <form id="leadForm">
+  <div class="field">
+    <label for="nameInput">Name</label>
+    <input id="nameInput" type="text" placeholder="Your name" required>
+  </div>
+
+  <div class="field">
+    <label for="emailInput">Email</label>
+    <input id="emailInput" type="email" placeholder="you@example.com" required>
+    <small id="emailFeedback" style="color: red; display: none; font-size: 13px;">Invalid email address</small>
+  </div>
+
+  <div class="field">
+    <label for="phoneInput">Phone</label>
+    <input id="phoneInput" type="tel" placeholder="+91 90000 00000" required>
+  </div>
+
+  <div class="field">
+    <label for="propertyInput">Property Name / Location</label>
+    <input id="propertyInput" type="text" placeholder="Apartment / Locality" required>
+    <small style="font-size: 12px; color: #666;">Start typing to search your location...</small>
+  </div>
+
+  <div class="row">
+    <label style="display:flex;align-items:center;gap:8px;">
+      <input id="whatsappOpt" type="checkbox"> Send me updates on WhatsApp
+    </label>
+  </div>
+
+  <div class="modal-cta">
+    <button type="button" class="btn cancel" id="cancelFormBtn">Cancel</button>
+    <button type="submit" class="btn" id="submitFormBtn">Submit & View Estimate</button>
+  </div>
+
+  <div class="row note">By submitting you agree to our privacy policy & terms.</div>
+</form>
+
+</div>
+</div>
+</div>
+
+
+  <!-- Summary Modal -->
+  <div id="summaryModal" class="modal-overlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="summaryModalTitle">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <h3 id="summaryModalTitle">Detailed Summary</h3>
+        <button class="close-btn" id="closeSummaryModal" aria-label="Close summary modal">&times;</button>
+      </div>
+      <div class="summary-modal-content" id="summaryContent"></div>
+    </div>
+  </div>
+
+  <!-- Room Details Modal -->
+  <div id="roomDetailsModal" class="modal-overlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="roomModalTitle">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <h3 id="roomModalTitle">Room Details</h3>
+        <button class="close-btn" id="closeRoomModal" aria-label="Close room details modal">&times;</button>
+      </div>
+      <ul style="margin-top:16px; line-height:1.5;">
+        <li><strong>Living Room:</strong> TV unit, false ceiling, shoe rack, sofa, coffee table, wallpapers, curtains, pooja unit.</li>
+        <li><strong>Kitchen:</strong> Modular kitchen, loft, countertop, appliances, tiling, utility.</li>
+        <li><strong>Bedroom:</strong> 2-door wardrobe, loft, false ceiling, TV unit, study unit, bed, side table, mattress, wooden flooring.</li>
+        <li><strong>Other Bedroom:</strong> 2-door wardrobe, loft.</li>
+        <li><strong>Bathroom:</strong> Vanity, tiling, shower cubicle.</li>
+        <li><strong>Dining:</strong> Crockery unit, dining table with chairs, false ceiling.</li>
+      </ul>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script>
+     // Fully lock scroll position on load
+    (function () {
+      // Initialize EmailJS
+      emailjs.init("ThHJcsTNy5dwLeEHs"); // Replace with your EmailJS public key
+
+      // ✅ Realistic Studio Patron Pricing Config
+// ✅ Simplified realistic pricing — depends only on BHK & package
+const pricing = {
+  bhk: {
+    "1BHK": { Essentials: [250000, 300000], Premium: [450000, 550000], Luxury: [800000, 1000000] },
+    "2BHK": { Essentials: [350000, 400000], Premium: [600000, 750000], Luxury: [1200000, 1400000] },
+    "3BHK": { Essentials: [400000, 500000], Premium: [800000, 1000000], Luxury: [1500000, 2000000] },
+    "4BHK": { Essentials: [500000, 600000], Premium: [1000000, 1200000], Luxury: [2000000, 2500000] }
+  }
+};
+
+
+
+      // Helpers
+      const $ = (sel, ctx = document) => ctx.querySelector(sel);
+      const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
+
+      // Step elements
+      const steps = $$('.step-content');
+      const stepNodes = $$('.progress .step');
+      let current = 0;
+
+      function showStep(index) {
+        if (index < 0) index = 0;
+        if (index >= steps.length) index = steps.length - 1;
+        steps.forEach((s, i) => s.classList.toggle('active', i === index));
+        stepNodes.forEach((p, i) => {
+          p.classList.toggle('active', i === index);
+          p.classList.toggle('completed', i < index);
+        });
+        current = index;
+    
+      }
+
+      // Initial step
+      showStep(0);
+
+      // Navigation
+      $$('.nextBtn').forEach(btn => btn.addEventListener('click', () => {
+        if (!validateStep(current)) return;
+        if (current === 2) {
+          showStep(3);
+          setTimeout(() => {
+            $('#formOverlay').classList.add('active');
+            $('#formOverlay').setAttribute('aria-hidden', 'false');
+            $('#nameInput').focus();
+          }, 200);
+        } else {
+          showStep(current + 1);
+        }
+      }));
+
+      $$('.prevBtn').forEach(btn => btn.addEventListener('click', () => showStep(current - 1)));
+
+      // Step validation
+      function validateStep(i) {
+        if (i === 0) {
+          if (!$("input[name='bhk']:checked")) {
+            alert("Please select a BHK type to continue.");
+            return false;
+          }
+        }
+        if (i === 1) {
+          const living = parseInt($('input[name="living"]').value, 10);
+          const kitchen = parseInt($('input[name="kitchen"]').value, 10);
+          if (living + kitchen === 0) {
+            alert("Please select at least one living room or kitchen.");
+            return false;
+          }
+        }
+        if (i === 2) {
+          if (!$("input[name='package']:checked")) {
+            alert("Please pick a package.");
+            return false;
+          }
+        }
+        return true;
+      }
+
+      // Room Details Modal
+      const roomModal = $('#roomDetailsModal');
+      $('#openRoomModal').addEventListener('click', (e) => {
+        e.preventDefault();
+        roomModal.classList.add('active');
+        roomModal.setAttribute('aria-hidden', 'false');
+        $('#closeRoomModal').focus();
+      });
+
+      $('#closeRoomModal').addEventListener('click', () => {
+        roomModal.classList.remove('active');
+        roomModal.setAttribute('aria-hidden', 'true');
+        $('#openRoomModal').focus();
+      });
+
+// Form Modal
+const formOverlay = $('#formOverlay');
+$('#openFormBtn').addEventListener('click', () => {
+  showStep(3);
+  setTimeout(() => {
+    formOverlay.classList.add('active');
+    formOverlay.setAttribute('aria-hidden', 'false');
+    $('#nameInput').focus();
+  }, 120);
+});
+
+// ✅ Corrected close button handler
+$('#closeFormBtn').addEventListener('click', () => {
+  formOverlay.classList.remove('active');
+  formOverlay.setAttribute('aria-hidden', 'true');
+  $('#openFormBtn').focus();
+});
+
+$('#cancelFormBtn').addEventListener('click', () => {
+  formOverlay.classList.remove('active');
+  formOverlay.setAttribute('aria-hidden', 'true');
+  $('#openFormBtn').focus();
+});
+// === LIVE EMAIL VALIDATION ===
+const emailInput = document.getElementById("emailInput");
+const emailFeedback = document.getElementById("emailFeedback");
+
+emailInput.addEventListener("input", () => {
+  const email = emailInput.value.trim();
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (email === "") {
+    emailFeedback.style.display = "none";
+    emailInput.style.borderColor = "#ccc";
+  } else if (regex.test(email)) {
+    emailFeedback.style.display = "none";
+    emailInput.style.borderColor = "#2a9d49"; // green border for valid
+  } else {
+    emailFeedback.style.display = "block";
+    emailFeedback.textContent = "Invalid email address";
+    emailInput.style.borderColor = "#ff4b4b"; // red border for invalid
+  }
+});
+
+
+      // Summary Modal
+      const summaryModal = $('#summaryModal');
+      $('#closeSummaryModal').addEventListener('click', () => {
+        summaryModal.classList.remove('active');
+        summaryModal.setAttribute('aria-hidden', 'true');
+        $('#viewSummary').focus();
+      });
+
+      // Modal closing on outside click or Escape
+      window.addEventListener('click', (e) => {
+        if (e.target === roomModal) {
+          roomModal.classList.remove('active');
+          roomModal.setAttribute('aria-hidden', 'true');
+          $('#openRoomModal').focus();
+        }
+        if (e.target === formOverlay) {
+          formOverlay.classList.remove('active');
+          formOverlay.setAttribute('aria-hidden', 'true');
+          $('#openFormBtn').focus();
+        }
+        if (e.target === summaryModal) {
+          summaryModal.classList.remove('active');
+          summaryModal.setAttribute('aria-hidden', 'true');
+          $('#viewSummary').focus();
+        }
+      });
+
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          if (roomModal.classList.contains('active')) {
+            roomModal.classList.remove('active');
+            roomModal.setAttribute('aria-hidden', 'true');
+            $('#openRoomModal').focus();
+          }
+          if (formOverlay.classList.contains('active')) {
+            formOverlay.classList.remove('active');
+            formOverlay.setAttribute('aria-hidden', 'true');
+            $('#openFormBtn').focus();
+          }
+          if (summaryModal.classList.contains('active')) {
+            summaryModal.classList.remove('active');
+            summaryModal.setAttribute('aria-hidden', 'true');
+            $('#viewSummary').focus();
+          }
+        }
+      });
+
+      // Room increment/decrement
+      $$('.inc').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const name = btn.getAttribute('data-name');
+          const input = $(`input[name="${name}"]`);
+          const max = parseInt(input.getAttribute('max') || 5);
+          input.value = Math.min(max, parseInt(input.value || 0, 10) + 1);
+          updateButtonStates(name);
+        });
+      });
+
+      $$('.dec').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const name = btn.getAttribute('data-name');
+          const input = $(`input[name="${name}"]`);
+          input.value = Math.max(0, parseInt(input.value || 0, 10) - 1);
+          updateButtonStates(name);
+        });
+      });
+
+      function updateButtonStates(name) {
+        const input = $(`input[name="${name}"]`);
+        const value = parseInt(input.value, 10);
+        const max = parseInt(input.getAttribute('max') || 5);
+        const decBtn = $(`.dec[data-name="${name}"]`);
+        const incBtn = $(`.inc[data-name="${name}"]`);
+        decBtn.classList.toggle('inactive', value === 0);
+        incBtn.classList.toggle('inactive', value === max);
+      }
+
+      // Initialize button states
+      ['living', 'kitchen', 'bedroom', 'bathroom', 'dining'].forEach(updateButtonStates);
+
+      // Calculate budget
+  // ✅ Updated calculateBudget() — only BHK + package
+function calculateBudget() {
+  const bhk = $("input[name='bhk']:checked")?.value;
+  const pkg = $("input[name='package']:checked")?.value;
+
+  if (!bhk || !pkg || !pricing.bhk[bhk] || !pricing.bhk[bhk][pkg]) {
+    return { min: 0, max: 0, bhk: bhk || "-", pkg: pkg || "-" };
+  }
+
+  const [min, max] = pricing.bhk[bhk][pkg];
+  return { min, max, bhk, pkg };
+}
+
+
+      // Format to lakhs
+      function formatAsL(amount) {
+        const l = amount / 100000;
+        return l % 1 === 0 ? `${l.toFixed(0)}L` : `${l.toFixed(1)}L`;
+      }
+
+      // Form submission
+      $('#leadForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const submitBtn = $('#submitFormBtn');
+        submitBtn.disabled = true;
+        submitBtn.classList.add('loading');
+        submitBtn.textContent = 'Submitting';
+
+        // Form validation
+        const name = $('#nameInput').value.trim();
+        const email = $('#emailInput').value.trim();
+        const phone = $('#phoneInput').value.trim();
+        const property = $('#propertyInput').value.trim();
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const phoneRegex = /^\+?\d{10,14}$/;
+
+        if (!name || !email || !phone || !property) {
+          alert('Please fill all fields.');
+          submitBtn.disabled = false;
+          submitBtn.classList.remove('loading');
+          submitBtn.textContent = 'Submit & View Estimate';
+          return;
+        }
+
+        if (!emailRegex.test(email)) {
+          alert('Please enter a valid email address.');
+          submitBtn.disabled = false;
+          submitBtn.classList.remove('loading');
+          submitBtn.textContent = 'Submit & View Estimate';
+          return;
+        }
+
+        if (!phoneRegex.test(phone)) {
+          alert('Please enter a valid phone number (10-14 digits).');
+          submitBtn.disabled = false;
+          submitBtn.classList.remove('loading');
+          submitBtn.textContent = 'Submit & View Estimate';
+          return;
+        }
+
+        // Compute budget
+        const result = calculateBudget();
+        const minStr = formatAsL(result.min);
+        const maxStr = formatAsL(result.max);
+        $('#budget-range').textContent = `₹${minStr} - ₹${maxStr}*`;
+        $('#budgetPlaceholder').classList.add('hidden');
+        $('#budgetResult').classList.remove('hidden');
+
+        // Send email
+        const params = {
+          name,
+          email,
+          phone,
+          property,
+          whatsapp: $('#whatsappOpt').checked ? 'Yes' : 'No'
+        };
+
+        emailjs.send('service_qcrnrhy', 'template_i0ruks5', params)
+          .then(() => {
+            alert('✅ Thank you! Your details were sent successfully.');
+            $('#leadForm').reset();
+            formOverlay.classList.remove('active');
+            formOverlay.setAttribute('aria-hidden', 'true');
+            showStep(3);
+            $('#budget-range').scrollIntoView({ behavior: 'smooth', block: 'center' });
+          })
+          .catch((error) => {
+            console.error('EmailJS Error:', error);
+            alert('❌ Oops! Something went wrong while sending. Please try again.');
+          })
+          .finally(() => {
+            submitBtn.disabled = false;
+            submitBtn.classList.remove('loading');
+            submitBtn.textContent = 'Submit & View Estimate';
+          });
+
+   // ✅ Corrected Summary Modal handler
+$('#viewSummary').onclick = (e) => {
+  e.preventDefault();
+  const result = calculateBudget(); // Recalculate current selection
+
+  const minStr = formatAsL(result.min);
+  const maxStr = formatAsL(result.max);
+
+  const details = `
+    <strong>BHK Type:</strong> ${result.bhk}<br>
+    <strong>Selected Package:</strong> ${result.pkg}<br>
+    <strong>Estimated Range:</strong> ₹${minStr} - ₹${maxStr}<br>
+    <br>
+    <em>This range is based on Studio Patron’s pricing standards and may vary depending on materials and design preferences.</em>
+  `;
+
+  $('#summaryContent').innerHTML = details;
+  summaryModal.classList.add('active');
+  summaryModal.setAttribute('aria-hidden', 'false');
+  $('#closeSummaryModal').focus();
+};
+      });
+
+      // BHK and package selection
+      $$('.option').forEach(opt => {
+        opt.addEventListener('click', () => {
+          const radio = opt.querySelector('input[type="radio"]');
+          if (radio) radio.checked = true;
+          $$('.option').forEach(o => o.style.borderColor = '#f0f0f0');
+          opt.style.borderColor = 'rgba(107,59,91,0.12)';
+        });
+      });
+
+      $$('.pkg').forEach(node => {
+        node.addEventListener('click', () => {
+          const input = node.querySelector('input');
+          if (input) input.checked = true;
+          $$('.pkg').forEach(n => n.style.borderColor = '#f0f0f0');
+          node.style.borderColor = 'rgba(107,59,91,0.14)';
+        });
+      });
+
+      // Progress step clicks
+      stepNodes.forEach((node, idx) => {
+        node.addEventListener('click', () => {
+          if (idx <= current + 1 && validateStep(current)) {
+            showStep(idx);
+          }
+        });
+      });
+    })();
+      window.history.scrollRestoration = "manual";
+
+  window.addEventListener("load", () => {
+    // Force the page to stay at top
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: "instant" });
+      document.body.style.overflowY = "auto"; // allow scroll after load
+    }, 50); // delay to ensure styles apply before unlocking scroll
+  });
+  </script>
+</body>
+</html>

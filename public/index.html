@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hyderabad Interiors | Studio Patron</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  </head>
+  <body class="bg-white text-gray-800 font-sans">
+    <!-- Navbar -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+      <nav class="max-w-7xl mx-auto px-4 py-5 flex justify-between items-center">
+        <a href="index.html" class="text-2xl text-brand logo-text">
+          <span class="studio">STUDIO</span>
+          <span class="patron">PATRON</span>
+        </a>
+        <ul class="flex gap-6 text-brand font-medium get">
+          <li>
+            <a href="javascript:void(0)" class="hover:text-white-500 openQuoteModal">GET FREE QUOTE</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <!-- Quote Modal -->
+    <div id="quoteModal" class="fixed inset-0 bg-black bg-opacity-60 hidden justify-center items-center z-50">
+      <div class="bg-white rounded-none shadow-lg w-full max-w-md overflow-hidden relative">
+        <!-- Top Image -->
+        <div class="modal-image">
+          <img src="./assets/images/banner.jpg" alt="Get Quote" class="w-full h-40 object-cover">
+        </div>
+        <!-- Close button -->
+        <button id="closeModalBtn" class="absolute top-2 right-2 text-gray-100 text-2xl font-bold z-10">&times;</button>
+        <!-- Modal content -->
+        <div class="p-6">
+          <h2 class="text-2xl font-bold mb-4 text-gray-900">Get Your Free Quote</h2>
+          <form id="quoteForm" class="space-y-4">
+            <input type="text" name="fullName" placeholder="Full Name" required class="w-full border rounded p-2">
+            <input type="email" name="email" placeholder="Email Address" required class="w-full border rounded p-2">
+            <input type="tel" name="phone" placeholder="Phone Number" required class="w-full border rounded p-2">
+            <textarea name="message" placeholder="Message (Optional)" class="w-full border rounded p-2"></textarea>
+            <button type="submit" class="w-full font-bold py-2 px-4 rounded btn"> Submit </button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- Hero Section -->
+    <!-- Hero Section -->
+    <section class="relative min-h-screen hero-slideshow overflow-hidden">
+      <!-- Slides -->
+      <div class="slideshow">
+        <div class="slide" style="background-image: url('assets/images/Desktop-1.jpg');"></div>
+        <div class="slide" style="background-image: url('assets/images/Desktop-2.jpg');"></div>
+        <div class="slide" style="background-image: url('assets/images/Desktop-3.png');"></div>
+        <div class="slide" style="background-image: url('assets/images/Desktop-4.jpg');"></div>
+        <div class="slide" style="background-image: url('assets/images/Desktop-5.jpg');"></div>
+      </div>
+      <!-- Text Content (Left Side) -->
+      <div class="relative z-20 text-center md:text-left max-w-6xl py-10 animate-text">
+        <div class="slide1-text">
+          <h1 class="text-4xl md:text-5xl font-bold mb-4">Hyderabad Interiors Designed Just for You</h1>
+          <p class="text-lg md:text-xl mb-6 text-gray-100">Book a Free Design Consultation with Experts Today</p>
+          <a href="javascript:void(0)" class="bg-yellow-400 text-black px-8 py-4 rounded text-lg font-semibold hover:bg-yellow-300 transition openQuoteModal  hover:scale-105 duration-300 inline-block" style="box-shadow: none;">GET FREE QUOTE</a>
+        </div>
+        <div class="slide2-text" style="opacity: 0;">
+          <p class="text-lg md:text-xl text-gray-100">Meet a designer</p>
+        </div>
+        <div class="slide3-text" style="opacity: 0;">
+          <p class="text-lg md:text-xl text-gray-100">(5% payment) Initial Advance</p>
+        </div>
+        <div class="slide4-text" style="opacity: 0;">
+          <p class="text-lg md:text-xl text-gray-100">(60% payment) Execution Begins</p>
+        </div>
+        <div class="slide5-text" style="opacity: 0;">
+          <p class="text-lg md:text-xl text-gray-100">Settle the final 35% at modular dispatch and move in to enjoy your new home!</p>
+        </div>
+      </div>
+    </section>
+    <!-- Guarantee Section -->
+    <section class="guarantee-section">
+      <h2>We promise you</h2>
+      <div class="guarantee-container">
+        <div class="guarantee-item">
+          <img src="./assets/images/Moving-pana (8).svg" alt="45 Days Move-in Guarantee">
+          <p>45 days move-in guarantee</p>
+        </div>
+        <div class="guarantee-item">
+          <img src="./assets/images/Product quality-pana (6).svg" alt="Flat 10-Year Warranty">
+          <p>Flat 12-year warranty</p>
+        </div>
+        <div class="guarantee-item">
+          <img src="./assets/images/Wallet-rafiki (6).svg" alt="No Hidden Cost">
+          <p>No hidden cost guarantee</p>
+        </div>
+      </div>
+    </section>
+<!-- ===========================
+     WHAT WE OFFER SECTION
+=========================== -->
+<section class="offer-section">
+  <div class="offer-header">
+    <h2>What we offer</h2>
+    <!-- Desktop / Laptop Button -->
+    <button class="quote-btn openQuoteModal btn">GET A QUOTE</button>
+  </div>
+
+  <!-- ==== DESKTOP / LAPTOP CARDS ==== -->
+  <div class="offer-container">
+    <div class="offer-card">
+      <div class="offer-title">
+        <img src="./assets/images/Maintenance-rafiki (3).svg" class="offer-icon" alt="Services">
+        <h3>Our Services</h3>
+      </div>
+      <ul class="services-list">
+        <li>Expert in interior designing</li>
+        <li>Modular kitchens</li>
+        <li>Modular wardrobes</li>
+        <li>Lighting</li>
+        <li>Flooring</li>
+        <li>Electrical work</li>
+        <li>Civil work</li>
+        <li>False ceiling</li>
+        <li>Wall design & painting</li>
+      </ul>
+    </div>
+
+    <div class="offer-card">
+      <div class="offer-title">
+        <img src="./assets/images/Wallet-rafiki (5).svg" class="offer-icon" alt="Price">
+        <h3>Price Benefits</h3>
+      </div>
+      <ul class="services-list">
+        <li>Flexible payment options with EMI plans.</li>
+        <li>No hidden costs – transparent pricing.</li>
+      </ul>
+    </div>
+
+    <div class="offer-card">
+      <div class="offer-title">
+        <img src="./assets/images/QA engineers-pana (3).svg" class="offer-icon" alt="Warranty">
+        <h3>Warranty</h3>
+      </div>
+      <ul class="services-list">
+        <li>12-year warranty on modular products.</li>
+        <li>Up to 5-year on-site service warranty.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ==== TABLET / MOBILE ACCORDION ==== -->
+  <div class="offer-accordion">
+    <!-- Panel 1 -->
+    <div class="offer-panel">
+      <div class="offer-panel-header">
+        <img src="./assets/images/Maintenance-rafiki (3).svg" alt="Services">
+        <h3>Our Services</h3>
+      </div>
+      <div class="offer-panel-body">
+        <ul class="services-list">
+          <li>Expert in interior designing</li>
+          <li>Modular kitchens</li>
+          <li>Modular wardrobes</li>
+          <li>Lighting</li>
+          <li>Flooring</li>
+          <li>Electrical work</li>
+          <li>Civil work</li>
+          <li>False ceiling</li>
+          <li>Wall design & painting</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Panel 2 -->
+    <div class="offer-panel">
+      <div class="offer-panel-header">
+        <img src="./assets/images/Wallet-rafiki (5).svg" alt="Price">
+        <h3>Price Benefits</h3>
+      </div>
+      <div class="offer-panel-body">
+        <ul class="services-list">
+          <li>Flexible payment options - EMI & partner schemes.</li>
+          <li>No hidden costs - transparent billing.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Panel 3 -->
+    <div class="offer-panel">
+      <div class="offer-panel-header">
+        <img src="./assets/images/QA engineers-pana (3).svg" alt="Warranty">
+        <h3>Warranty</h3>
+      </div>
+      <div class="offer-panel-body">
+        <ul class="services-list">
+          <li>Flat 12-year warranty on modular products.</li>
+          <li>Up to 5-year on-site service warranty.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ Mobile/Tablet Bottom Button -->
+  <button class="quote-btn-mobile openQuoteModal quote-btn-bottom">GET A QUOTE</button>
+</section>
+
+
+
+    <!-- DESIGN 3: HORIZONTAL SCROLL GALLERY WITH HEADER -->
+    <section class="scroll-gallery-section">
+  <div class="gallery-header">
+    <h2>Be inspired by this gallery</h2>
+    <p>Crafted to inspire your next creation, where vision meets craftsmanship.</p>
+  </div>
+
+  <div class="scroll-gallery">
+    <div class="media-track">
+      <!-- MIXED IMAGES & VIDEOS -->
+      <div class="media-item">
+        <img src="./assets/images/img 1 .jpg" alt="Gallery Image 1">
+      </div>
+      <div class="media-item">
+        <img src="./assets/images/img 2.jpg" alt="Gallery Image 2">
+      </div>
+
+      <!-- ✅ Autoplay Video — no controls -->
+      <div class="media-item">
+        <video muted autoplay loop playsinline>
+          <source src="./assets/images/vedio 1 - Trim.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <div class="media-item">
+        <img src="./assets/images/img 3.jpg" alt="Gallery Image 3">
+      </div>
+      <div class="media-item">
+        <img src="./assets/images/img 4.jpg" alt="Gallery Image 4">
+      </div>
+      <div class="media-item">
+        <img src="./assets/images/img 5.jpg" alt="Gallery Image 5">
+      </div>
+      <div class="media-item">
+        <img src="./assets/images/img 6.jpg" alt="Gallery Image 6">
+      </div>
+      <div class="media-item">
+        <img src="./assets/images/img 7.jpg" alt="Gallery Image 7">
+      </div>
+
+      <!-- ✅ Autoplay Video — no controls -->
+      <div class="media-item">
+        <video muted autoplay loop playsinline>
+          <source src="./assets/images/vedio 2.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <div class="media-item">
+        <img src="./assets/images/img 8.jpg" alt="Gallery Image 8">
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!--Trusted patners-->
+    <section class="partners-section">
+      <div class="partners-header">
+        <h2>Our trusted partners</h2>
+        <p>Winning collaborations that produce winning designs.</p>
+      </div>
+      <!-- Scroll Wrapper -->
+      <div class="partners-scroll">
+        <div class="partners-logos">
+          <div class="partner-card">
+            <img src="./assets/images/hettich.svg" alt="Hettich">
+          </div>
+          <div class="partner-card">
+            <img src="./assets/images/CENTURYPLY.NS_BIG.svg" alt="Century Ply">
+          </div>
+          <div class="partner-card">
+            <img src="./assets/images/Greenlam.png" alt="Greenlam">
+          </div>
+          <div class="partner-card">
+            <img src="./assets/images/saint-gobain-logo.png" alt="Saint‑Gobain">
+          </div>
+          <div class="partner-card">
+            <img src="./assets/images/Bosch_idi5e7gC2E_0.svg" alt="Bosch">
+          </div>
+          <div class="partner-card">
+            <img src="./assets/images/asian-paints-logo.png" alt="Asian Paints">
+          </div>
+          <div class="partner-card">
+            <img src="./assets/images/o-general.jpg" alt="O‑General">
+          </div>
+          <div class="partner-card">
+            <img src="./assets/images/orientbell-vector-logo.png" alt="Orient Bell">
+          </div>
+          <div class="partner-card">
+            <img src="./assets/images/ikea logo.svg" alt="Ikea">
+          </div>
+          <div class="partner-card">
+            <img src="./assets/images/Jaquar_idzjZg-3Mx_1.svg" alt="Jaguar">
+          </div>
+          <!-- duplicate for seamless infinite scroll -->
+          <div class="partner-card">
+            <img src="./assets/images/hettich.svg" alt="Hettich">
+          </div>
+          <div class="partner-card">
+            <img src="./assets/images/CENTURYPLY.NS_BIG.svg" alt="Century Ply">
+          </div>
+          <div class="partner-card">
+            <img src="./assets/images/Greenlam.png" alt="Greenlam">
+          </div>
+          <div class="partner-card">
+            <img src="./assets/images/saint-gobain-logo.png" alt="Saint‑Gobain">
+          </div>
+          <div class="partner-card">
+            <img src="./assets/images/Bosch_idi5e7gC2E_0.svg" alt="Bosch">
+          </div>
+          <div class="partner-card">
+            <img src="./assets/images/asian-paints-logo.png" alt="Asian Paints">
+          </div>
+          <div class="partner-card">
+            <img src="./assets/images/o-general.jpg" alt="O‑General">
+          </div>
+          <div class="partner-card">
+            <img src="./assets/images/orientbell-vector-logo.png" alt="Orient Bell">
+          </div>
+          <div class="partner-card">
+            <img src="./assets/images/ikea logo.svg" alt="ikea">
+          </div>
+          <div class="partner-card">
+            <img src="./assets/images/Jaquar_idzjZg-3Mx_1.svg" alt="Jaguar">
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- design 2 -->
+    <section class="infinite-scroll">
+      <div class="scroll-track">
+        <div class="scroll-panel" style="background-image: url('assets/images/truck\ .jpg');">
+          <div class="panel-text">Delivery</div>
+          <p> We promise on-time delivery within 45 days, ensuring your dream interiors come to life without delay. </p>
+          <p> Our streamlined design-to-installation process guarantees efficiency, precision, and care at every step. </p>
+          <p> Experience reliability you can count on—because your time matters as much as your design. </p>
+        </div>
+        <div class="scroll-panel" style="background-image: url('assets/images/Responcible\ \(2\).jpg');">
+          <div class="panel-text">Responsible</div>
+          <p> Ethics and transparency have been the foundation of our journey. We hold ourselves accountable, fostering a bond of trust and integrity with our clients, that stand the test of time. </p>
+          <p> Sustainably crafted, human-safe certified, designed with precision, and timeless in appeal. </p>
+          <p> Studio Patron redefines premium with well-being at its core. </p>
+        </div>
+        <div class="scroll-panel" style="background-image: url('assets/images/Lifetime.jpg');">
+          <div class="panel-text">12 YEARS WARRANTY</div>
+          <p> Our interiors come with a 12-year warranty, a mark of our unwavering commitment to superior craftsmanship and enduring quality.Each design is thoughtfully built to stand the test of time—beautiful, functional, and reliable. </p>
+          <p> Experience reliability you can count on—because your time matters as much as your design. </p>
+          <p> Experience peace of mind knowing your space is crafted to last, backed by our promise of durability and excellence. </p>
+        </div>
+        <!-- Duplicate panels for looping -->
+        <div class="scroll-panel" style="background-image: url('assets/images/truck.jpg');">
+          <div class="panel-text">Delivery</div>
+          <p> We promise on-time delivery within 45 days, ensuring your dream interiors come to life without delay. </p>
+          <p> Our streamlined design-to-installation process guarantees efficiency, precision, and care at every step. </p>
+          <p> Experience reliability you can count on—because your time matters as much as your design. </p>
+        </div>
+        <div class="scroll-panel" style="background-image: url('assets/images/Responcible.jpg');">
+          <div class="panel-text">Responsible</div>
+          <p> Ethics and transparency have been the foundation of our journey. We hold ourselves accountable, fostering a bond of trust and integrity with our clients, that stand the test of time. </p>
+          <p> Sustainably crafted, human-safe certified, designed with precision, and timeless in appeal. </p>
+          <p> Studio Patron redefines premium with well-being at its core. </p>
+        </div>
+        <div class="scroll-panel" style="background-image: url('assets/images/Lifetime.jpg');">
+          <div class="panel-text">Lifetime* Quality</div>
+          <p> Our interiors come with a 12-year warranty, a mark of our unwavering commitment to superior craftsmanship and enduring quality.Each design is thoughtfully built to stand the test of time—beautiful, functional, and reliable. </p>
+          <p> Experience reliability you can count on—because your time matters as much as your design. </p>
+          <p> Experience peace of mind knowing your space is crafted to last, backed by our promise of durability and excellence. </p>
+        </div>
+      </div>
+    </section>
+    <!--estimation crad-->
+    <section class="estimate-section">
+      <h2>Interior Price Estimator</h2>
+      <p>Calculate the approximate cost of doing up your interiors</p>
+      <div class="estimate-container">
+        <!-- Card 1 -->
+        <div class="estimate-card">
+          <img src="./assets/images/Living room-pana.svg" alt="Full Home">
+          <h3>Full Home</h3>
+          <p>Get an approximate costing for your full home interiors.</p>
+          <a href="./living-room.html" class="calc-btn btn">CALCULATE →</a>
+        </div>
+        <!-- Card 2 -->
+        <div class="estimate-card">
+          <img src="./assets/images/Kitchen appliances-rafiki.svg" alt="Kitchen">
+          <h3>Kitchen</h3>
+          <p>Get an approximate costing for your kitchen interior.</p>
+          <a href="./kitchen-layout.html" class="calc-btn btn">CALCULATE →</a>
+        </div>
+        <!-- Card 3 -->
+        <div class="estimate-card">
+          <img src="./assets/images/Waiting-rafiki (1).svg" alt="Wardrobe">
+          <h3>Wardrobe</h3>
+          <p>Get an approximate costing for your wardrobe.</p>
+          <a href="./wadrobe-layout.html" class="calc-btn btn">CALCULATE →</a>
+        </div>
+      </div>
+    </section>
+    <!-- How it works -->
+    <section class="how-it-works">
+      <h2>How it works</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="icon">
+            <img src="./assets/images/Face to face-rafiki.svg" alt="Designer">
+          </div>
+          <p>Meet a designer</p>
+        </div>
+        <div class="step">
+          <div class="icon">
+            <img src="./assets/images/Wallet-bro.svg" alt="Book">
+          </div>
+          <p>(5% payment) Initial Advance</p>
+        </div>
+        <div class="step">
+          <div class="icon">
+            <img src="./assets/images/Heavy box-rafiki.svg" alt="Execution">
+          </div>
+          <p>(60% payment) Operation Begins</p>
+        </div>
+        <div class="step">
+          <div class="icon">
+            <img src="./assets/images/Coronavirus Delivery Preventions-rafiki.svg" alt="Installations">
+          </div>
+          <p>(35% payment) At Modular Despatch Time</p>
+        </div>
+        <div class="step">
+          <div class="icon">
+            <img src="./assets/images/Home cinema-pana.svg" alt="Move in">
+          </div>
+          <p>Move in and enjoy!</p>
+        </div>
+      </div>
+      <!-- Desktop Button -->
+      <button class="quote-btn openQuoteModal btn">BOOK A CONSULTATION</button>
+      <!-- Mobile Button -->
+      <button class="quote-btn-mobile openQuoteModal">BOOK A CONSULTATION</button>
+    </section>
+    <!-- Contact Section -->
+    <section class="connect-section">
+      <h2>Connect with us</h2>
+      <p>Reach out on WhatsApp or give us a call for the best home design experience.</p>
+      <div class="button-group">
+        <a href="tel:+917207105444" class="btn call " onclick="handleCallClick(event)">
+          <i class="fas fa-phone" style="color: #000000;"></i> CALL NOW </a>
+        <a href="https://wa.me/917207105444" target="_blank" class="btn whatsapp">
+          <i class="fab fa-whatsapp"></i> WHATSAPP </a>
+      </div>
+    </section>
+    <!-- Modal (unchanged) -->
+    <div id="thankYouModal" class="modal-overlay">
+      <div class="modal-content">
+        <span class="modal-close" onclick="closeModal()">×</span>
+        <h2>Thank you</h2>
+        <div class="modal-check">
+          <i class="fas fa-check"></i>
+          <!-- This is the right mark (checkmark) -->
+        </div>
+        <p>Please call us on</p>
+        <p class="modal-phone">+91 7207105444</p>
+      </div>
+    </div>
+    <!--design 3 -->
+    <!-- DESIGN 3: HORIZONTAL SCROLL GALLERY -->
+    <!-- Faqs section-->
+    <div class="faq-container">
+      <h2>FAQs</h2>
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>1. How much does interior design cost in Hyderabad?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer"> Interior design costs in Hyderabad can vary based on project size and requirements, generally starting from ₹3 lakh and above. </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>2. How much does a 2BHK interior cost in Hyderabad?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer"> A 2BHK interior design can cost between ₹3 lakh to ₹6 lakh, depending on the scope and materials used. </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>3. How much does 3BHK interior design cost in Hyderabad?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer"> For a 3BHK, expect the costs to range from ₹4 lakh to ₹10 lakh depending on complexity and finishes. </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>4. Why is Studio Patron perfect for your home interior design?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer"> Studio Patron offers end-to-end interior solutions, transparent pricing, professional designers, and quality assurance. </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>5. What will be the timelines for my project completion?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer"> Timelines vary, but most interior projects take 45–90 days depending on the project size and complexity. </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>6. What services are included under home interior design?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer"> Services include space planning, modular kitchen, wardrobes, false ceiling, lighting, painting, and furniture. </div>
+      </div>
+    </div>
+    <!--Design-->
+    <section class="concept-section">
+      <div class="concept-image"></div>
+      <div class="concept-text">
+        <h2>PRODUCT CORE</h2>
+        <p> Studio Patron products are crafted on a foundation of strong and responsible principles, setting them apart with exceptional design and unparalleled quality. </p>
+        <p> Sustainably crafted, human-safe certified, designed with precision, and timeless in appeal. </p>
+        <p> Studio Patron redefines premium with well-being at its core. </p>
+      </div>
+    </section>
+    <!--Hero banner-->
+    <section class="hero-banner">
+      <div class="hero-content">
+        <h1>
+          <span>Your dream home</span> is just a click away
+        </h1>
+        <p>Book a free consultation with our expert interior designers.</p>
+        <!-- Add this class to link with your JS -->
+        <button class="button">
+          <span class="button-content openQuoteModal btn ">START YOUR DESIGN JOURNEY</span>
+        </button>
+      </div>
+    </section>
+    <!--footer-->
+    <footer class="footer">
+      <!-- <hr> -->
+      <div class="footer-content">
+        <div class="footer-left">
+          <h1>
+            <span class="studio">STUDIO</span>
+            <span class="patron">PATRON LLP</span>
+          </h1>
+<a 
+  href="https://maps.app.goo.gl/mpSZFLpAbU6qBKRX7?g_st=iw" 
+  target="_blank" 
+  rel="noopener noreferrer"
+  class="location"
+>
+  opposite IKEA, Plot No.18/2, Sector-III, <br>
+  HUDA Techno Enclave, HITEC City, Hyderabad, Telangana 500081. <br>
+  +91 72071 05444, care@studiopatron.in
+</a>
+          <div class="footer-socials">
+            <a href="https://www.instagram.com/thepatron_interio/" aria-label="Instagram" target="_blank">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://wa.me/7207105444" aria-label="WhatsApp" target="_blank">
+              <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="mailto:care@studiopatron.in" aria-label="gmail" target="_blank">
+              <i class="fas fa-envelope"></i>
+            </a>
+          </div>
+        </div>
+        <div class="footer-right">
+          <nav class="footer-links">
+            <a href="./about.html">About us</a>
+                        <div class="footer-dropdown">
+              <button class="dropbtn"> Offerings <span class="arrow">▾</span>
+              </button>
+           <div class="dropdown-content">
+  <a href="./kitchen.html">Know Your Kitchen</a>
+  <a href="./wadrobe.html">Know Your Wardrobe</a>
+  <a href="https://in.pinterest.com/STUDIO_PATRON/?invite_code=1c0f2eb62fa64acd99927ea713ba3807&sender=1139481280627528648"
+     target="_blank"
+     rel="noopener noreferrer">
+     Explore on Pinterest
+  </a>
+</div>
+
+            </div>
+            <a href="./Shop.html">Shop Here</a>
+            <a href="./t&c.html">Privacy Policy</a>
+            <a href="./t&c.html">Terms & Conditions</a>
+            <!-- 👇 Added Dropdown beside other links -->
+          </nav>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-text">© studio patron — All rights reserved.</p>
+      </div>
+    </footer>
+    <!-- Font Awesome for icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <!-- Modal -->
+    <div id="quoteModal" class="fixed inset-0 bg-black bg-opacity-60 hidden justify-center items-center z-50">
+      <div class="bg-white rounded-xl shadow-lg w-full max-w-md p-6 relative">
+        <!-- Close button -->
+        <button id="closeModalBtn" class="absolute top-3 right-3 text-gray-500 hover:text-black text-xl">&times;</button>
+        <h2 class="text-xl font-bold mb-4 text-center">Book Your Free Consultation</h2>
+        <form class="space-y-4">
+          <input type="text" placeholder="Full Name" class="w-full border p-2 rounded" required>
+          <input type="email" placeholder="Email Address" class="w-full border p-2 rounded" required>
+          <input type="tel" placeholder="Phone Number" class="w-full border p-2 rounded" required>
+          <textarea placeholder="Message (Optional)" class="w-full border p-2 rounded"></textarea>
+          <button type="submit" class="w-full bg-yellow-500 hover:bg-yellow-600 text-white py-2 rounded">Submit</button>
+        </form>
+      </div>
+    </div>
+    <script>
+      const footerDropdown = document.querySelector('.footer-dropdown');
+      const dropBtn = footerDropdown.querySelector('.dropbtn');
+      dropBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        footerDropdown.classList.toggle('active');
+      });
+      document.addEventListener('click', () => {
+        footerDropdown.classList.remove('active');
+      });
+    </script>
+  </body>
+</html>

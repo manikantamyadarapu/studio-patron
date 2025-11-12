@@ -1,0 +1,1637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wardrobe Estimator | Studio Patron</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700&display=swap');
+     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+    :root {
+      --active: #aaa;               /* active step text */
+      --inactive: #fff;             /* inactive step text */
+      --line: #444;                 /* line colour */
+      --accent: #000;               /* deep purple accent */
+      --accent-2: rgb(43,42,42);    /* CTA accent */
+      --muted: #9aa0a6;
+      --bg: #f4f6f8;
+      --card: #fff;
+      --green: #2a9d49;
+    }
+    body {
+      margin: 0;
+      background: rgb(0, 0, 0);
+         font-family: 'Montserrat', sans-serif !important;
+
+
+    }
+ .brand {
+  position: relative;
+  z-index: 100;
+  pointer-events: auto;
+}
+
+     /* ===== TOPBAR ===== */
+    .topbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 70px;
+      background: #000000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 60px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+      z-index: 10;
+    }
+
+    /* ===== BRAND ===== */
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+    }
+/* ===== BRAND ===== */
+.studio {
+   font-family: 'Montserrat', sans-serif;
+  font-weight: 200; 
+  letter-spacing: 1.5px;
+  opacity: 0.7;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+.patron {
+ font-weight: 500; /* bold weight */
+  color: #fffff4; /* optional: golden tone for emphasis */
+  letter-spacing: 1.5px;
+  opacity: 0.9; /* slightly faded look */
+  font-family: 'Montserrat', sans-serif;
+}
+
+    /* ===== PROGRESS BAR ===== */
+.progress {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 90px;
+  height: 30px; /* controls where line aligns */
+  width: 100%;
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+    /* The thin line centered with text */
+    .progress::before {
+      content: "";
+      position: absolute;
+      top: 50%; /* Center vertically */
+      left: 30%;
+      right: 30%;
+      height: 1.3px;
+      background: var(--line);
+      transform: translateY(-50%);
+      z-index: 0;
+    }
+
+    /* Steps */
+    .step {
+      position: relative;
+      z-index: 1;
+      background: #000000; /* same as topbar background to hide line behind text */
+      padding: 0 10px;
+      cursor: pointer;
+    }
+
+    .step .label {
+      font-size: 13px;
+      font-weight: 500;
+      text-transform: uppercase;
+      color: var(--inactive);
+      letter-spacing: 0.6px;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    .step.active .label {
+      color: #ffcc33;
+      transform: scale(1.05);
+    }
+
+    .step:hover .label {
+      color: #ccc;
+    }
+    /* ===== RESPONSIVE BEHAVIOR ===== */
+@media (max-width: 991px) {
+  .topbar {
+    height: 80px !important;
+    padding: 0 20px;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .brand {
+    position: absolute;
+    left: 20px;
+    top: 15px;
+    transform: none;
+    margin-top: 10px !important;
+  }
+
+  .progress {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    gap: 5px !important;
+    margin-top: 50px;
+    justify-content: center;
+    width: 100%;
+    margin-left: -10px !important;
+  }
+
+  .progress::before {
+    left: 10%;
+    right: 10%;
+  }
+
+  .step .label {
+    font-size: 12px;
+  }
+}
+
+/* ===== SMALLER MOBILE VIEW ===== */
+@media (max-width: 600px) {
+  .topbar {
+    height: 55px;
+    padding: 0 15px;
+  }
+
+  .brand {
+    top: 10px;
+  }
+
+  .progress {
+    gap: 25px;
+  }
+
+  .progress::before {
+    left: 15%;
+    right: 15%;
+  }
+
+  .step .label {
+    font-size: 11px;
+    letter-spacing: 0.5px;
+  }
+}
+
+
+    /* ===== PAGE CONTENT ===== */
+    .page {
+      max-width: 1100px;
+      margin: 100px auto 30px; /* top margin gives space under fixed bar */
+      padding: 0 24px 60px;
+    }
+    /* Card Layout */
+    .card {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 36px;
+      box-shadow: 0 8px 26px rgba(15, 15, 15, 0.06);
+      margin-top: 18px;
+      min-height: 420px;
+    }
+
+    .step-content {
+      display: none;
+      opacity: 0;
+      transform: translateX(20px);
+      transition: all 0.36s ease;
+    }
+
+    .step-content.active {
+      display: block;
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+  h1.h-title{
+      margin:0 0 18px;text-align:center;color:#000;font-size:22px;
+      font-family:'Montserrat',sans-serif;text-transform:uppercase;
+      font-weight:500;letter-spacing:1px;
+    }
+    p.h-sub{
+      text-align:center;color:var(--muted);margin:6px 0 26px;
+      font-family:'Montserrat',sans-serif;
+    }
+#sliding{
+    font-family: 'Montserrat', sans-serif !important;
+
+}
+/* ===== WARDROBE TYPE (SAME STYLE AS PACKAGE) ===== */
+/* ===== WARDROBE TYPE (SAME STYLE AS PACKAGE) ===== */
+/* ===== WARDROBE TYPE (SAME STYLE AS PACKAGE) ===== */
+.packages {
+  display: flex;
+  gap: 18px;
+  justify-content: center;
+  margin-top: 10px;
+  font-family: 'Montserrat', sans-serif;
+  color: rgb(73, 72, 72);
+  flex-wrap: wrap;
+}
+
+.pkg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 18px 20px;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid #f0f0f0;
+  cursor: pointer;
+  min-width: 300px;
+  max-width: 340px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .04);
+  height: auto;
+}
+
+/* Hover effect */
+.pkg:hover {
+  border-color: #ffe6b3;
+  background: #fff9e6;
+  transform: translateY(-3px);
+}
+
+.pkg img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  display: block;
+  object-position: center;
+}
+
+.pkg input[type="radio"] {
+  margin-bottom: 6px;
+  accent-color: #ffcb05; /* yellow accent for selected */
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.pkg-title {
+  font-weight: 700;
+  color: #444;
+  margin-bottom: 6px;
+}
+
+.pkg-desc {
+  font-size: 13px;
+  color: #777;
+  font-weight: 400;
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+/* ===== SELECTED STATE =====
+.pkg:has(input[type="radio"]:checked) {
+  border: 2px solid #ffcb05;
+  background: #fff9e6;
+  box-shadow: 0 0 10px rgba(255, 203, 5, 0.3);
+} */
+
+
+/* ===== ACTION BUTTONS (BOTTOM) ===== */
+.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 32px;
+}
+
+
+
+/* ===== WARDROBE IMAGE ===== */
+.wardrobe-img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  transition: transform 0.4s ease;
+}
+
+.option-card label:hover .wardrobe-img {
+  transform: scale(1.04);
+}
+
+    /* Options (Height, Type, Finish, Material) */
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .option {
+      background: #fff;
+      border-radius: 8px;
+      padding: 14px 18px;
+      border: 1px solid #f0f0f0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-family: 'Montserrat', sans-serif;
+
+    }
+
+    .option label {
+      font-weight: 700;
+      color: rgb(73, 72, 72);
+    }
+
+      input[type="radio"] {
+  accent-color: #ffcb05; /* replace with your preferred color */
+}
+    .option-card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 14px 18px;
+      border: 1px solid #f0f0f0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+      margin: 10px 0;
+      text-align: left;
+      position: relative;
+    }
+
+    .option-card input:checked + label {
+      background: rgba(107, 59, 91, 0.05);
+      border-color: var(--accent);
+    }
+
+    .dot {
+      display: none;
+      width: 10px;
+      height: 10px;
+      background: var(--accent);
+      border-radius: 50%;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+
+    .option-card input:checked + label .dot {
+      display: block;
+    }
+
+    .image-placeholder {
+      background: #eee;
+      height: 100px;
+      margin: 10px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #757575;
+      border-radius: 4px;
+    }
+
+
+
+   /* ===== QUOTE STEP CARD ===== */
+    .quote-card {
+      max-width: 700px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 14px;
+      padding: 22px;
+      border: 1px solid #f1f1f1;
+    }
+
+    .quote-card .small {
+      color: var(--muted);
+      text-align: center;
+      margin-bottom: 8px;
+     font-family: 'Montserrat', sans-serif;
+    }
+
+    #budget-range {
+      font-size: 34px;
+      color: var(--green);
+      font-weight: 800;
+      text-align: center;
+      margin: 8px 0;
+    }
+
+    .cta-wrap {
+      margin-top: 18px;
+      background: #fff9e6;
+      padding: 18px;
+      border-radius: 10px;
+      text-align: center;
+      font-family: 'Montserrat', sans-serif!important;
+    }
+    #budgetPlaceholder{
+      font-family: 'Montserrat', sans-serif!important;
+    }
+    .cta-wrap .cta-btn {
+      background: var(--accent-2);
+      color: #fff;
+      padding: 12px 22px;
+      border-radius: 24px;
+      border: none;
+      cursor: pointer;
+      font-weight: 700;
+    }
+  
+    .summary-list {
+      margin-top: 18px;
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      color: #444;
+    }
+
+    /* ===== FOOTER BUTTONS ===== */
+    .actions {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 24px;
+      max-width: 740px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .btn-ghost {
+      background: #f0f0f0;
+      color: #333;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(107, 59, 91, 0.12);
+    }
+
+    /* ===== MODAL OVERLAY ===== */
+   .modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff; /* solid white background */
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.modal {
+  background: #fffdf6 !important; /* soft creamy white */
+  border: 1px solid #fdfbf4;      /* warm light yellow border */
+}
+
+
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+
+  /* ===== Base Modal ===== */
+.modal {
+  background: #fff !important;
+  width: 90%;
+  max-width: 500px;
+  border-radius: 12px;
+  padding: 0;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+  animation: slideUp 0.35s ease-in-out;
+  font-family: "Poppins", sans-serif;
+  overflow: hidden;
+  margin: 0 15px; /* adds safe space on tiny screens */
+}
+
+/* ===== Image block — full width header image ===== */
+.modal-image {
+  width: 100%;
+  height: 150px;
+  overflow: hidden;
+}
+
+.modal-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* ===== Inner Content Wrapper ===== */
+.modal-body {
+  padding: 20px 24px; 
+}
+
+/* ===== Responsive Breakpoints ===== */
+
+/* Large Tablets / Small Laptops */
+@media (max-width: 991px) {
+  .modal {
+    max-width: 480px;
+  }
+
+  .modal-body {
+    padding: 24px 28px;
+  }
+
+  .modal-image {
+    height: 160px;
+  }
+}
+
+/* Phones (Portrait) */
+@media (max-width: 768px) {
+  .modal {
+    width: 94%;
+    max-width: 420px;
+  }
+
+  .modal-body {
+    padding: 22px 24px;
+  }
+
+  .modal-image {
+    height: 150px;
+  }
+}
+
+/* 📱 Compact modal fix for small screens */
+@media (max-width: 480px) {
+  .modal {
+    width: 90% !important;
+    max-width: 320px !important;
+    border-radius: 12px !important;
+    margin: auto !important;
+    padding: 0 !important;
+  }
+
+  .modal-image {
+    height: 100px !important;
+  }
+
+  .modal-body {
+    padding: 12px 15px !important;
+  }
+
+  .modal-body h3 {
+    font-size: 1.1rem !important;
+  }
+
+  .field input,
+  .modal-body button {
+    font-size: 13px !important;
+    padding: 9px 10px !important;
+  }
+}
+
+
+    /* ===== MODAL HEADER ===== */
+    .modal h3 {
+      margin: 0;
+      color: #222;
+      font-weight: 600;
+      font-size: 1.3rem;
+    }
+
+    /* ===== FIELDS ===== */
+    .field {
+      margin-top: 14px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .field label {
+      font-size: 0.9rem;
+      color: #444;
+      margin-bottom: 6px;
+    }
+
+    .field input {
+      padding: 10px 12px;
+      font-size: 0.95rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    .field input:focus {
+      border-color: #fff9e6;
+      box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+    }
+    .field input:hover {
+      border-color: #fff2cf;
+      background: #fffbea; /* light yellow hover */
+}
+
+
+    /* ===== CHECKBOX ROW ===== */
+    .row {
+      margin-top: 12px;
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    .row input[type="checkbox"] {
+      transform: scale(1.2);
+      accent-color:black; /* golden tick */
+    }
+
+    /* ===== BUTTONS ===== */
+    .modal-cta {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn {
+      background:black;
+      color: #fff;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .btn:hover {
+      background: #f2f2f2 !important;
+    }
+
+    .btn.cancel {
+      background: #f2f2f2 !important;
+      color: #444;
+    }
+
+    .btn.cancel:hover {
+      background: #e0e0e0 !important;
+    }
+
+    /* ===== LOADING SPINNER ===== */
+    .btn.loading::after {
+      content: '';
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid black;
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-left: 8px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* ===== NOTE ===== */
+    .note {
+      margin-top: 10px;
+      font-size: 0.75rem;
+      color: #777;
+      text-align: center;
+    }
+
+    /* ===== CLOSE BUTTON ===== */
+    .close-btn {
+      color: #444;
+      transition: color 0.2s ease;
+      background: none;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .close-btn:hover {
+      color: #ff4b4b;
+    }
+
+    /* ===== SUMMARY MODAL ===== */
+    .summary-modal-content {
+      line-height: 1.5;
+      font-size: 0.9rem;
+      color: #333;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 860px) {
+      .rooms {
+        grid-template-columns: 1fr;
+      }
+      .card {
+        padding: 20px;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .modal {
+        width: 90%;
+        padding: 20px;
+      }
+      .modal-cta {
+        flex-direction: column;
+      }
+      .btn {
+        width: 100%;
+      }
+    }
+#budgetResult {
+  font-family: 'Montserrat', sans-serif;
+}
+
+    /* ===== HELPER CLASSES ===== */
+    .muted {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .summary-modal-content {
+      font-size: 0.9rem;
+      color: #333;
+      line-height: 1.6;
+      padding: 12px 0;
+    }
+    /* ============================================
+   🌐 GLOBAL RESPONSIVE TEXT + LAYOUT SETTINGS
+   ============================================ */
+
+       /* =======================================
+   RESPONSIVE TEXT STYLING FOR TOPBAR + STEPPER
+   ======================================= */
+
+/* === Desktop Default (already handled above) === */
+
+/* === Tablet View (max-width: 1024px) === */
+@media (max-width: 1024px) {
+
+  /* Brand text */
+  .studio {
+    font-size: 15px;
+    letter-spacing: 1.2px;
+  }
+
+  .patron {
+    font-size: 15px;
+    letter-spacing: 1.2px;
+  }
+
+  /* Step labels */
+  .step .label {
+    font-size: 12px;
+    letter-spacing: 0.5px;
+  }
+
+  /* Headings inside cards */
+  h1.h-title {
+    font-size: 20px;
+  }
+
+  /* Paragraph subheading */
+  p.h-sub {
+    font-size: 14px;
+  }
+
+  /* Option text */
+  .option label,
+  .pkg label,
+  .room-card .name {
+    font-size: 14px;
+  }
+
+  .pkg-desc {
+    font-size: 12px;
+  }
+
+  /* Buttons */
+  .btn,
+  .btn-primary,
+  .btn-ghost {
+    font-size: 14px;
+  }
+}
+
+/* === Mobile View (max-width: 768px) === */
+@media (max-width: 768px) {
+
+  .topbar {
+    height: 60px;
+    padding: 0 25px;
+  }
+
+  .studio {
+    font-size: 13px;
+    letter-spacing: 1px;
+  }
+
+  .patron {
+    font-size: 13px;
+    letter-spacing: 1px;
+  }
+
+  .progress {
+    gap: 40px;
+  }
+
+  .step .label {
+    font-size: 10.5px;
+    letter-spacing: 0.4px;
+  }
+
+  h1.h-title {
+    font-size: 18px;
+  }
+
+  p.h-sub {
+    font-size: 13px;
+  }
+
+  .option label,
+  .pkg label,
+  .room-card .name {
+    font-size: 13px;
+  }
+
+  .pkg-desc {
+    font-size: 11.5px;
+  }
+
+  .btn,
+  .btn-primary,
+  .btn-ghost {
+    font-size: 13px;
+    padding: 8px 14px;
+  }
+}
+
+/* === Very Small Phones (max-width: 480px) === */
+@media (max-width: 480px) {
+
+  .topbar {
+    height: 54px;
+    padding: 0 16px;
+  }
+
+  .studio,
+  .patron {
+    font-size: 11.5px;
+    letter-spacing: 0.8px;
+  }
+
+  .progress {
+    gap: 25px;
+  }
+
+  .step .label {
+    font-size: 9.5px;
+  }
+
+  h1.h-title {
+    font-size: 16px;
+  }
+
+  p.h-sub {
+    font-size: 12px;
+  }
+
+  .option label,
+  .pkg label,
+  .room-card .name {
+    font-size: 12px;
+  }
+
+  .pkg-desc {
+    font-size: 10.5px;
+  }
+
+  .btn,
+  .btn-primary,
+  .btn-ghost {
+    font-size: 12px;
+    padding: 7px 12px;
+  }
+}
+/* ===========================================
+   📱 RESPONSIVE CARD SCALING (Fix Mobile View)
+=========================================== */
+
+/* === Tablet View (Below 1024px) === */
+@media (max-width: 1024px) {
+  .pkg {
+    min-width: 260px !important;
+    max-width: 280px !important;
+    padding: 16px 18px !important;
+  }
+
+  .pkg img {
+    height: 160px !important;
+  }
+}
+
+/* === Mobile View (Below 768px) === */
+@media (max-width: 768px) {
+  .packages {
+    gap: 16px !important;
+  }
+
+  .pkg {
+    min-width: 220px !important;
+    max-width: 240px !important;
+    padding: 14px 16px !important;
+    border-radius: 10px !important;
+  }
+
+  .pkg img {
+    height: 140px !important;
+    border-radius: 8px !important;
+  }
+
+  .pkg-title,
+  .pkg label {
+    font-size: 13.5px !important;
+  }
+
+  .pkg-desc {
+    font-size: 12px !important;
+    line-height: 1.4;
+  }
+}
+
+/* === Very Small Phones (Below 480px) === */
+@media (max-width: 480px) {
+  .packages {
+    gap: 12px !important;
+  }
+
+  .pkg {
+    min-width: 180px !important;
+    max-width: 200px !important;
+    padding: 12px 14px !important;
+  }
+
+  .pkg img {
+    height: 120px !important;
+  }
+
+  .pkg-title,
+  .pkg label {
+    font-size: 12.5px !important;
+  }
+
+  .pkg-desc {
+    font-size: 11.5px !important;
+  }
+}
+
+html, body {
+  overscroll-behavior: none !important;
+  scroll-behavior: smooth !important;
+}
+
+.step-content.active {
+  scroll-margin-top: 0 !important;
+}
+
+
+  </style>
+</head>
+<body>
+  <div class="page">
+  <div class="topbar">
+    <a href="index.html" class="brand">
+      <span class="studio">STUDIO</span>
+      <span class="patron">PATRON</span>
+    </a>
+
+    <div class="progress" id="progressBar">
+      <div class="step active" data-step="0">
+        <div class="label">HEIGHT</div>
+      </div>
+      <div class="step" data-step="1">
+        <div class="label">TYPE</div>
+      </div>
+      <div class="step" data-step="2">
+        <div class="label">FINISH</div>
+      </div>
+      <div class="step" data-step="3">
+        <div class="label">MATERIAL</div>
+      </div>
+      <div class="step" data-step="4">
+        <div class="label">ACCESSORIES</div>
+      </div>
+      <div class="step" data-step="5">
+        <div class="label">GET QUOTE</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <!-- Step 1: Height -->
+<section class="step-content active" data-step="0">
+  <h1 class="h-title">Select the height of your wardrobe</h1>
+  <p class="h-sub">Standard size has been set for your convenience</p>
+  <div class="options">
+    <div class="option">
+      <label>
+        <input type="radio" name="height" value="4" data-price="50" id="height-4" aria-label="4 ft">
+        6 ft
+      </label>
+      <div class="arrow"></div>
+    </div>
+    <div class="option">
+      <label>
+        <input type="radio" name="height" value="6" data-price="75" id="height-6" aria-label="6 ft">
+        7 ft
+      </label>
+      <div class="arrow"></div>
+    </div>
+    <div class="option">
+      <label>
+        <input type="radio" name="height" value="7" data-price="100" id="height-7" checked aria-label="7 ft">
+        8 ft
+      </label>
+      <div class="arrow"></div>
+    </div>
+    <div class="option">
+      <label>
+        <input type="radio" name="height" value="9" data-price="125" id="height-9" aria-label="9 ft">
+        9 ft
+      </label>
+      <div class="arrow"></div>
+    </div>
+  </div>
+  <div class="actions">
+    <div></div>
+    <div><button class="btn-primary nextBtn" aria-label="Next step">Next</button></div>
+  </div>
+</section>
+
+   <!-- STEP 1 – Wardrobe Type -->
+<section class="step-content active" data-step="1">
+  <h1 class="h-title">Select the type of wardrobe</h1>
+  <p class="h-sub">Choose the wardrobe type that suits your space</p>
+
+  <div class="packages">
+    <div class="pkg">
+      <img src="./assets/images/sliding door.jpeg" alt="Sliding Wardrobe">
+      <label><input type="radio" name="type" value="sliding"> Sliding</label>
+      <p class="pkg-desc">Movable doors that slide horizontally along a rail, saving floor space.</p>
+      <p class="pkg-desc">- Space-saving design.</p>
+
+    </div>
+
+    <div class="pkg">
+      <img src="./assets/images/Closet Design Layout.jpeg" alt="Swing Wardrobe">
+      <label><input type="radio" name="type" value="swing"> Swing</label>
+      <p class="pkg-desc">Doors that swing open for easy access and full visibility.</p>
+      <p class="pkg-desc">- Classic and durable.</p>
+    </div>
+  </div>
+
+  <div class="actions">
+    <div><button class="btn-ghost prevBtn">Back</button></div>
+    <div><button class="btn-primary nextBtn">Next</button></div>
+  </div>
+</section>
+
+
+<!-- STEP 3 – Finish -->
+<section class="step-content" data-step="2">
+  <h1 class="h-title">Select your preferred finish</h1>
+  <p class="h-sub">Choose a finish that matches your style</p>
+
+  <div class="packages">
+    <div class="pkg">
+      <img src="./assets/images/lamiinate.jpeg" alt="Laminate Finish">
+      <label><input type="radio" name="finish" value="laminate"> Laminate</label>
+      <p class="pkg-desc">Seamless finish, ideal for all interiors.</p>
+      <p class="pkg-desc">- Durable & budget-friendly.</p>
+    </div>
+
+    <div class="pkg">
+      <img src="./assets/images/acrylic.jpeg" alt="Acrylic Finish">
+      <label><input type="radio" name="finish" value="acrylic"> Acrylic</label>
+      <p class="pkg-desc">Adds a touch of luxury to your modular wardrobe.</p>
+      <p class="pkg-desc">- Glossy premium surface.</p>
+    </div>
+  </div>
+
+  <div class="actions">
+    <div><button class="btn-ghost prevBtn">Back</button></div>
+    <div><button class="btn-primary nextBtn">Next</button></div>
+  </div>
+</section>
+
+
+<!-- STEP 4 – Material -->
+<section class="step-content" data-step="3">
+  <h1 class="h-title">Select your preferred core material</h1>
+  <p class="h-sub">Material options depend on your chosen finish</p>
+
+  <div class="packages">
+    <div class="pkg">
+      <img src="./assets/images/Plywood.jpeg" alt="Plywood">
+      <label><input type="radio" name="material" value="plywood"> Plywood</label>
+      <p class="pkg-desc">Strong, durable, and perfect for every interior.</p>
+      <p class="pkg-desc">- Excellent longevity.</p>
+    </div>
+
+    <div class="pkg">
+      <img src="./assets/images/HDF-HMR.jpg" alt="HDF / HMR">
+      <label><input type="radio" name="material" value="hdf"> HDF / HMR</label>
+      <p class="pkg-desc">Sturdy, dense, and solid screw-holding capacity.</p>
+      <p class="pkg-desc">- Ideal for moisture resistance.</p>
+    </div>
+  </div>
+
+  <div class="actions">
+    <div><button class="btn-ghost prevBtn">Back</button></div>
+    <div><button class="btn-primary nextBtn">Next</button></div>
+  </div>
+</section>
+
+
+
+<!-- Step 5: Accessories -->
+<section class="step-content" data-step="4">
+  <h1 class="h-title">Add your preferred accessories (optional)</h1>
+  <p class="h-sub">Select one or more accessory types</p>
+
+  <div class="packages accessories-small">
+    <!-- Loft -->
+    <div class="pkg">
+      <img src="./assets/images/loft.jpeg" alt="Loft">
+      <label class="pkg-title">
+        <input type="checkbox" name="accessory" value="loft" data-price="20"> Loft
+      </label>
+      <p class="pkg-desc">Adds extra storage space on top.</p>
+    </div>
+
+    <!-- Single full-size drawer -->
+    <div class="pkg">
+      <img src="./assets/images/single drawer.jpeg" alt="Single Full-Size Drawer">
+      <label class="pkg-title">
+        <input type="checkbox" name="accessory" value="single-drawer" data-price="25"> Single Drawer
+      </label>
+      <p class="pkg-desc">Ideal for storing essentials neatly.</p>
+    </div>
+
+    <!-- 1 half-drawer -->
+    <div class="pkg">
+      <img src="./assets/images/one drawer.jpg" alt="1 Half-Drawer">
+      <label class="pkg-title">
+        <input type="checkbox" name="accessory" value="half-drawer" data-price="15"> Half Drawer
+      </label>
+      <p class="pkg-desc">Compact drawer for minimal storage.</p>
+    </div>
+
+    <!-- Wicker pull out -->
+    <div class="pkg">
+      <img src="./assets/images/wicker-pull-out.jpg" alt="Wicker Pull Out">
+      <label class="pkg-title">
+        <input type="checkbox" name="accessory" value="wicker" data-price="35"> Wicker Pull Out
+      </label>
+      <p class="pkg-desc">Elegant pull-out basket for storage.</p>
+    </div>
+  </div>
+
+  <div class="actions">
+    <div><button class="btn-ghost prevBtn">Back</button></div>
+    <div><button class="btn-primary getQuoteBtn">Get Quote</button></div>
+  </div>
+</section>
+
+
+
+
+      <!-- Step 6: Get Quote -->
+      <section class="step-content" data-step="5">
+        <h1 class="h-title">Your Estimated Quote</h1>
+        <p class="h-sub">We’ll show the exact estimate after a quick detail form</p>
+        <div class="quote-card" id="quoteCard">
+          <div class="small">Here's your estimated budget range</div>
+          <div id="budgetPlaceholder">
+            <div style="font-size:18px;color:var(--muted);text-align:center;padding:18px 0;">
+              Click <strong>Get Detailed Quote</strong> and fill a short form to see the exact estimate
+            </div>
+          </div>
+          <div id="budgetResult" class="hidden">
+            <div id="budget-range">₹0L - ₹0L*</div>
+            <div style="font-size:13px;color:var(--muted);margin-top:6px;text-align:center;">
+              This isn’t a final quote and can be customised to suit your needs.
+            </div>
+            <div style="margin-top:8px;text-align:center;">
+              <a href="#" id="viewSummary" style="color:var(--accent);text-decoration:none;">View detailed summary</a>
+            </div>
+          </div>
+          <div class="cta-wrap">
+            <div style="font-weight:800;margin-bottom:8px;">Want an accurate quote?</div>
+            <div style="margin-bottom:8px;">
+              Book a <span style="background:#2a9d49;color:#fff;padding:4px 6px;border-radius:6px;font-weight:700;font-size:12px">FREE</span> consultation with our designer to get a detailed quote for your wardrobe.
+            </div>
+            <button class="cta-btn" id="openFormBtn">GET DETAILED QUOTE</button>
+          </div>
+        </div>
+        <div class="actions">
+          <div><button class="btn-ghost prevBtn">Back</button></div>
+          <div></div>
+        </div>
+      </section>
+    </div>
+
+  <!-- Form Modal -->
+<!-- Form Modal -->
+<div id="formOverlay" class="modal-overlay" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="formModalTitle">
+    
+    <!-- 🖼️ Full-width header image -->
+    <div class="modal-image">
+      <img src="./assets/images/wadrobe banner.webp" alt="Studio Patron" />
+    </div>
+
+    <!-- Content section wrapped for inner padding -->
+    <div class="modal-body">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px;">
+        <h3 id="formModalTitle">Enter your details</h3>
+        <button class="close-btn" id="closeFormBtn" aria-label="Close form modal">×</button>
+      </div>
+
+      <form id="leadForm">
+  <div class="field">
+    <label for="nameInput">Name</label>
+    <input id="nameInput" type="text" placeholder="Your name" required>
+  </div>
+
+  <div class="field">
+    <label for="emailInput">Email</label>
+    <input id="emailInput" type="email" placeholder="you@example.com" required>
+    <small id="emailFeedback" style="color: red; display: none; font-size: 13px;">Invalid email address</small>
+  </div>
+
+  <div class="field">
+    <label for="phoneInput">Phone</label>
+    <input id="phoneInput" type="tel" placeholder="+91 90000 00000" required>
+  </div>
+
+  <div class="field">
+    <label for="propertyInput">Property Name / Location</label>
+    <input id="propertyInput" type="text" placeholder="Apartment / Locality" required>
+    <small style="font-size: 12px; color: #666;">Start typing to search your location...</small>
+  </div>
+
+  <div class="row">
+    <label style="display:flex;align-items:center;gap:8px;">
+      <input id="whatsappOpt" type="checkbox"> Send me updates on WhatsApp
+    </label>
+  </div>
+
+  <div class="modal-cta">
+    <button type="button" class="btn cancel" id="cancelFormBtn">Cancel</button>
+    <button type="submit" class="btn" id="submitFormBtn">Submit & View Estimate</button>
+  </div>
+
+  <div class="row note">By submitting you agree to our privacy policy & terms.</div>
+</form>
+
+</div>
+</div>
+</div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script>
+   window.addEventListener("load", () => {
+  window.scrollTo(0, 0); // reset to top on page load
+});
+
+(function() {
+  // Initialize EmailJS
+  emailjs.init("ThHJcsTNy5dwLeEHs"); // 🔹 Replace with your EmailJS public key
+
+  // 💰 Pricing configuration (values in actual rupees)
+const pricing = {
+  height: {
+    "4": 20000,   // was 30000
+    "6": 30000,   // was 45000
+    "7": 45000,   // was 70000
+    "9": 60000    // was 90000
+  },
+  type: {
+    "sliding": 20000,  // was 30000
+    "swing": 30000     // was 45000
+  },
+  finish: {
+    "laminate": 15000, // was 20000
+    "membrane": 30000  // was 40000
+  },
+  material: {
+    "mdf": 20000,      // was 28000
+    "hdf": 35000       // was 50000
+  },
+  accessories: {
+    "loft": 7000,            // was 10000
+    "single-drawer": 5000,  // was 15000
+    "half-drawer": 7000,     // was 10000
+    "two-half-drawers": 7000, // was 20000
+    "wicker": 10000          // was 25000
+  }
+};
+
+
+
+  // Helper shortcuts
+  const $ = (sel, ctx = document) => ctx.querySelector(sel);
+  const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
+
+  // Highlight package on click
+  document.querySelectorAll('.pkg').forEach(pkg => {
+    pkg.addEventListener('click', () => {
+      const radio = pkg.querySelector('input[type="radio"]');
+      if (radio) radio.checked = true;
+
+      const name = radio?.name;
+      if (name) {
+        document.querySelectorAll(`input[name="${name}"]`).forEach(r => {
+          r.closest('.pkg')?.classList.remove('selected');
+        });
+      }
+
+      pkg.classList.add('selected');
+    });
+  });
+
+  // Step system
+  const steps = $$('.step-content');
+  const stepNodes = $$('.progress .step');
+  let current = 0;
+
+  function showStep(index, disableScroll = false) {
+    if (index < 0) index = 0;
+    if (index >= steps.length) index = steps.length - 1;
+
+    steps.forEach((s, i) => s.classList.toggle('active', i === index));
+    stepNodes.forEach((p, i) => {
+      p.classList.toggle('active', i === index);
+      p.classList.toggle('completed', i < index);
+    });
+    current = index;
+
+    // 🧭 Stop unwanted scroll on mobile/tablet
+    const isMobile = window.innerWidth <= 768;
+    if (!disableScroll && !isMobile) {
+      window.scrollTo({
+        top: document.querySelector('.card').offsetTop - 10,
+        behavior: 'smooth'
+      });
+    }
+  }
+
+  // Initialize first step
+  showStep(0);
+
+  // Step navigation
+  $$('.nextBtn').forEach(btn =>
+    btn.addEventListener('click', () => {
+      if (!validateStep(current)) return;
+
+      // Prevent scroll on the last step transition
+      if (current === steps.length - 2) {
+        const freezeY = window.scrollY;
+        showStep(current + 1, true);
+        requestAnimationFrame(() => window.scrollTo(0, freezeY));
+      } else {
+        showStep(current + 1);
+      }
+    })
+  );
+
+  $$('.prevBtn').forEach(btn =>
+    btn.addEventListener('click', () => showStep(current - 1))
+  );
+
+  // Validation function
+  function validateStep(i) {
+    const checks = [
+      { step: 0, name: "height", msg: "Please select a wardrobe height!" },
+      { step: 1, name: "type", msg: "Please select a wardrobe type!" },
+      { step: 2, name: "finish", msg: "Please select a finish!" },
+      { step: 3, name: "material", msg: "Please select a material!" }
+    ];
+
+    const check = checks.find(c => c.step === i);
+    if (check && !document.querySelector(`input[name='${check.name}']:checked`)) {
+      alert(check.msg);
+      return false;
+    }
+    return true;
+  }
+
+  // 🧮 Calculate budget
+  function calculateBudget() {
+    let total = 0;
+    const height = document.querySelector("input[name='height']:checked")?.value || '7';
+    const type = document.querySelector("input[name='type']:checked")?.value || 'sliding';
+    const finish = document.querySelector("input[name='finish']:checked")?.value || 'laminate';
+    const material = document.querySelector("input[name='material']:checked")?.value || 'mdf';
+    const accessories = Array.from(document.querySelectorAll("input[name='accessory']:checked")).map(acc => acc.value);
+
+    total += pricing.height[height] || 0;
+    total += pricing.type[type] || 0;
+    total += pricing.finish[finish] || 0;
+    total += pricing.material[material] || 0;
+    accessories.forEach(acc => (total += pricing.accessories[acc] || 0));
+
+    const min = Math.round(total * 0.9);
+    const max = Math.round(total * 1.1);
+
+    return { min, max, total, height, type, finish, material, accessories };
+  }
+
+  // 💲 Format to Lakhs (actual rupees)
+  function formatAsL(amount) {
+    const l = amount / 100000;
+    return `${l.toFixed(1)}L`;
+  }
+
+  // Option click highlight
+  $$('.option, .option-card').forEach(opt => {
+    opt.addEventListener('click', () => {
+      const input = opt.querySelector('input');
+      if (input.type === 'radio') {
+        input.checked = true;
+        opt.parentElement
+          .querySelectorAll('.option, .option-card')
+          .forEach(o => (o.style.borderColor = '#f0f0f0'));
+        opt.style.borderColor = 'rgba(107,59,91,0.12)';
+      } else if (input.type === 'checkbox') {
+        input.checked = !input.checked;
+        opt.style.borderColor = input.checked
+          ? 'rgba(107,59,91,0.12)'
+          : '#f0f0f0';
+      }
+    });
+  });
+
+  // 🧾 Modal handling
+  const formOverlay = $('#formOverlay');
+  const openForm = () => {
+    formOverlay.classList.add('active');
+    formOverlay.setAttribute('aria-hidden', 'false');
+    $('#nameInput').focus();
+  };
+  const closeForm = () => {
+    formOverlay.classList.remove('active');
+    formOverlay.setAttribute('aria-hidden', 'true');
+    $('#openFormBtn').focus();
+  };
+
+  $('#openFormBtn').addEventListener('click', () => {
+    showStep(5);
+    setTimeout(openForm, 120);
+  });
+  $('#closeFormBtn').addEventListener('click', closeForm);
+  $('#cancelFormBtn').addEventListener('click', closeForm);
+
+  // “Get Quote” button → open modal
+  $$('.getQuoteBtn').forEach(btn =>
+    btn.addEventListener('click', () => {
+      showStep(5);
+      setTimeout(openForm, 200);
+    })
+  );
+
+  // 💬 Form submission
+  $('#leadForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const submitBtn = $('#submitFormBtn');
+    submitBtn.disabled = true;
+    submitBtn.classList.add('loading');
+    submitBtn.textContent = 'Submitting...';
+
+    // Validation
+    const name = $('#nameInput').value.trim();
+    const email = $('#emailInput').value.trim();
+    const phone = $('#phoneInput').value.trim();
+    const property = $('#propertyInput').value.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phoneRegex = /^\+?\d{10,14}$/;
+
+    if (!name || !email || !phone || !property) {
+      alert('⚠️ Please fill all required fields.');
+      return resetBtn();
+    }
+    if (!emailRegex.test(email)) {
+      alert('⚠️ Invalid email format.');
+      return resetBtn();
+    }
+    if (!phoneRegex.test(phone)) {
+      alert('⚠️ Invalid phone number (10-14 digits).');
+      return resetBtn();
+    }
+
+    // Calculate budget
+    const result = calculateBudget();
+    const minStr = formatAsL(result.min);
+    const maxStr = formatAsL(result.max);
+    $('#budget-range').textContent = `₹${minStr} - ₹${maxStr}*`;
+    $('#budgetPlaceholder').classList.add('hidden');
+    $('#budgetResult').classList.remove('hidden');
+
+    // Email parameters
+    const accessoriesList = result.accessories.length
+      ? result.accessories.join(', ')
+      : 'None';
+    const params = {
+      name,
+      email,
+      phone,
+      property,
+      whatsapp: $('#whatsappOpt').checked ? 'Yes' : 'No',
+      wardrobe_height: `${result.height} ft`,
+      wardrobe_type: result.type,
+      wardrobe_finish: result.finish,
+      wardrobe_material: result.material,
+      wardrobe_accessories: accessoriesList,
+      estimated_price: `₹${(result.total).toLocaleString()}`
+    };
+
+    // Send email via EmailJS
+    emailjs
+      .send('service_qcrnrhy', 'template_i0ruks5', params)
+      .then(() => {
+        alert('✅ Thank you! Your details were sent successfully.');
+        $('#leadForm').reset();
+        closeForm();
+        showStep(5);
+        $('#budget-range').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      })
+      .catch(error => {
+        console.error('EmailJS Error:', error);
+        alert('❌ Something went wrong. Please try again.');
+      })
+      .finally(resetBtn);
+
+    function resetBtn() {
+      submitBtn.disabled = false;
+      submitBtn.classList.remove('loading');
+      submitBtn.textContent = 'Submit & View Estimate';
+    }
+  });
+
+  // Keyboard Escape key for modals
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeForm();
+  });
+
+  // Progress bar click navigation
+  stepNodes.forEach((node, idx) => {
+    node.addEventListener('click', () => {
+      if (idx <= current + 1 && validateStep(current)) {
+        showStep(idx);
+      }
+    });
+  });
+})();
+
+  </script>
+</body>
+</html>

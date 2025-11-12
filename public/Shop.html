@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Studio Patron — Shop Picks</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;600&display=swap');
+
+:root {
+  --bg: #fff;
+  --card: #ffffff;
+  --muted: #6b6b6b;
+  --accent: #ffcb05;
+  --accent-dark: #2b2b2b;
+}
+
+/* ===== GLOBAL RESET ===== */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: var(--bg);
+  color: var(--accent-dark);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ===== TOPBAR ===== */
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background: #111;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 60px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+  z-index: 10;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+}
+.studio {
+  font-weight: 200;
+  letter-spacing: 1.5px;
+  opacity: 0.7;
+  color: #fff;
+  text-transform: uppercase;
+}
+.patron {
+  font-weight: 500;
+  color: #fffff4;
+  letter-spacing: 1.5px;
+  opacity: 0.9;
+}
+/* === Tablet View (Below 1024px) === */
+@media (max-width: 1024px) {
+  .brand {
+    margin-left: -20px !important; /* move slightly left */
+  }
+}
+
+/* === Mobile View (Below 768px) === */
+@media (max-width: 768px) {
+  .brand {
+    margin-left: -30px !important; /* move further left for smaller screens */
+  }
+}
+
+/* === Very Small Phones (Below 480px) === */
+@media (max-width: 480px) {
+  .brand {
+    margin-left: -40px !important; /* slight extra adjustment for ultra small devices */
+  }
+}
+
+/* ===== CONTAINER ===== */
+.container {
+  max-width: 1200px;
+  margin: 100px auto 80px;
+  padding: 0 20px;
+}
+h1.page-title {
+  margin-bottom: 8px;
+  font-size: 22px;
+  text-transform: uppercase;
+}
+p.lead {
+  margin-bottom: 24px;
+  color: var(--muted);
+}
+
+/* ===== CATEGORY ===== */
+.category { margin: 40px 0; }
+.category h2 { font-size: 18px; color: var(--accent-dark); margin-bottom: 10px; }
+.category p.desc { font-size: 14px; color: var(--muted); margin-bottom: 18px; }
+
+/* ===== GRID ===== */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 22px;
+}
+
+/* ===== CARD ===== */
+.card {
+  background: var(--card);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(16,16,16,0.06);
+  border: 1px solid rgba(0,0,0,0.05);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  will-change: transform, box-shadow;
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.1);
+}
+
+/* ===== IMAGE ===== */
+.card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  display: block;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+/* ===== CARD CONTENT ===== */
+.card-content {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.card .title {
+  font-weight: 600;
+  font-size: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.card .brand-small {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 500;
+}
+.card .desc {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+.card .actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ===== BUTTONS ===== */
+.btn {
+  display: inline-block;
+  padding: 8px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.btn-outline {
+  border: 1px solid rgba(0,0,0,0.1);
+  color: var(--accent-dark);
+  background: transparent;
+}
+.btn-outline:hover {
+  background: rgba(0,0,0,0.04);
+}
+.btn-primary {
+  background: var(--accent);
+  color: #111;
+  border: none;
+}
+.btn-primary:hover {
+  background: #ffd633;
+}
+
+/* ===== FOOTER NOTE ===== */
+.note {
+  margin-top: 24px;
+  color: #555;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width:520px) {
+  .container { margin: 84px 12px 60px; }
+  .card img { height: 140px; }
+}
+</style>
+</head>
+
+<body>
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <a class="brand" href="index.html">
+      <span class="studio">STUDIO</span><span class="patron">PATRON</span>
+    </a>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main class="container" id="shopRoot">
+    <h1 class="page-title">Studio Patron — Shop Picks</h1>
+    <p class="lead">Hand-picked, budget-friendly and reliable home essentials from IKEA — quick links for kitchen, bathroom, bedroom, and living room basics.</p>
+
+    <!-- Kitchen essentials -->
+    <section class="category" id="kitchen">
+      <h2>Kitchen essentials</h2>
+      <p class="desc">Must-haves for a functional kitchen — cookware, storage and sink organizers.</p>
+      <div class="grid">
+        <article class="card">
+          <img src="https://www.ikea.com/in/en/images/products/ikea-365-cookware-set-of-6-stainless-steel__0710669_pe727726_s5.jpg" alt="Cookware">
+          <div class="card-content">
+            <div class="title">
+              <div>IKEA 365+ cookware set <div class="brand-small">Cookware — stainless steel</div></div>
+              <div style="font-size:12px;color:var(--muted)">₹ • popular</div>
+            </div>
+            <div class="desc">Durable, oven-safe cookware perfect for daily use.<br><a href="https://www.ikea.com/in/en/p/ikea-365-cookware-set-of-6-stainless-steel-60484330/" target="_blank">View on IKEA</a></div>
+            <div class="actions">
+              <a class="btn btn-outline" href="#">Open</a>
+              <a class="btn btn-primary" href="#">Buy</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="https://www.ikea.com/in/en/images/products/variera-shelf-insert-white__0712429_pe728846_s5.jpg" alt="Storage">
+          <div class="card-content">
+            <div class="title">
+              <div>VARIERA storage <div class="brand-small">Shelf inserts & trays</div></div>
+              <div style="font-size:12px;color:var(--muted)">₹</div>
+            </div>
+            <div class="desc">Compact and practical organizers for modular kitchens.<br><a href="#">View on IKEA</a></div>
+            <div class="actions">
+              <a class="btn btn-outline" href="#">Open</a>
+              <a class="btn btn-primary" href="#">Shop</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="https://www.ikea.com/in/en/images/products/rinnig-dish-washing-brush-grey__0712432_pe728849_s5.jpg" alt="Sink accessories">
+          <div class="card-content">
+            <div class="title">
+              <div>RINNIG accessories <div class="brand-small">Drainers & brushes</div></div>
+              <div style="font-size:12px;color:var(--muted)">₹</div>
+            </div>
+            <div class="desc">Keep your sink tidy and organized.<br><a href="#">View on IKEA</a></div>
+            <div class="actions">
+              <a class="btn btn-outline" href="#">Open</a>
+              <a class="btn btn-primary" href="#">Shop</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Bathroom essentials -->
+    <section class="category" id="bathroom">
+      <h2>Bathroom essentials</h2>
+      <p class="desc">Space-saving storage, mirrors, and accessories for a clean, modern bathroom.</p>
+      <div class="grid">
+        <article class="card">
+          <img src="https://www.ikea.com/in/en/images/products/godmorgon-high-cabinet-with-mirror-door-2-drawers-kilsviken-black__0755737_pe748573_s5.jpg" alt="GODMORGON cabinet">
+          <div class="card-content">
+            <div class="title"><div>GODMORGON cabinet <div class="brand-small">Mirror & storage</div></div><div style="font-size:12px;color:var(--muted)">Series</div></div>
+            <div class="desc">High cabinet with mirror doors and soft-close drawers.<br><a href="#">View on IKEA</a></div>
+            <div class="actions"><a class="btn btn-outline" href="#">Open</a><a class="btn btn-primary" href="#">Shop</a></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="https://www.ikea.com/in/en/images/products/hemnes-rattvik-bathroom-furniture-set-of-5-white__0862709_pe693943_s5.jpg" alt="HEMNES set">
+          <div class="card-content">
+            <div class="title"><div>HEMNES bathroom set <div class="brand-small">Classic wood finish</div></div><div style="font-size:12px;color:var(--muted)">₹₹</div></div>
+            <div class="desc">Timeless wooden vanity with sink and mirror.<br><a href="#">View on IKEA</a></div>
+            <div class="actions"><a class="btn btn-outline" href="#">Open</a><a class="btn btn-primary" href="#">Shop</a></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="https://www.ikea.com/in/en/images/products/bolmen-toothbrush-holder-white__0712430_pe728847_s5.jpg" alt="BOLMEN accessories">
+          <div class="card-content">
+            <div class="title"><div>BOLMEN accessories <div class="brand-small">Toothbrush & soap holders</div></div><div style="font-size:12px;color:var(--muted)">₹</div></div>
+            <div class="desc">Affordable, stackable holders for daily essentials.<br><a href="#">View on IKEA</a></div>
+            <div class="actions"><a class="btn btn-outline" href="#">Open</a><a class="btn btn-primary" href="#">Shop</a></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Bedroom essentials -->
+    <section class="category" id="bedroom">
+      <h2>Bedroom essentials</h2>
+      <p class="desc">Comfortable bedding, storage, and organization for restful sleep.</p>
+      <div class="grid">
+        <article class="card">
+          <img src="https://www.ikea.com/in/en/images/products/malm-bed-frame-high-black-brown__0638608_pe699050_s5.jpg" alt="MALM bed frame">
+          <div class="card-content">
+            <div class="title"><div>MALM bed frame <div class="brand-small">With storage drawers</div></div><div style="font-size:12px;color:var(--muted)">₹₹</div></div>
+            <div class="desc">Sleek bed with under-bed storage — perfect for small spaces.<br><a href="#">View on IKEA</a></div>
+            <div class="actions"><a class="btn btn-outline" href="#">Open</a><a class="btn btn-primary" href="#">Shop</a></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="https://www.ikea.com/in/en/images/products/songesand-bed-frame-white__0637517_pe698415_s5.jpg" alt="SONGESAND bed">
+          <div class="card-content">
+            <div class="title"><div>SONGESAND bed <div class="brand-small">Classic white frame</div></div><div style="font-size:12px;color:var(--muted)">₹₹</div></div>
+            <div class="desc">Traditional style with sturdy build and headboard.<br><a href="#">View on IKEA</a></div>
+            <div class="actions"><a class="btn btn-outline" href="#">Open</a><a class="btn btn-primary" href="#">Buy</a></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="https://www.ikea.com/in/en/images/products/skubb-storage-box-set-of-6-white__0712428_pe728845_s5.jpg" alt="SKUBB storage">
+          <div class="card-content">
+            <div class="title"><div>SKUBB under-bed storage <div class="brand-small">Boxes & dividers</div></div><div style="font-size:12px;color:var(--muted)">₹</div></div>
+            <div class="desc">Soft fabric boxes to organize clothes, shoes, or linens.<br><a href="#">View on IKEA</a></div>
+            <div class="actions"><a class="btn btn-outline" href="#">Open</a><a class="btn btn-primary" href="#">Shop</a></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Hall / Living Room essentials -->
+    <section class="category" id="hall">
+      <h2>Hall & Living Room</h2>
+      <p class="desc">Comfortable seating, storage, and decor for a cozy living space.</p>
+      <div class="grid">
+        <article class="card">
+          <img src="https://www.ikea.com/in/en/images/products/billy-bookcase-white__0626592_pe692839_s5.jpg" alt="BILLY bookcase">
+          <div class="card-content">
+            <div class="title"><div>BILLY bookcase <div class="brand-small">Adjustable shelves</div></div><div style="font-size:12px;color:var(--muted)">₹₹</div></div>
+            <div class="desc">Iconic, customizable bookshelf for books, decor, or storage.<br><a href="#">View on IKEA</a></div>
+            <div class="actions"><a class="btn btn-outline" href="#">Open</a><a class="btn btn-primary" href="#">Shop</a></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="https://www.ikea.com/in/en/images/products/eketroem-chair-black__1035975_pe838177_s5.jpg" alt="EKET storage">
+          <div class="card-content">
+            <div class="title"><div>EKET storage cubes <div class="brand-small">Wall-mounted or floor</div></div><div style="font-size:12px;color:var(--muted)">₹₹</div></div>
+            <div class="desc">Modular cubes for display, storage, or TV unit.<br><a href="#">View on IKEA</a></div>
+            <div class="actions"><a class="btn btn-outline" href="#">Open</a><a class="btn btn-primary" href="#">Shop</a></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="https://www.ikea.com/in/en/images/products/lack-side-table-black-brown__0712427_pe728844_s5.jpg" alt="LACK table">
+          <div class="card-content">
+            <div class="title"><div>LACK side table <div class="brand-small">Minimal & affordable</div></div><div style="font-size:12px;color:var(--muted)">₹</div></div>
+            <div class="desc">Lightweight, modern table for sofa or bedside.<br><a href="#">View on IKEA</a></div>
+            <div class="actions"><a class="btn btn-outline" href="#">Open</a><a class="btn btn-primary" href="#">Buy</a></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <p class="note">Note: These are curated IKEA links for easy browsing. Prices and availability may vary by region.</p>
+  </main>
+</body>
+</html>

@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kitchen Layout | Studio Patron</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+    :root {
+      --active: #aaa;               /* active step text */
+      --inactive: #fff;             /* inactive step text */
+      --line: #444;                 /* line colour */
+      --accent: #000000;               /* deep purple accent */
+      --accent-2: rgb(43,42,42);    /* CTA accent */
+      --muted: #9aa0a6;
+      --bg: #f4f6f8;
+      --card: #fff;
+      --green: #2a9d49;
+    }
+       .brand {
+  position: relative;
+  z-index: 11;
+}
+    body { margin:0; background:#000; font-family:'Montserrat',sans-serif !important; }
+
+      /* ===== TOPBAR ===== */
+    .topbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 70px;
+      background: #000000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 60px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+      z-index: 10;
+    }
+
+    /* ===== BRAND ===== */
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+    }
+/* ===== BRAND ===== */
+.studio {
+   font-family: 'Montserrat', sans-serif;
+  font-weight: 200; 
+  letter-spacing: 1.5px;
+  opacity: 0.7;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+.patron {
+ font-weight: 500; /* bold weight */
+  color: #fffff4; /* optional: golden tone for emphasis */
+  letter-spacing: 1.5px;
+  opacity: 0.9; /* slightly faded look */
+  font-family: 'Montserrat', sans-serif;
+}
+
+    /* ===== PROGRESS BAR ===== */
+.progress {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 90px;
+  height: 30px; /* controls where line aligns */
+  width: 100%;
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+    /* The thin line centered with text */
+    .progress::before {
+      content: "";
+      position: absolute;
+      top: 50%; /* Center vertically */
+      left: 30%;
+      right: 30%;
+      height: 1.3px;
+      background: var(--line);
+      transform: translateY(-50%);
+      z-index: 0;
+    }
+
+    /* Steps */
+    .step {
+      position: relative;
+      z-index: 1;
+      background: #000000; /* same as topbar background to hide line behind text */
+      padding: 0 10px;
+      cursor: pointer;
+    }
+
+    .step .label {
+      font-size: 13px;
+      font-weight: 500;
+      text-transform: uppercase;
+      color: var(--inactive);
+      letter-spacing: 0.6px;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+       .step.active .label {
+      color: #ffcc33;
+      transform: scale(1.05);
+    }
+
+    .step:hover .label {
+      color: #ccc;
+    }
+    /* ===== RESPONSIVE BEHAVIOR ===== */
+@media (max-width: 991px) {
+  .topbar {
+    height: 80px !important;
+    padding: 0 20px;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .brand {
+    position: absolute;
+    left: 20px;
+    top: 15px;
+    transform: none;
+    margin-top: 10px !important;
+  }
+
+  .progress {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    gap: 25px !important;
+    margin-top: 50px;
+    justify-content: center;
+    width: 100%;
+    margin-left: -10px !important;
+  }
+
+  .progress::before {
+    left: 10%;
+    right: 10%;
+  }
+
+  .step .label {
+    font-size: 12px;
+  }
+}
+
+/* ===== SMALLER MOBILE VIEW ===== */
+@media (max-width: 600px) {
+  .topbar {
+    height: 55px;
+    padding: 0 15px;
+  }
+
+  .brand {
+    top: 10px;
+  }
+
+  .progress {
+    gap: 25px;
+  }
+
+  .progress::before {
+    left: 15%;
+    right: 15%;
+  }
+
+  .step .label {
+    font-size: 11px;
+    letter-spacing: 0.5px;
+  }
+}
+
+
+
+
+
+    /* ===== PAGE CONTENT ===== */
+    .page{ max-width:1100px;margin:100px auto 30px;padding:0 24px 60px; }
+
+    .card{
+      background:var(--card);border-radius:12px;padding:36px;
+      box-shadow:0 8px 26px rgba(15,15,15,.06);margin-top:18px;min-height:420px;
+    }
+
+    .step-content{
+      display:none;opacity:0;transform:translateX(20px);transition:all .36s ease;
+    }
+    .step-content.active{ display:block;opacity:1;transform:translateX(0); }
+
+    h1.h-title{
+      margin:0 0 18px;text-align:center;color:#000;font-size:22px;
+      font-family:'Montserrat',sans-serif;text-transform:uppercase;
+      font-weight:500;letter-spacing:1px;
+    }
+    p.h-sub{
+      text-align:center;color:var(--muted);margin:6px 0 26px;
+      font-family:'Montserrat',sans-serif;
+    }
+
+    /* ===== LAYOUT OPTIONS (grid of images) ===== */
+/* ----- LAYOUT OPTIONS – SAME STYLE AS PACKAGES ----- */
+/* ——— HORIZONTAL LAYOUT CARDS ——— */
+ .options {
+  display: flex;
+  gap: 18px;
+  justify-content: center;
+  margin: 20px auto 0;
+  flex-wrap: wrap;                    /* responsive on small screens */
+  font-family: 'Montserrat', sans-serif;
+  color: rgb(73, 72, 72);
+  max-width: 1100px;
+  padding: 0 20px;
+}
+
+.option {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 18px 20px;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid #f0f0f0;
+  cursor: pointer;
+  min-width: 200px;
+  width: 100%;
+  max-width: 260px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.option:hover {
+  border-color: #ffe6b3;
+  background: #fff9e6;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.option img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  display: block;
+  object-position: center;
+}
+
+/* ——— RADIO BUTTON BEFORE TEXT ——— */
+.option-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: 700;
+  color: #444;
+  margin-bottom: 4px;
+  width: 100%;
+}
+
+.option-label input[type="radio"] {
+  width: 12px;
+  height: 12px;
+  accent-color: #ffcb05;
+  margin: 0;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.option-label span {
+  font-weight: 700;
+  color: #444;
+}
+
+/* ——— DESCRIPTION ——— */
+.option-desc {
+  font-size: 13px;
+  color: #777;
+  font-weight: 400;
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+    /* ===== MEASUREMENTS (grid of input cards) ===== */
+    .measurements{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+      gap:12px;max-width:640px;margin:14px auto 0;
+    }
+    .measurement-card{
+      display:flex;flex-direction:column;align-items:center;
+      padding:12px 16px;border-radius:8px;background:#fff;
+      border:1px solid #f0f0f0;box-shadow:0 4px 10px rgba(0,0,0,.03);
+    }
+    .measurement-card img{ width:100px;height:100px;margin-bottom:8px; }
+    .measurement-card .name{ font-weight:600;color:#3b2b36;margin-bottom:8px; }
+    .measurement-card input{
+      padding:10px 12px;font-size:.95rem;border:1px solid #ccc;
+      border-radius:8px;outline:none;width:100%;text-align:center;
+      transition:border-color .2s ease;
+    }
+    .measurement-card input:focus{
+      border-color:var(--accent);box-shadow:0 0 0 3px rgba(107,59,91,.1);
+    }
+
+    /* ===== PACKAGES (horizontal cards) ===== */
+    .packages{
+      display:flex;gap:18px;justify-content:center;margin-top:10px;
+      font-family:'Montserrat',sans-serif;color:rgb(73,72,72);
+    }
+    .pkg{
+      display:flex;flex-direction:column;align-items:center;
+      text-align:center;padding:18px 20px;border-radius:12px;
+      background:#fff;border:1px solid #f0f0f0;cursor:pointer;
+      min-width:200px;font-weight:600;transition:all .3s ease;
+      box-shadow:0 2px 8px rgba(0,0,0,.04);
+    }
+    .pkg:hover{
+      border-color:#ffe6b3;background:#fff9e6;transform:translateY(-3px);
+    }
+    .pkg img{
+      width:100%;height:160px;object-fit:cover;border-radius:8px;
+      margin-bottom:12px;display:block;object-position:center;
+    }
+    .pkg label{
+      display:flex;align-items:center;justify-content:center;gap:6px;
+      font-weight:700;cursor:pointer;color:#444;margin-bottom:4px;
+    }
+    .pkg input{ margin:0; accent-color:#ffcb05; }
+    .pkg-desc{
+      font-size:13px;color:#777;font-weight:400;margin-top:4px;
+    }
+
+    /* ===== QUOTE CARD ===== */
+    .quote-card{
+      max-width:700px;margin:0 auto;background:#fff;border-radius:14px;
+      padding:22px;border:1px solid #f1f1f1;
+    }
+    .quote-card .small{
+      color:var(--muted);text-align:center;margin-bottom:8px;
+      font-family:'Montserrat',sans-serif;
+    }
+    #budget-range{
+      font-size:34px;color:var(--green);font-weight:800;
+      text-align:center;margin:8px 0;
+    }
+    .cta-wrap{
+      margin-top:18px;background:#fff9e6;padding:18px;
+      border-radius:10px;text-align:center;font-family:'Montserrat',sans-serif !important;
+    }
+    .cta-wrap .cta-btn{
+      background:var(--accent-2);color:#fff;padding:12px 22px;
+      border-radius:24px;border:none;cursor:pointer;font-weight:700;
+    }
+
+    /* ===== ACTIONS (footer buttons) ===== */
+    .actions{
+      display:flex;justify-content:space-between;gap:10px;
+      margin-top:24px;max-width:740px;margin-left:auto;margin-right:auto;
+    }
+    .btn-ghost{
+      background:#f0f0f0;color:#333;border:none;padding:10px 16px;
+      border-radius:8px;cursor:pointer;
+    }
+    .btn-primary{
+      background:var(--accent);color:#fff;border:none;
+      padding:10px 18px;border-radius:8px;cursor:pointer;
+      box-shadow:0 6px 18px rgba(107,59,91,.12);
+    }
+    .nextBtn{ font-family:'Montserrat',sans-serif !important;background:#111; }
+
+    /* ===== MODALS ===== */
+    /* ===== MODAL OVERLAY ===== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;               /* solid white background */
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.modal-overlay.active {
+  display: flex;
+}
+
+
+  /* ===== Base Modal ===== */
+.modal {
+  background: #fff !important;
+  width: 90%;
+  max-width: 550px;
+  border-radius: 12px;
+  padding: 0;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+  animation: slideUp 0.35s ease-in-out;
+  font-family: "Poppins", sans-serif;
+  overflow: hidden;
+  margin: 0 15px; /* adds safe space on tiny screens */
+}
+
+/* ===== Image block — full width header image ===== */
+.modal-image {
+  width: 100%;
+  height: 150px;
+  overflow: hidden;
+}
+
+.modal-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* ===== Inner Content Wrapper ===== */
+.modal-body {
+  padding: 20px 24px; 
+}
+
+/* ===== Responsive Breakpoints ===== */
+
+/* Large Tablets / Small Laptops */
+@media (max-width: 991px) {
+  .modal {
+    max-width: 480px;
+  }
+
+  .modal-body {
+    padding: 24px 28px;
+  }
+
+  .modal-image {
+    height: 160px;
+  }
+}
+
+/* Phones (Portrait) */
+@media (max-width: 768px) {
+  .modal {
+    width: 94%;
+    max-width: 420px;
+  }
+
+  .modal-body {
+    padding: 22px 24px;
+  }
+
+  .modal-image {
+    height: 150px;
+  }
+}
+
+/* 📱 Compact modal fix for small screens */
+@media (max-width: 480px) {
+  .modal {
+    width: 90% !important;
+    max-width: 320px !important;
+    border-radius: 12px !important;
+    margin: auto !important;
+    padding: 0 !important;
+  }
+
+  .modal-image {
+    height: 100px !important;
+  }
+
+  .modal-body {
+    padding: 12px 15px !important;
+  }
+
+  .modal-body h3 {
+    font-size: 1.1rem !important;
+  }
+
+  .field input,
+  .modal-body button {
+    font-size: 13px !important;
+    padding: 9px 10px !important;
+  }
+}
+
+
+/* ===== MODAL HEADER ===== */
+.modal h3 {
+  margin: 0;
+  color: #222;
+  font-weight: 600;
+  font-size: 1.3rem;
+}
+
+/* ===== FIELDS ===== */
+.field {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+}
+.field label {
+  font-size: 0.9rem;
+  color: #444;
+  margin-bottom: 6px;
+}
+.field input {
+  padding: 10px 12px;
+  font-size: 0.95rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+.field input:focus {
+  border-color: #fff9e6;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+.field input:hover {
+  border-color: #fff2cf;
+  background: #fffbea;           /* light yellow hover */
+}
+
+/* ===== CHECKBOX ROW ===== */
+.row {
+  margin-top: 12px;
+  font-size: 0.9rem;
+  color: #555;
+}
+.row input[type="checkbox"] {
+  transform: scale(1.2);
+  accent-color: black;           /* golden tick */
+}
+
+/* ===== BUTTONS ===== */
+.modal-cta {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+.btn {
+  background: black;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.2s ease-in-out;
+font-family:'Montserrat',sans-serif !important;}
+.btn:hover {
+  background: #f2f2f2 !important;
+}
+.btn.cancel {
+  background: #f2f2f2 !important;
+  color: #444;
+}
+.btn.cancel:hover {
+  background: #e0e0e0 !important;
+}
+
+/* ===== LOADING SPINNER ===== */
+.btn.loading::after {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid black;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-left: 8px;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ===== NOTE ===== */
+.note {
+  margin-top: 10px;
+  font-size: 0.75rem;
+  color: #777;
+  text-align: center;
+}
+
+/* ===== CLOSE BUTTON ===== */
+.close-btn {
+  color: #444;
+  transition: color 0.2s ease;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+.close-btn:hover {
+  color: #ff4b4b;
+}
+
+/* ===== SUMMARY MODAL CONTENT ===== */
+.summary-modal-content {
+  line-height: 1.5;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+/* ===== RESPONSIVE (modal) ===== */
+@media (max-width: 500px) {
+  .modal {
+    width: 90%;
+    padding: 20px;
+  }
+  .modal-cta {
+    flex-direction: column;
+  }
+  .btn {
+    width: 100%;
+  }
+}
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width:860px){
+      .measurements,.options{ grid-template-columns:1fr; }
+      .card{ padding:20px; }
+    }
+    @media (max-width:500px){
+      .modal{ width:90%;padding:20px; }
+      .modal-cta{ flex-direction:column; }
+      .btn{ width:100%; }
+    }
+    .hidden{ display:none !important; }
+    .muted{ color:var(--muted);font-size:14px; }
+       /* =======================================
+   RESPONSIVE TEXT STYLING FOR TOPBAR + STEPPER
+   ======================================= */
+
+/* === Desktop Default (already handled above) === */
+
+/* === Tablet View (max-width: 1024px) === */
+@media (max-width: 1024px) {
+
+  /* Brand text */
+  .studio {
+    font-size: 15px;
+    letter-spacing: 1.2px;
+  }
+
+  .patron {
+    font-size: 15px;
+    letter-spacing: 1.2px;
+  }
+
+  /* Step labels */
+  .step .label {
+    font-size: 12px;
+    letter-spacing: 0.5px;
+  }
+
+  /* Headings inside cards */
+  h1.h-title {
+    font-size: 20px;
+  }
+
+  /* Paragraph subheading */
+  p.h-sub {
+    font-size: 14px;
+  }
+
+  /* Option text */
+  .option label,
+  .pkg label,
+  .room-card .name {
+    font-size: 14px;
+  }
+
+  .pkg-desc {
+    font-size: 12px;
+  }
+
+  /* Buttons */
+  .btn,
+  .btn-primary,
+  .btn-ghost {
+    font-size: 14px;
+  }
+}
+
+/* === Mobile View (max-width: 768px) === */
+@media (max-width: 768px) {
+
+  .topbar {
+    height: 60px;
+    padding: 0 25px;
+  }
+
+  .studio {
+    font-size: 13px;
+    letter-spacing: 1px;
+  }
+
+  .patron {
+    font-size: 13px;
+    letter-spacing: 1px;
+  }
+
+  .progress {
+    gap: 40px;
+  }
+
+  .step .label {
+    font-size: 10.5px;
+    letter-spacing: 0.4px;
+  }
+
+  h1.h-title {
+    font-size: 18px;
+  }
+
+  p.h-sub {
+    font-size: 13px;
+  }
+
+  .option label,
+  .pkg label,
+  .room-card .name {
+    font-size: 13px;
+  }
+
+  .pkg-desc {
+    font-size: 11.5px;
+  }
+
+  .btn,
+  .btn-primary,
+  .btn-ghost {
+    font-size: 13px;
+    padding: 8px 14px;
+  }
+}
+
+/* === Very Small Phones (max-width: 480px) === */
+@media (max-width: 480px) {
+
+  .topbar {
+    height: 54px;
+    padding: 0 16px;
+  }
+
+  .studio,
+  .patron {
+    font-size: 11.5px;
+    letter-spacing: 0.8px;
+  }
+
+  .progress {
+    gap: 25px;
+  }
+
+  .step .label {
+    font-size: 9.5px;
+  }
+
+  h1.h-title {
+    font-size: 16px;
+  }
+
+  p.h-sub {
+    font-size: 12px;
+  }
+
+  .option label,
+  .pkg label,
+  .room-card .name {
+    font-size: 12px;
+  }
+
+  .pkg-desc {
+    font-size: 10.5px;
+  }
+
+  .btn,
+  .btn-primary,
+  .btn-ghost {
+    font-size: 12px;
+    padding: 7px 12px;
+  }
+}
+/* ===== 🌟 Enhanced Mobile Layout for Package Section ===== */
+@media (max-width: 768px) {
+  /* Reduce top padding & keep titles closer */
+  .h-title {
+    margin-top: 10px !important;
+    font-size: 18px !important;
+    text-align: center !important;
+  }
+
+  .h-sub {
+    font-size: 13px !important;
+    margin-top: -6px !important;
+    margin-bottom: 18px !important;
+    text-align: center !important;
+  }
+
+  /* Stack and center all packages */
+  .packages {
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 18px !important;
+    margin-top: 5px !important;
+  }
+
+  /* Card styling */
+  .pkg {
+    width: 92% !important;
+    max-width: 380px !important;
+    padding: 16px 18px !important;
+    border-radius: 14px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    background: #fff;
+  }
+
+  .pkg img {
+    height: 150px !important;
+    width: 100% !important;
+    border-radius: 10px !important;
+    object-fit: cover !important;
+    margin-bottom: 12px !important;
+  }
+
+  .pkg label {
+    font-size: 14px !important;
+  }
+
+  .pkg-desc {
+    font-size: 12px !important;
+    line-height: 1.5 !important;
+  }
+}
+
+/* ===== Extra small phones ===== */
+@media (max-width: 480px) {
+  .pkg {
+    width: 95% !important;
+    max-width: 340px !important;
+  }
+
+  .pkg img {
+    height: 130px !important;
+  }
+
+  .h-title {
+    font-size: 16px !important;
+  }
+
+  .h-sub {
+    font-size: 12.5px !important;
+  }
+}
+
+
+/* === Prevent unwanted scroll jump on page load === */
+html, body {
+  scroll-behavior: smooth;    /* smooth scrolling for navigation */
+  overflow-x: hidden;         /* prevent horizontal scroll */
+  overscroll-behavior: none;  /* avoid bounce/scroll chaining */
+}
+
+/* Keeps page fixed on initial load, then scrolls normally */
+body {
+  position: relative;
+  top: 0;
+  scroll-margin-top: 0;
+}
+
+  </style>
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+</head>
+<body>
+<div class="page">
+  <!-- Top bar + stepper -->
+  <div class="topbar">
+    <a href="index.html" class="brand">
+      <span class="studio">STUDIO</span>
+      <span class="patron">PATRON</span>
+    </a>
+
+    <div class="progress" id="progressBar">
+      <div class="step active" data-step="0"><div class="label">KITCHEN LAYOUT</div></div>
+      <div class="step" data-step="1"><div class="label">MEASUREMENTS</div></div>
+      <div class="step" data-step="2"><div class="label">PACKAGE</div></div>
+      <div class="step" data-step="3"><div class="label">GET QUOTE</div></div>
+    </div>
+  </div>
+
+  <!-- Main card -->
+  <div class="card">
+
+    <!-- STEP 0 – Layout -->
+<section class="step-content active" data-step="0">
+  <h1 class="h-title">Select the layout of your kitchen</h1>
+
+  <div class="options">
+    <label class="option">
+      <img src="./assets/images/l-shaped.png" alt="L-shaped">
+      <div class="option-label">
+        <input type="radio" name="layout" value="L-shaped">
+        <span>L-shaped</span>
+      </div>
+      <p class="option-desc">Ideal for corner spaces, efficient workflow.</p>
+    </label>
+
+    <label class="option">
+      <img src="./assets/images/straight-d-1623057553-UjgVM.png" alt="Straight">
+      <div class="option-label">
+        <input type="radio" name="layout" value="Straight">
+        <span>Straight</span>
+      </div>
+      <p class="option-desc">Compact, perfect for small kitchens.</p>
+    </label>
+
+    <label class="option">
+      <img src="./assets/images/u-shaped.png" alt="U-shaped">
+      <div class="option-label">
+        <input type="radio" name="layout" value="U-shaped">
+        <span>U-shaped</span>
+      </div>
+      <p class="option-desc">Maximum storage, great for large families.</p>
+    </label>                                                                
+    <label class="option">
+      <img src="./assets/images/parallel-d-1623057550-KAv73.png" alt="Parallel">
+      <div class="option-label">
+        <input type="radio" name="layout" value="Parallel">
+        <span>Parallel</span>
+      </div>
+      <p class="option-desc">Two parallel counters, high efficiency.</p>
+    </label>
+  </div>
+
+  <div class="actions">
+    <div></div>
+    <div><button class="btn-primary nextBtn" data-step="0">Next</button></div>
+  </div>
+</section>
+
+
+    <!-- STEP 1 – Measurements -->
+    <section class="step-content" data-step="1">
+      <h1 class="h-title">Enter your kitchen measurements</h1>
+      <p class="h-sub">Provide wall lengths in feet. Visuals below show wall positions for clarity.</p>
+      <div id="measurementImages" class="measurements"></div>
+      <form id="measurementForm" class="measurements">
+        <div id="measurementFields"></div>
+      </form>
+
+      <div class="actions">
+        <div><button class="btn-ghost prevBtn">Back</button></div>
+        <div><button class="btn-primary nextBtn" data-step="1">Next</button></div>
+      </div>
+    </section>
+
+    <!-- STEP 2 – Package -->
+    <section class="step-content" data-step="2">
+      <h1 class="h-title">Select your kitchen package</h1>
+      <p class="h-sub">Pick a style that matches your taste and requirements.</p>
+
+      <div class="packages">
+        <div class="pkg">
+          <img src="./assets/images/simple kitchen.jpeg" alt="Classic">
+          <label><input type="radio" name="package" value="Classic"> Essentials (₹₹)</label>
+          <p class="pkg-desc">Minimal designs with essential finishes — clean and efficient look.</p>
+           <p class="pkg-desc">- Affordable pricing.</p>
+          <p class="pkg-desc">- Convenient designs.</p>
+          <p class="pkg-desc">- Basic accessories.</p>
+        </div>
+        <div class="pkg">
+          <img src="./assets/images/mordern kitchen.jpeg" alt="Modern">
+          <label><input type="radio" name="package" value="Modern"> Luxury (₹₹₹)</label>
+          <p class="pkg-desc">Sleek modular design with trendy finishes and better fittings.</p>
+          <p class="pkg-desc">- Mid-range pricing.</p>
+          <p class="pkg-desc">- Premium designs.</p>
+          <p class="pkg-desc">- Wide range of accessories.</p>
+        </div>
+        <div class="pkg">
+          <img src="./assets/images/luxury kitchen.jpeg" alt="Luxury">
+          <label><input type="radio" name="package" value="Luxury"> Premium (₹₹₹₹)</label>
+          <p class="pkg-desc">High-end European finishes, designer fittings, and elegant tones.</p>
+          <p class="pkg-desc">- Elite pricing.</p>
+          <p class="pkg-desc">- Lavish designs.</p>
+          <p class="pkg-desc">- Extensive range of accessories.</p>
+
+
+        </div>
+      </div>
+
+      <div class="actions">
+        <div><button class="btn-ghost prevBtn">Back</button></div>
+        <div><button class="btn-primary getQuoteBtn">Get Quote</button></div>
+      </div>
+    </section>
+
+    <!-- STEP 3 – Quote -->
+    <section class="step-content" data-step="3">
+      <h1 class="h-title">Your Estimated Quote</h1>
+      <p class="h-sub">We’ll show the exact estimate after a quick detail form.</p>
+
+      <div class="quote-card" id="quoteCard">
+        <div class="small">Here's your estimated budget range</div>
+        <div id="budgetPlaceholder" style="text-align:center;padding:18px 0;">
+          <div style="font-size:18px;color:var(--muted);">Click <strong>Get Detailed Quote</strong> and fill a short form to see the exact estimate</div>
+        </div>
+        <div id="budgetResult" class="hidden">
+          <div id="budget-range">₹0L - ₹0L*</div>
+          <div style="font-size:13px;color:var(--muted);margin-top:6px;">This isn’t a final quote and can be customised to suit your needs.</div>
+          <div style="margin-top:8px;"><a href="#" id="viewSummary" style="color:var(--accent)">View detailed summary</a></div>
+        </div>
+        <div class="cta-wrap" style="margin-top:16px;">
+          <div style="font-weight:800;margin-bottom:8px;">Want an accurate quote?</div>
+          <div style="margin-bottom:8px;">Book a <span style="background:#2a9d49;color:#fff;padding:4px 6px;border-radius:6px;font-weight:700;font-size:12px">FREE</span> consultation with our designer to get a detailed quote for your interiors.</div>
+          <button class="cta-btn" id="openFormBtn">GET DETAILED QUOTE</button>
+        </div>
+      </div>
+
+      <div class="actions" style="margin-top:26px;">
+        <div><button class="btn-ghost prevBtn">Back</button></div>
+        <div></div>
+      </div>
+    </section>
+
+  </div> <!-- /.card -->
+</div> <!-- /.page -->
+
+<!-- Form Modal -->
+<!-- Form Modal -->
+<!-- Form Modal -->
+<div id="formOverlay" class="modal-overlay" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="formModalTitle">
+    
+    <!-- 🖼️ Full-width header image -->
+    <div class="modal-image">
+      <img src="./assets/images/kitchen banner.jpg" alt="Studio Patron" />
+    </div>
+
+    <!-- Content section wrapped for inner padding -->
+    <div class="modal-body">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px;">
+        <h3 id="formModalTitle">Enter your details</h3>
+        <button class="close-btn" id="closeFormBtn" aria-label="Close form modal">×</button>
+      </div>
+
+      <form id="leadForm">
+  <div class="field">
+    <label for="nameInput">Name</label>
+    <input id="nameInput" type="text" placeholder="Your name" required>
+  </div>
+
+  <div class="field">
+    <label for="emailInput">Email</label>
+    <input id="emailInput" type="email" placeholder="you@example.com" required>
+    <small id="emailFeedback" style="color: red; display: none; font-size: 13px;">Invalid email address</small>
+  </div>
+
+  <div class="field">
+    <label for="phoneInput">Phone</label>
+    <input id="phoneInput" type="tel" placeholder="+91 90000 00000" required>
+  </div>
+
+  <div class="field">
+    <label for="propertyInput">Property Name / Location</label>
+    <input id="propertyInput" type="text" placeholder="Apartment / Locality" required>
+    <small style="font-size: 12px; color: #666;">Start typing to search your location...</small>
+  </div>
+
+  <div class="row">
+    <label style="display:flex;align-items:center;gap:8px;">
+      <input id="whatsappOpt" type="checkbox"> Send me updates on WhatsApp
+    </label>
+  </div>
+
+  <div class="modal-cta">
+    <button type="button" class="btn cancel" id="cancelFormBtn">Cancel</button>
+    <button type="submit" class="btn" id="submitFormBtn">Submit & View Estimate</button>
+  </div>
+
+  <div class="row note">By submitting you agree to our privacy policy & terms.</div>
+</form>
+
+</div>
+</div>
+</div>
+
+<!-- Summary Modal -->
+<div id="summaryModal" class="modal-overlay" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="summaryModalTitle">
+    <div style="display:flex;justify-content:space-between;align-items:center;">
+      <h3 id="summaryModalTitle">Detailed Summary</h3>
+      <button class="close-btn" id="closeSummaryBtn" aria-label="Close summary modal">×</button>
+    </div>
+    <div class="summary-modal-content" id="summaryContent"></div>
+  </div>
+</div>  
+
+<script>
+window.addEventListener("load", () => {
+  window.scrollTo(0, 0); // reset to top on page load
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  // ✅ Initialize EmailJS
+  emailjs.init("ThHJcsTNy5dwLeEHs");
+
+  /* ----------------------------------------------
+     🧱 CONFIGURATIONS
+  ---------------------------------------------- */
+  const packagePrice = {
+    "Classic": "₹0.5 – 1 L",
+    "Modern": "₹2 – 2.5 L",
+    "Luxury": "₹4 – 6 L"
+  };
+
+  const layoutImages = {
+    "Straight": ["./assets/images/layout-straight.jpg"],
+    "L-shaped": ["./assets/images/layout-lshape.jpg"],
+    "U-shaped": ["./assets/images/layout-ushape.jpg"],
+    "Parallel": ["./assets/images/layout-parallel.jpg"]
+  };
+
+  const labelSets = {
+    "Straight": ["A"],
+    "L-shaped": ["A", "B"],
+    "U-shaped": ["A", "B", "C"],
+    "Parallel": ["A", "B"]
+  };
+
+  /* ----------------------------------------------
+     🧩 SHORTCUT HELPERS
+  ---------------------------------------------- */
+  const $ = (s, c = document) => c.querySelector(s);
+  const $$ = (s, c = document) => Array.from(c.querySelectorAll(s));
+
+  const steps = $$('.step-content');
+  const stepNodes = $$('.progress .step');
+  let current = 0;
+
+  /* ----------------------------------------------
+     🚀 STEP NAVIGATION LOGIC (Scroll Fix Added)
+  ---------------------------------------------- */
+  function showStep(index, disableScroll = false) {
+    if (index < 0) index = 0;
+    if (index >= steps.length) index = steps.length - 1;
+
+    steps.forEach((s, i) => s.classList.toggle('active', i === index));
+    stepNodes.forEach((p, i) => {
+      p.classList.toggle('active', i === index);
+      p.classList.toggle('completed', i < index);
+    });
+    current = index;
+
+    // 🧭 Stop unwanted scroll on mobile/tablet
+    const isMobile = window.innerWidth <= 768;
+    if (!disableScroll && !isMobile) {
+      window.scrollTo({
+        top: document.querySelector('.card').offsetTop - 10,
+        behavior: 'smooth'
+      });
+    }
+  }
+
+  // ✅ Initial call without auto-scroll
+  showStep(0, true);
+
+  $$('.nextBtn').forEach(b => b.addEventListener('click', () => {
+    if (validateStep(current)) showStep(current + 1);
+  }));
+
+  $$('.prevBtn').forEach(b => b.addEventListener('click', () => showStep(current - 1)));
+
+  /* ----------------------------------------------
+     ✅ VALIDATION
+  ---------------------------------------------- */
+  function validateStep(i) {
+    if (i === 0 && !$("input[name='layout']:checked")) {
+      alert("Please select a kitchen layout!");
+      return false;
+    }
+    if (i === 1) {
+      const ins = $$('#measurementFields input');
+      if (ins.some(inp => !inp.value || inp.value < 1)) {
+        alert("Please provide valid measurements for all walls!");
+        return false;
+      }
+    }
+    if (i === 2 && !$("input[name='package']:checked")) {
+      alert("Please select a package!");
+      return false;
+    }
+    return true;
+  }
+
+  /* ----------------------------------------------
+     🖼️ MEASUREMENT IMAGE + INPUT GENERATOR
+  ---------------------------------------------- */
+  function showMeasurementLayout(selectedLayout) {
+    const imageContainer = document.getElementById("measurementImages");
+    const fieldContainer = document.getElementById("measurementFields");
+
+    imageContainer.innerHTML = "";
+    fieldContainer.innerHTML = "";
+
+    if (!selectedLayout || !layoutImages[selectedLayout]) return;
+
+    // Layout visual
+    layoutImages[selectedLayout].forEach((src) => {
+      const wrapper = document.createElement("div");
+      wrapper.classList.add("layout-preview");
+
+      const caption = document.createElement("div");
+      caption.textContent = `${selectedLayout} Layout`;
+      caption.style.textAlign = "center";
+      caption.style.fontWeight = "600";
+      caption.style.marginBottom = "8px";
+      caption.style.color = "#333";
+
+      const img = document.createElement("img");
+      img.src = src;
+      img.alt = `${selectedLayout} layout visual`;
+      img.style.width = "100%";
+      img.style.borderRadius = "12px";
+      img.style.boxShadow = "0 4px 14px rgba(0,0,0,0.15)";
+      img.style.marginBottom = "12px";
+
+      wrapper.appendChild(caption);
+      wrapper.appendChild(img);
+      imageContainer.appendChild(wrapper);
+    });
+
+    // Dynamic measurement input fields
+    const labels = labelSets[selectedLayout] || [];
+    labels.forEach(label => {
+      const div = document.createElement("div");
+      div.classList.add("measurement-card");
+      div.innerHTML = `
+        <div class="name">Wall ${label}</div>
+        <input type="number" min="1" placeholder="Enter length (ft)" required>
+      `;
+      fieldContainer.appendChild(div);
+    });
+  }
+
+  // 🧠 When clicking "Next" from layout step
+  $('.nextBtn[data-step="0"]').addEventListener('click', () => {
+    const layout = $("input[name='layout']:checked")?.value;
+    if (!layout) return alert("Please select a layout first!");
+    showMeasurementLayout(layout);
+  });
+
+  /* ----------------------------------------------
+     🎨 PACKAGE SELECTION VISUAL
+  ---------------------------------------------- */
+  $$('.pkg').forEach(p => {
+    p.addEventListener('click', () => {
+      const inp = p.querySelector('input');
+      if (inp) inp.checked = true;
+      $$('.pkg').forEach(n => n.style.borderColor = '#f0f0f0');
+      p.style.borderColor = 'rgba(107,59,91,.14)';
+    });
+  });
+
+  /* ----------------------------------------------
+     📨 OPEN FORM
+  ---------------------------------------------- */
+  $('.getQuoteBtn').addEventListener('click', () => {
+    if (validateStep(current)) showStep(3);
+    setTimeout(openForm, 200);
+  });
+
+  $('#openFormBtn').addEventListener('click', () => {
+    showStep(3);
+    setTimeout(openForm, 120);
+  });
+
+  function openForm() {
+    $('#formOverlay').classList.add('active');
+    $('#formOverlay').setAttribute('aria-hidden', 'false');
+    document.body.classList.add('modal-open');
+    $('#nameInput').focus();
+  }
+
+  /* ----------------------------------------------
+     📬 FORM SUBMISSION (EmailJS)
+  ---------------------------------------------- */
+  $('#leadForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const btn = $('#submitFormBtn');
+    btn.disabled = true;
+    btn.classList.add('loading');
+    btn.textContent = 'Submitting...';
+
+    const name = $('#nameInput').value.trim(),
+      email = $('#emailInput').value.trim(),
+      phone = $('#phoneInput').value.trim(),
+      property = $('#propertyInput').value.trim();
+
+    const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phoneRe = /^\+?\d{10,14}$/;
+
+    if (!name || !email || !phone || !property) {
+      alert('Please fill all required fields.');
+      return resetBtn();
+    }
+    if (!emailRe.test(email)) {
+      alert('Invalid email format.');
+      return resetBtn();
+    }
+    if (!phoneRe.test(phone)) {
+      alert('Invalid phone number (10-14 digits).');
+      return resetBtn();
+    }
+
+    const layout = $("input[name='layout']:checked")?.value || 'Not selected';
+    const pkg = $("input[name='package']:checked")?.value || 'Not selected';
+    const meas = Array.from($('#measurementFields').querySelectorAll('input')).map((i, idx) =>
+      `Wall ${String.fromCharCode(65 + idx)}: ${i.value || 'N/A'} ft`
+    );
+    const price = packagePrice[pkg] || 'N/A';
+
+    const params = {
+      name, email, phone, property,
+      whatsapp: $('#whatsappOpt').checked ? 'Yes' : 'No',
+      kitchen_layout: layout,
+      measurements: meas.join(', '),
+      package_type: pkg,
+      estimated_price: price
+    };
+
+    emailjs.send('service_qcrnrhy', 'template_i0ruks5', params)
+      .then(() => {
+        alert('✅ Thank you! Your details were sent successfully.');
+        $('#leadForm').reset();
+        closeModal('#formOverlay', '#openFormBtn');
+        $('#budgetPlaceholder').classList.add('hidden');
+        $('#budgetResult').classList.remove('hidden');
+        $('#budget-range').textContent = price;
+        showStep(3);
+        $('#budget-range').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      })
+      .catch(() => alert('❌ Something went wrong. Please try again.'))
+      .finally(resetBtn);
+
+    function resetBtn() {
+      btn.disabled = false;
+      btn.classList.remove('loading');
+      btn.textContent = 'Submit & View Estimate';
+    }
+  });
+
+  /* ----------------------------------------------
+     📋 SUMMARY MODAL
+  ---------------------------------------------- */
+  $('#viewSummary').addEventListener('click', e => {
+    e.preventDefault();
+    const layout = $("input[name='layout']:checked")?.value || 'Not selected';
+    const pkg = $("input[name='package']:checked")?.value || 'Not selected';
+    const meas = Array.from($('#measurementFields').querySelectorAll('input')).map((i, idx) =>
+      `&nbsp;&nbsp;Wall ${String.fromCharCode(65 + idx)}: ${i.value || 'N/A'} ft`
+    );
+    const price = packagePrice[pkg] || 'N/A';
+    $('#summaryContent').innerHTML = `
+      <strong>Kitchen Layout:</strong> ${layout}<br>
+      <strong>Measurements:</strong><br>${meas.join('<br>')}<br>
+      <strong>Package Selected:</strong> ${pkg}<br>
+      <strong>Estimated Price:</strong> ${price}
+    `;
+    openModal('#summaryModal', '#closeSummaryBtn');
+  });
+
+  /* ----------------------------------------------
+     ❌ MODAL CLOSE / ESC HANDLERS
+  ---------------------------------------------- */
+  ['#closeFormBtn', '#cancelFormBtn'].forEach(id =>
+    $(id)?.addEventListener('click', () => closeModal('#formOverlay', '#openFormBtn'))
+  );
+
+  $('#closeSummaryBtn')?.addEventListener('click', () =>
+    closeModal('#summaryModal', '#viewSummary')
+  );
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      if ($('#formOverlay').classList.contains('active'))
+        closeModal('#formOverlay', '#openFormBtn');
+      else if ($('#summaryModal').classList.contains('active'))
+        closeModal('#summaryModal', '#viewSummary');
+    }
+  });
+
+  stepNodes.forEach((n, i) =>
+    n.addEventListener('click', () => {
+      if (i <= current + 1 && validateStep(current)) showStep(i);
+    })
+  );
+
+  /* ----------------------------------------------
+     ⚙️ HELPER FUNCTIONS
+  ---------------------------------------------- */
+  function openModal(selector, focusTarget) {
+    const modal = $(selector);
+    modal.classList.add('active');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('modal-open');
+    $(focusTarget)?.focus();
+  }
+
+  function closeModal(selector, focusTarget) {
+    const modal = $(selector);
+    modal.classList.remove('active');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('modal-open');
+    $(focusTarget)?.focus();
+  }
+});
+</script>
+
+</body>
+</html>

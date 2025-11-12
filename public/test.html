@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Legal & Policies | Studio Patron</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --black: #000;
+      --gray: #212121;
+      --accent: #ffcc33;
+      --text: #2b2b2b;
+      --muted: #666;
+      --light-gray: #f8f8f8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      color: var(--text);
+      background: #fff;
+      line-height: 1.7;
+      overflow-x: hidden;
+      margin: 0 80px;
+    }
+
+    /* ===== TOPBAR ===== */
+    .topbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 70px;
+      background: var(--black);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 60px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+      z-index: 10;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+    }
+
+    .studio {
+      font-weight: 200;
+      letter-spacing: 1.5px;
+      opacity: 0.7;
+      color: #fff;
+      text-transform: uppercase;
+    }
+
+    .patron {
+      font-weight: 500;
+      color: #fffff5;
+      letter-spacing: 1.5px;
+      opacity: 0.9;
+    }
+
+    /* ===== TAB MENU ===== */
+    .tab-menu {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 100px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .tab-btn {
+      padding: 10px 18px;
+      font-weight: 500;
+      color: var(--gray);
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 15px;
+      transition: all 0.3s ease;
+    }
+
+    .tab-btn.active {
+      color: var(--black);
+      border-bottom: 2px solid var(--accent);
+      font-weight: 600;
+    }
+
+    .tab-btn:hover {
+      color: var(--accent);
+    }
+
+    /* ===== CONTENT SECTIONS ===== */
+    .content {
+      padding: 40px 0 80px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(10px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    h1 {
+      font-size: 30px;
+      font-weight: 600;
+      color: var(--black);
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .section h2 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--black);
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 15px;
+      color: var(--gray);
+      margin-bottom: 18px;
+    }
+
+    .divider {
+      text-align: center;
+      font-weight: 300;
+      letter-spacing: 4px;
+      color: #aaa;
+      margin: 40px 0 25px;
+    }
+
+    ul {
+      list-style: none;
+      margin: 10px 0 0;
+      padding: 0;
+    }
+
+    li {
+      padding-left: 20px;
+      position: relative;
+      margin-bottom: 6px;
+      color: var(--gray);
+      font-size: 15px;
+    }
+
+    li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    .contact strong {
+      color: var(--black);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      body {
+        margin: 0 20px;
+      }
+
+      .topbar {
+        padding: 0 30px;
+      }
+
+      .tab-menu {
+        flex-wrap: wrap;
+        gap: 10px;
+        font-size: 14px;
+      }
+
+      h1 {
+        font-size: 22px;
+      }
+
+      p, li {
+        font-size: 14px;
+      }
+    }
+    /* Warranty Table Styling */
+.table-wrapper {
+  margin-top: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow-x: auto;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.warranty-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+  background-color: #fff;
+}
+
+.warranty-table th,
+.warranty-table td {
+  padding: 14px 18px;
+  text-align: left;
+  border-bottom: 1px solid #e5e5e5;
+  font-size: 15px;
+  color: var(--gray);
+  vertical-align: middle;
+}
+
+.warranty-table th {
+  background: #000;
+  color: #fff;
+  font-weight: 600;
+  text-transform: capitalize;
+  letter-spacing: 0.3px;
+}
+
+.warranty-table tr:nth-child(even) {
+  background: #fafafa;
+}
+
+.warranty-table tr:hover {
+  background: #f5f5f5;
+  transition: 0.2s ease;
+}
+
+/* Responsive - Tablet & Mobile */
+@media (max-width: 768px) {
+  .warranty-table th,
+  .warranty-table td {
+    font-size: 14px;
+    padding: 10px 12px;
+  }
+
+  .table-wrapper {
+    border-radius: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .warranty-table {
+    font-size: 13px;
+    min-width: 100%;
+  }
+
+  .warranty-table th,
+  .warranty-table td {
+    padding: 8px 10px;
+  }
+}
+
+  </style>
+</head>
+
+<body>
+  <!-- ===== TOPBAR ===== -->
+  <div class="topbar">
+    <a href="index.html" class="brand">
+      <span class="studio">STUDIO</span>
+      <span class="patron">PATRON</span>
+    </a>
+  </div>
+
+  <!-- ===== TAB MENU ===== -->
+  <div class="tab-menu">
+    <button class="tab-btn active" data-tab="terms">Terms & Conditions</button>
+    <button class="tab-btn" data-tab="warranty">Warranty Policy</button>
+    <button class="tab-btn" data-tab="privacy">Privacy Policy</button>
+  </div>
+
+  <!-- ===== CONTENT ===== -->
+  <div class="content">
+    <!-- TERMS & CONDITIONS -->
+    <div id="terms" class="tab-content active">
+      <h1>Terms & Conditions</h1>
+      <p><strong>Effective Date:</strong> November-2025</p>
+      <p>Welcome to Studio Patron. By accessing or using our website (<a href="https://studiopatron.in" target="_blank" style="color: var(--accent); text-decoration: none;">https://studiopatron.in</a>), you agree to these Terms & Conditions.</p>
+
+        <div class="section">
+      <h2>1. Acceptance of Terms</h2>
+      <p>By visiting our website, filling out contact forms, or interacting with Studio Patron online, you acknowledge that you have read, understood, and agreed to comply with these Terms & Conditions and our Privacy Policy.</p>
+      <p>If you do not agree, please do not use our website.</p>
+    </div>
+
+         <div class="divider">⸻</div>
+
+    <div class="section">
+      <h2>2. Services Overview</h2>
+      <p>Studio Patron provides residential interior design services, including consultation, design execution, and related offerings. All project visuals, materials, and layouts displayed on the website are for representation purposes only and may differ from actual outcomes.</p>
+    </div>
+
+    <div class="divider">⸻</div>
+
+    <div class="section">
+      <h2>3. Intellectual Property</h2>
+      <p>All text, images, graphics, designs, and other content on this website are the exclusive property of Studio Patron LLP. You may not copy, reproduce, or use any content for commercial or personal purposes without our written consent.</p>
+    </div>
+     <div class="divider">⸻</div>
+
+    <div class="section">
+      <h2>4. Use of Website</h2>
+      <p>You agree to use our website lawfully and responsibly. You shall not:</p>
+      <ul>
+        <li>Misuse or damage any part of the website</li>
+        <li>Upload false information or data</li>
+        <li>Copy or use our designs without permission</li>
+        <li>Attempt to hack, spam, or interfere with the site’s security</li>
+      </ul>
+    </div>
+
+    <div class="divider">⸻</div>
+
+    <div class="section">
+      <h2>5. Design Concepts and Proposals</h2>
+      <p>All design ideas, digital renders, and proposals shared during consultations remain the intellectual property of Studio Patron and cannot be reused or shared without authorization.</p>
+    </div>
+
+    <div class="divider">⸻</div>
+
+    <div class="section">
+      <h2>6. Limitation of Liability</h2>
+      <p>While we make every effort to keep the website updated and accurate, Studio Patron is not liable for:</p>
+      <ul>
+        <li>Technical errors, downtime, or inaccuracies</li>
+        <li>Loss or damage resulting from website use or reliance on its content</li>
+        <li>Third-party actions or external links</li>
+      </ul>
+      <p>Your use of this website is at your own discretion and risk.</p>
+    </div>
+
+    <div class="divider">⸻</div>
+
+    <div class="section">
+      <h2>7. Third-Party Links</h2>
+      <p>Our website may include links to social platforms or external tools (such as Instagram, WhatsApp, or analytics tools). We are not responsible for the content or privacy practices of any third-party websites.</p>
+    </div>
+
+    <div class="divider">⸻</div>
+
+    <div class="section">
+      <h2>8. Modifications</h2>
+      <p>Studio Patron may update or modify these Terms & Conditions at any time. The revised version will be effective immediately upon posting on this page.</p>
+    </div>
+
+    <div class="divider">⸻</div>
+
+    <div class="section">
+      <h2>9. Governing Law</h2>
+      <p>These Terms & Conditions are governed by the laws of India, and any disputes will fall under the jurisdiction of the courts in Hyderabad, Telangana.</p>
+    </div>
+      <div class="divider">⸻</div>
+
+        <div class="section">
+      <h2>10. Contact Us</h2>
+      <p>If you have any questions about these Terms & Conditions, please contact us at:</p>
+      <div class="contact">
+        📧 <strong>thepatron.in@gmail.com</strong><br>
+        📞 <strong>+91 7207105444</strong><br>
+        📍 <strong>Opposite IKEA, Plot No.18/2, Sector-III, HUDA Techno Enclave, HITEC City, Hyderabad, Telangana – 500081</strong>
+      </div>
+    </div>
+  </div>
+
+    <!-- WARRANTY POLICY -->
+    <div id="warranty" class="tab-content">
+      <h1>Warranty Policy</h1>
+      <p><strong>Effective Date:</strong> November-2025</p>
+      <p>At Studio Patron, we stand by the quality of our craftsmanship and offer a transparent warranty policy for all modular furniture and interior fittings.</p>
+
+<div class="section">
+    <h2>1. Warranty Coverage</h2>
+    <p>This warranty applies to all Studio Patron modular kitchens and wardrobes manufactured, supplied, and installed by our authorized team.</p>
+    <ul>
+      <li>Cabinets, shutters, drawers, and panels: 10-year warranty against manufacturing and installation defects</li>
+      <li>Hardware and accessories: As per the respective manufacturer’s warranty</li>
+    </ul>
+    <p>If any component is found defective during the warranty period, Studio Patron will repair or replace it free of cost as per claim terms.</p>
+  </div>
+
+  <div class="divider">⸻</div>
+
+  <div class="section">
+    <h2>2. Warranty Terms & Expectations</h2>
+    <p>To maintain the validity of this warranty, please follow these expectations:</p>
+
+    <ul>
+      <li><strong>Proper Use:</strong> Products must be used under normal residential conditions and maintained regularly.</li>
+      <li><strong>Care & Maintenance:</strong> Avoid exposure to excessive moisture, heat, or sunlight. Clean surfaces with a soft, damp cloth — avoid harsh chemicals, acids, or abrasives.</li>
+      <li><strong>Installation Site:</strong> The warranty is valid only for products installed at the original location by authorized Studio Patron technicians. Any movement, reinstallation, or modification by others will void the warranty.</li>
+      <li><strong>Manufacturer Support:</strong> Hardware, fittings, and appliances (such as hinges, channels, handles, and accessories) carry individual brand warranties. Studio Patron will assist clients in claiming these directly from the manufacturer if required.</li>
+      <li><strong>Authorized Repairs:</strong> All repairs or adjustments must be carried out by Studio Patron’s authorized service team only.</li>
+    </ul>
+  </div>
+
+  <div class="divider">⸻</div>
+
+<div class="section">
+  <h2>3. Product Warranty Details</h2>
+  <p>Below are the specific warranty durations and coverage details for Studio Patron products:</p>
+
+  <div class="table-wrapper">
+    <table class="warranty-table">
+      <thead>
+        <tr>
+          <th>Product Category</th>
+          <th>Warranty Duration</th>
+          <th>Coverage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Cabinets, shutters, drawers, panels</td>
+          <td>10 Years</td>
+          <td>100% repair/replacement – free of cost</td>
+        </tr>
+        <tr>
+          <td>Hardware and accessories</td>
+          <td>As per manufacturer’s warranty</td>
+          <td>Replacement as per brand policy</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+  <div class="divider">⸻</div>
+
+  <div class="section">
+    <h2>4. Exclusions</h2>
+    <p>This warranty does not cover:</p>
+    <ul>
+      <li>Normal wear and tear, scratches, dents, or stains</li>
+      <li>Rusting of metal parts caused by chemical or moisture exposure</li>
+      <li>Damage due to water leakage, seepage, or prolonged dampness</li>
+      <li>Termite or pest infestation</li>
+      <li>Misuse, negligence, or improper maintenance</li>
+      <li>Fading or discoloration due to sunlight, heat, or humidity</li>
+      <li>Modifications or repairs by unauthorized persons</li>
+      <li>Damage during relocation, reinstallation, or third-party handling</li>
+      <li>Force majeure events (fire, flood, earthquake, etc.)</li>
+    </ul>
+  </div>
+
+  <div class="divider">⸻</div>
+
+  <div class="section">
+    <h2>5. Product-Specific Note</h2>
+    <ul>
+      <li><strong>Shutter Bends:</strong> Due to climatic variations, minor shutter bending up to 4mm is acceptable under industry standards. If bending exceeds this limit, Studio Patron will inspect and adjust or replace the shutter accordingly.</li>
+    </ul>
+  </div>
+
+  <div class="divider">⸻</div>
+
+  <div class="section">
+    <h2>6. Warranty Claim Process</h2>
+    <p>To raise a claim:</p>
+    <ul>
+      <li>Email us at <strong>thepatron.in@gmail.com</strong> or call <strong>+91 7207105444</strong></li>
+      <li>Provide your project name, installation date, and clear images of the defect</li>
+      <li>Our service team will inspect the issue within 3–5 working days</li>
+      <li>Valid claims will be serviced promptly with repair or replacement</li>
+    </ul>
+    <p>The decision of Studio Patron on warranty claims shall be final and binding.</p>
+  </div>
+
+  <div class="divider">⸻</div>
+
+  <div class="section">
+    <h2>7. Limitation of Liability</h2>
+    <p>Studio Patron’s responsibility is limited to repair or replacement of the defective product. We are not liable for indirect, incidental, or consequential damages, nor for any loss caused by misuse or external factors.</p>
+  </div>
+
+  <div class="divider">⸻</div>
+
+  <div class="section">
+    <h2>8. Governing Law</h2>
+    <p>This warranty is governed by the laws of India and subject to the jurisdiction of the courts in Hyderabad, Telangana.</p>
+  </div>
+
+  <div class="divider">⸻</div>
+
+    <div class="section">
+    <h2>9. Contact Us</h2>
+    <p><strong>Studio Patron LLP</strong></p>
+    <p>Opposite IKEA, Plot No.18/2, Sector-III, HUDA Techno Enclave,<br>HITEC City, Hyderabad, Telangana – 500081</p>
+    <p>📞 +91 7207105444 | 📧 thepatron.in@gmail.com</p>
+  </div>
+    </div>
+
+    <!-- PRIVACY POLICY -->
+    <div id="privacy" class="tab-content">
+      <h1>Privacy Policy</h1>
+      <p><strong>Effective Date:</strong> November-2025</p>
+      <p>Studio Patron respects your privacy and is committed to protecting your personal data collected through our website and services.</p>
+
+      <div class="section">
+        <h2>1. Information We Collect</h2>
+        <ul>
+          <li>Personal details such as name, email, and contact number via forms.</li>
+          <li>Usage data, analytics, and cookies to improve site performance.</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>2. Use of Information</h2>
+        <p>We use your information to provide consultations, improve our services, and communicate relevant updates.</p>
+      </div>
+
+      <div class="section">
+        <h2>3. Data Security</h2>
+        <p>Your data is stored securely and will never be sold or shared with unauthorized third parties.</p>
+      </div>
+
+      <div class="section">
+        <h2>4. Contact Us</h2>
+        <p>For privacy concerns, reach us at <strong>care@studiopatron.in</strong> or call <strong>+91 7207105444</strong>.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== JS ===== -->
+  <script>
+    const tabs = document.querySelectorAll(".tab-btn");
+    const contents = document.querySelectorAll(".tab-content");
+
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        tabs.forEach((t) => t.classList.remove("active"));
+        contents.forEach((c) => c.classList.remove("active"));
+
+        tab.classList.add("active");
+        document.getElementById(tab.dataset.tab).classList.add("active");
+        window.scrollTo({ top: 100, behavior: "smooth" });
+      });
+    });
+  </script>
+</body>
+</html>
