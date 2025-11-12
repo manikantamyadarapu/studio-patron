@@ -343,10 +343,10 @@ const horizontalScroll = document.querySelector('.horizontal-scroll');
     e.preventDefault();
 
     const formData = {
-      fullName: this.fullName.value.trim(),
-      email: this.email.value.trim(),
-      phone: this.phone.value.trim(),
-      message: this.message.value.trim(),
+      fullName: this.fullName?.value.trim(),
+      email: this.email?.value.trim(),
+      phone: this.phone?.value.trim(),
+      message: this.message?.value.trim(),
     };
 
     try {
@@ -359,6 +359,7 @@ const horizontalScroll = document.querySelector('.horizontal-scroll');
       const data = await res.json();
       alert(data.message || "✅ Message sent successfully!");
 
+      // Close modal if quote form
       if (formId === "quoteForm") {
         modal.classList.remove("flex");
         modal.classList.add("hidden");
@@ -366,11 +367,12 @@ const horizontalScroll = document.querySelector('.horizontal-scroll');
 
       this.reset();
     } catch (err) {
-      console.error("Error submitting form:", err);
-      alert("❌ Something went wrong, please try again.");
+      console.error("❌ Error submitting form:", err);
+      alert("Something went wrong — please try again later.");
     }
   });
 });
+
 
   // ==========================
   // FAQ TOGGLE FUNCTIONALITY
