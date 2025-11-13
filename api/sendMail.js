@@ -47,7 +47,7 @@ Message: ${message || "No message provided"}
         html: `
 <div style="font-family: Arial, sans-serif; line-height:1.6; color:#333; max-width:600px; margin:auto; border:1px solid #eee; border-radius:8px; padding:20px;">
   <div style="text-align:center; margin-bottom:20px;">
-    <img src="https://i.ibb.co/7JtHJc1D/6325413.jpg" alt="Studio Patron" style="max-width:200px;">
+    <img src="https://ibb.co/ccqKnDyj" alt="Studio Patron" style="max-width:200px;">
   </div>
   <h2 style="color:#FDBA21; text-align:center;">Thank You, ${fullName || "there"}!</h2>
   <p>We’ve received your request and our team will get back to you soon. Here’s a copy of your details:</p>
@@ -69,7 +69,7 @@ Message: ${message || "No message provided"}
       });
     }
 
-    return res.status(200).json({ message: "✅ Email sent successfully!" });
+    return res.status(200).json({ message: "✅ We will reach out to you soon" });
   } catch (err) {
     console.error("Mailer error:", err);
     return res.status(500).json({ message: "❌ Failed to send email", error: String(err) });

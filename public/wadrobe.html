@@ -122,92 +122,130 @@
   }
 }
 
-/* -------------------------------------------------
-   HERO SECTION – Fully Responsive
-------------------------------------------------- */
+    /* -------------------------------------------------
+            HERO
+          ------------------------------------------------- */
 .hero {
   position: relative;
   height: 600px;
-  background: url('./assets/images/wadrobe-know.jpg') center 55% / cover no-repeat;
+  background:
+linear-gradient(
+  to bottom,
+  rgba(0, 0, 0, 0) 0%,     /* CLEAR top */
+  rgba(0, 0, 0, 0) 45%,    /* STILL CLEAR until mid */
+  rgba(0, 0, 0, 0.35) 70%, /* light dark middle */
+  rgba(0, 0, 0, 0.65) 100% /* dark bottom */
+),
+
+
+
+    url('./assets/images/wadrobe-know.jpg') center 55% / cover no-repeat;
   margin-top: 70px;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
 }
 
 
-/* Hero text layer */
-.hero-overlay {
-  text-align: center;
-  color: #fff;
-  position: relative;
-  z-index: 2;
-}
+    .hero-overlay {
+      text-align: center;
+      color: #fff;
+      position: relative;
+      /* no absolute positioning */
+      padding-top: 40px;
+    }
 
-.hero-overlay h1 {
-  font-size: 42px !important;
-  font-weight: 400 !important;
-  font-family: 'Montserrat', sans-serif !important;
-  line-height: 1.2;
-  color: #000000;
-  text-align: center;
-  margin-top: 360px !important;
-  text-transform: uppercase;
-  background-color: white !important;
-  display: inline-block;          /* allows background to wrap nicely */
-  padding: 20px 60px !important;  /* ✅ controls background size */
-  border-radius: 6px;             /* optional: soften corners */
-}
-.hero-overlay span {
-  color: #ffcc22;
-}
+  .hero-overlay h1 {
+    font-size: 42px !important;
+    font-weight: 400 !important;
+    font-family: 'Montserrat', sans-serif !important;
+    line-height: 1.2;
+    color: #ffffff;
+    text-align: center;
+    margin-top: 330px;
+    text-transform: uppercase;
+    display: inline-block;          /* allows background to wrap nicely */
+    padding: 20px 60px !important;  /* ✅ controls background size */
+    border-radius: 6px;             /* optional: soften corners */
+  }
+  .hero-overlay span{
+    color: #ffcc33;
+  }
 
-/* -------------------------------------------------
-   💻 Tablet (Below 1024px)
-------------------------------------------------- */
+
+  /* -------------------------------------------------
+    💻 Tablet (Below 1024px)
+  ------------------------------------------------- */
 @media (max-width: 1024px) {
   .hero {
     height: 500px;
-    background: url('./assets/images/wardrobe-vetrical.jpg') center center / cover no-repeat;
+    background:
+      linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, 0) 45%,
+        rgba(0, 0, 0, 0.35) 70%,
+        rgba(0, 0, 0, 0.65) 100%
+      ),
+      url('./assets/images/wardrobe-vetrical.jpg') center center / cover no-repeat;
   }
 
   .hero-overlay h1 {
     font-size: 38px;
-    margin-top: 240px;
+    margin-top: 340px !important;
+    color: #ffffff !important; /* text white for gradient */
   }
 }
 
-/* -------------------------------------------------
-   📱 Mobile (Below 768px)
-------------------------------------------------- */
+
+  /* -------------------------------------------------
+    📱 Mobile (Below 768px)
+  ------------------------------------------------- */
 @media (max-width: 768px) {
   .hero {
     height: 420px;
-    background: url('./assets/images/wardrobe-vetrical.jpg') center top / cover no-repeat;
+    background:
+      linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, 0) 45%,
+        rgba(0, 0, 0, 0.35) 70%,
+        rgba(0, 0, 0, 0.65) 100%
+      ),
+      url('./assets/images/wardrobe-vetrical.jpg') center top / cover no-repeat;
   }
 
   .hero-overlay h1 {
     font-size: 28px;
-    margin-top: 200px;
+    margin-top: 320px !important;
     padding: 0 15px;
     line-height: 1.3;
+    color: #ffffff !important;
   }
 }
 
-/* -------------------------------------------------
-   📱 Very Small Phones (Below 480px)
-------------------------------------------------- */
+  /* -------------------------------------------------
+    📱 Very Small Phones (Below 480px)
+  ------------------------------------------------- */
 @media (max-width: 480px) {
   .hero {
     height: 380px;
-    background: url('./assets/images/wardrobe-vetrical.jpg') center top / cover no-repeat;
+    background:
+      linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, 0) 45%,
+        rgba(0, 0, 0, 0.35) 70%,
+        rgba(0, 0, 0, 0.65) 100%
+      ),
+      url('./assets/images/wardrobe-vetrical.jpg') center top / cover no-repeat;
   }
 
   .hero-overlay h1 {
     font-size: 24px;
-    margin-top: 180px;
+    margin-top: 300px;
     padding: 0 20px;
+    color: #ffffff !important;
   }
 }
 

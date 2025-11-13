@@ -111,20 +111,22 @@
   height: 30px; /* controls where line aligns */
   width: 100%;
   font-family: 'Montserrat', sans-serif !important;
+  padding: 0px 0px !important;
 }
 
     /* The thin line centered with text */
-    .progress::before {
-      content: "";
-      position: absolute;
-      top: 50%; /* Center vertically */
-      left: 30%;
-      right: 30%;
-      height: 1.3px;
-      background: var(--line);
-      transform: translateY(-50%);
-      z-index: 0;
-    }
+.progress::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 25%;              /* start behind first step */
+  right: 25%;             /* end behind last step */
+  height: 1.2px;
+  background: var(--line);
+  transform: translateY(-50%);
+  z-index: 0;
+}
+
 
     /* Steps */
     .step {

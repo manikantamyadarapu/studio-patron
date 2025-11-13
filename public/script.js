@@ -357,7 +357,7 @@ const horizontalScroll = document.querySelector('.horizontal-scroll');
       });
 
       const data = await res.json();
-      alert(data.message || "✅ Message sent successfully!");
+      alert(data.message || "✅ We will reach out to you soon!");
 
       // Close modal if quote form
       if (formId === "quoteForm") {

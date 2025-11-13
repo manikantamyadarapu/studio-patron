@@ -1330,16 +1330,27 @@ header ul {
   margin-bottom: 20px !important;
 }
 
-/* === Logos Container === */
 .partners-logos {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 80px;
-  animation: scrollLeft 38s linear infinite !important;
   padding: 20px 0;
-  margin: 0 auto;
+  animation: scrollLeft 25s linear infinite;
+  white-space: nowrap;
+  width: max-content;
 }
+
+
+@keyframes scrollLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+
 
 /* === Partner Card (White Card Background) === */
 .partner-card {
@@ -1368,19 +1379,6 @@ header ul {
   transition: all 0.3s ease;
 }
 
-.partner-card img:hover {
-  opacity: 1;
-  transform: scale(1.05);
-}
-/* === Scroll Animation === */
-@keyframes scrollLeft {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
 
 /* === Tablet View === */
 @media (max-width: 1024px) {
@@ -1451,6 +1449,9 @@ header ul {
   .partners-header p {
     font-size: 13px;
   }
+}
+.partners-logos:hover {
+  animation-play-state: paused;
 }
 
 /* ================================================
@@ -1533,20 +1534,22 @@ header ul {
   margin-top: -10px !important; /* reduce gap between consecutive <p> tags */
 }
 
-/* ===== Slide Animations ===== */
-/* Super slow cinematic fade */
 .scroll-panel:nth-child(1) {
-  animation: slideFromTop 45s infinite;
+  animation: slideFromTop 20s infinite;
   animation-delay: 0s;
 }
+
 .scroll-panel:nth-child(2) {
-  animation: slideFromLeft 45s infinite;
-  animation-delay: 15s;
+  animation: slideFromLeft 20s infinite;
+  animation-delay: 6.6s;
 }
+
 .scroll-panel:nth-child(3) {
-  animation: slideFromBottom 45s infinite;
-  animation-delay: 30s;
+  animation: slideFromBottom 20s infinite;
+  animation-delay: 13.2s;
 }
+
+
 
 /* === Keyframes === */
 @keyframes slideFromTop {
